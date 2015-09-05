@@ -199,6 +199,14 @@
 				TargetAttributes = {
 					EFE3F6191B99D9170012E081 = {
 						CreatedOnToolsVersion = 7.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					EFE3F62F1B99D9170012E081 = {
 						CreatedOnToolsVersion = 7.0;
