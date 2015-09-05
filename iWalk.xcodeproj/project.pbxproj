@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10566121B9B066E00CC8EE1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10566111B9B066E00CC8EE1 /* HealthKit.framework */; };
 		EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61D1B99D9170012E081 /* AppDelegate.swift */; };
 		EFE3F6201B99D9170012E081 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61F1B99D9170012E081 /* FirstViewController.swift */; };
 		EFE3F6221B99D9170012E081 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6211B99D9170012E081 /* SecondViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E10566111B9B066E00CC8EE1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EFE3F61A1B99D9170012E081 /* iWalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE3F61D1B99D9170012E081 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFE3F61F1B99D9170012E081 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E10566121B9B066E00CC8EE1 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		EFE3F6111B99D9170012E081 = {
 			isa = PBXGroup;
 			children = (
+				E10566111B9B066E00CC8EE1 /* HealthKit.framework */,
 				EFE3F61C1B99D9170012E081 /* iWalk */,
 				EFE3F6331B99D9170012E081 /* iWalkTests */,
 				EFE3F63E1B99D9170012E081 /* iWalkUITests */,
@@ -487,6 +491,7 @@
 				EFE3F6461B99D9170012E081 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EFE3F6471B99D9170012E081 /* Build configuration list for PBXNativeTarget "iWalkTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +500,7 @@
 				EFE3F6491B99D9170012E081 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EFE3F64A1B99D9170012E081 /* Build configuration list for PBXNativeTarget "iWalkUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +509,7 @@
 				EFE3F64C1B99D9170012E081 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
