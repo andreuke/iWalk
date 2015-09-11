@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  TodayViewController.swift
 //  iWalk
 //
 //  Created by Andrea Piscitello on 04/09/15.

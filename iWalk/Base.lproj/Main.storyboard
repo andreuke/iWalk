@@ -204,7 +204,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Body" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bm-Ll-v3Z">
-                                                <rect key="frame" x="15" y="11.5" width="67.5" height="20.5"/>
+                                                <rect key="frame" x="15" y="11" width="67.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -216,6 +216,13 @@
                                                     <constraint firstAttribute="height" constant="1" id="BPF-j0-grP"/>
                                                 </constraints>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="15" placeholderIntrinsicHeight="22" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="mcO-wc-fBt">
+                                                <rect key="frame" x="575" y="10.5" width="15" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="jwI-nN-EgY"/>
+                                                    <constraint firstAttribute="width" constant="15" id="yci-EY-GHa"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -224,8 +231,10 @@
                                             <constraint firstItem="n0X-s0-xwh" firstAttribute="leading" secondItem="Nl8-sa-24C" secondAttribute="leading" constant="15" id="2dO-sx-6NN"/>
                                             <constraint firstItem="n0X-s0-xwh" firstAttribute="top" secondItem="9Bm-Ll-v3Z" secondAttribute="bottom" constant="8" id="2zY-u8-Kgk"/>
                                             <constraint firstAttribute="height" constant="44" id="IlL-0y-aWC"/>
+                                            <constraint firstAttribute="trailing" secondItem="mcO-wc-fBt" secondAttribute="trailing" constant="10" id="WsB-gB-Shs"/>
                                             <constraint firstItem="9Bm-Ll-v3Z" firstAttribute="leading" secondItem="Nl8-sa-24C" secondAttribute="leading" constant="15" id="gOe-1n-qBm"/>
                                             <constraint firstItem="9Bm-Ll-v3Z" firstAttribute="centerY" secondItem="Nl8-sa-24C" secondAttribute="centerY" id="iNl-VM-hj7"/>
+                                            <constraint firstItem="mcO-wc-fBt" firstAttribute="centerY" secondItem="Nl8-sa-24C" secondAttribute="centerY" id="oty-UX-aU0"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Nbv-De-qpA" appends="YES" id="la5-bu-2c8"/>
@@ -286,8 +295,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Value" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbD-3L-4Gt" customClass="InfoTextField" customModule="iWalk" customModuleProvider="target">
-                                            <rect key="frame" x="513" y="7" width="67" height="30"/>
+                                        <textField clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Value" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbD-3L-4Gt" customClass="InfoTextField" customModule="iWalk" customModuleProvider="target">
+                                            <rect key="frame" x="534" y="11.5" width="46" height="21"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -332,6 +341,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Arrow" width="25" height="40"/>
         <image name="Charts" width="25" height="25"/>
         <image name="Goals" width="25" height="25"/>
         <image name="Image" width="225" height="110"/>
