@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		B3444F27D0611C23E58439E1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A2F1DC7321348FE0E2A189 /* libPods.a */; };
 		E10566121B9B066E00CC8EE1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10566111B9B066E00CC8EE1 /* HealthKit.framework */; };
-		E129FEC91BA095D900E4D197 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129FEC81BA095D900E4D197 /* ThirdViewController.swift */; };
-		E129FECD1BA0ABEC00E4D197 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129FECC1BA0ABEC00E4D197 /* PageContentViewController.swift */; };
+		E1CEA9731BA32C3D003C8BEF /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEA9721BA32C3D003C8BEF /* StatsViewController.swift */; };
+		E1CEA9771BA330E6003C8BEF /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CEA9761BA330E6003C8BEF /* PageContentViewController.swift */; };
+		EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF033CDE1BA1D528003198CD /* InfoTextField.swift */; };
+		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
+		EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */; };
+		EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6411BA051030067384C /* MeTableViewCell.swift */; };
+		EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6431BA076D70067384C /* UserInfo.swift */; };
 		EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61D1B99D9170012E081 /* AppDelegate.swift */; };
 		EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61F1B99D9170012E081 /* MeViewController.swift */; };
 		EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6211B99D9170012E081 /* TodayViewController.swift */; };
@@ -43,9 +48,13 @@
 		A66C69472F21994E39E751D6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B576AC54223030DBCD8AE2E1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E10566111B9B066E00CC8EE1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		E129FEC81BA095D900E4D197 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
-		E129FECC1BA0ABEC00E4D197 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
-		E163B7171B9F6A8B00A9902C /* BChartView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BChartView-Bridging-Header.h"; sourceTree = "<group>"; };
+		E1CEA9721BA32C3D003C8BEF /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		E1CEA9761BA330E6003C8BEF /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
+		EF033CDE1BA1D528003198CD /* InfoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTextField.swift; sourceTree = "<group>"; };
+		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBodyViewController.swift; sourceTree = "<group>"; };
+		EFB8F6411BA051030067384C /* MeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeTableViewCell.swift; path = ../MeTableViewCell.swift; sourceTree = "<group>"; };
+		EFB8F6431BA076D70067384C /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = ../UserInfo.swift; sourceTree = "<group>"; };
 		EFE3F61A1B99D9170012E081 /* iWalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE3F61D1B99D9170012E081 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFE3F61F1B99D9170012E081 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -133,19 +142,19 @@
 			isa = PBXGroup;
 			children = (
 				EFB8F6431BA076D70067384C /* UserInfo.swift */,
+				E1CEA9761BA330E6003C8BEF /* PageContentViewController.swift */,
+				E1CEA9721BA32C3D003C8BEF /* StatsViewController.swift */,
 				EFB8F6411BA051030067384C /* MeTableViewCell.swift */,
 				EFE3F61D1B99D9170012E081 /* AppDelegate.swift */,
-				E129FECC1BA0ABEC00E4D197 /* PageContentViewController.swift */,
-				E129FEC81BA095D900E4D197 /* ThirdViewController.swift */,
-				EFE3F61F1B99D9170012E081 /* FirstViewController.swift */,
-				EFE3F6211B99D9170012E081 /* SecondViewController.swift */,
+				EFE3F61F1B99D9170012E081 /* MeViewController.swift */,
+				EFE3F6211B99D9170012E081 /* TodayViewController.swift */,
 				EFE3F6231B99D9170012E081 /* Main.storyboard */,
 				EF033CDE1BA1D528003198CD /* InfoTextField.swift */,
 				EF9ED6BA1B9F355D0081035F /* HeaderView.swift */,
 				EFE3F6261B99D9170012E081 /* Assets.xcassets */,
 				EFE3F6281B99D9170012E081 /* LaunchScreen.storyboard */,
 				EFE3F62B1B99D9170012E081 /* Info.plist */,
-				E163B7171B9F6A8B00A9902C /* BChartView-Bridging-Header.h */,
+				EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */,
 			);
 			path = iWalk;
 			sourceTree = "<group>";
@@ -341,14 +350,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFE3F6221B99D9170012E081 /* SecondViewController.swift in Sources */,
-				E129FEC91BA095D900E4D197 /* ThirdViewController.swift in Sources */,
-				E129FECD1BA0ABEC00E4D197 /* PageContentViewController.swift in Sources */,
+				EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */,
+				EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */,
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
 				EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */,
 				EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */,
 				EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */,
 				EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */,
+				E1CEA9771BA330E6003C8BEF /* PageContentViewController.swift in Sources */,
+				E1CEA9731BA32C3D003C8BEF /* StatsViewController.swift in Sources */,
 				EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
