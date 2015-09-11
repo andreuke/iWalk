@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  MeViewController.swift
 //  iWalk
 //
 //  Created by Andrea Piscitello on 04/09/15.
@@ -8,11 +8,14 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class MeViewController: UIViewController, UINavigationControllerDelegate {
+    
+    // MARK: Properties
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +23,12 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: Actions
+//    @IBAction func navigateToMyBody(sender: UITapGestureRecognizer) {
+//        performSegueWithIdentifier("MyBody", sender: self)
+//
+//    }
+    
 
 }
 
