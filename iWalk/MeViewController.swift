@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  MeViewController.swift
 //  iWalk
 //
 //  Created by Andrea Piscitello on 04/09/15.
@@ -11,7 +11,6 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
