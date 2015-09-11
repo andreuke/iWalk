@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>JBChartView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-iWalk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-iWalkTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-iWalkUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>28C367170AC854CF010BEF0A0800107C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>502F6C5CC8AF0C864996EF851208D6F0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>535F0BD19B1BEC11E8BB6347FF692630</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8A91957D37036A9A6FF1302D3BF778B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1DEEF213E4864C0E9652934EBC9A113</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
