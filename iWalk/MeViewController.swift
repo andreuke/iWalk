@@ -9,6 +9,12 @@ import UIKit
 
 class MeViewController: UIViewController {
     
+    // MARK: Properties
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var bmiLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
