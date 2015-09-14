@@ -48,7 +48,7 @@ class InfoTextField: UITextField {
     }
     
     func onEditingBegin(sender: InfoTextField) {
-        self.textColor = UIColor.blueColor()
+        self.textColor = UIColor(hex: Colors.BlueColor)
     }
     
     func onEditingEnd(sender: InfoTextField) {

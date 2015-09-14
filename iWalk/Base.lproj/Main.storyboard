@@ -453,10 +453,10 @@
             </objects>
             <point key="canvasLocation" x="1470" y="1073"/>
         </scene>
-        <!--Content View Controller-->
+        <!--Page Content View Controller-->
         <scene sceneID="oCj-35-KQO">
             <objects>
-                <viewController storyboardIdentifier="ContentViewController" id="1eF-wc-z52" customClass="ContentViewController" customModule="iWalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageContentViewController" id="1eF-wc-z52" customClass="PageContentViewController" customModule="iWalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iwm-Pe-KbF"/>
                         <viewControllerLayoutGuide type="bottom" id="6NI-je-e91"/>
@@ -501,17 +501,27 @@
                                     <constraint firstAttribute="height" constant="44" id="x8e-K4-YvT"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2g-WA-6gK" customClass="JBBarChartView">
+                                <rect key="frame" x="0.0" y="108" width="600" height="383"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="i2Y-pL-A94" firstAttribute="leading" secondItem="Fz9-mY-pN7" secondAttribute="leading" id="Bhh-lz-Cit"/>
+                            <constraint firstItem="f2g-WA-6gK" firstAttribute="top" secondItem="i2Y-pL-A94" secondAttribute="bottom" id="Dpj-aj-6Lc"/>
                             <constraint firstItem="i2Y-pL-A94" firstAttribute="top" secondItem="Iwm-Pe-KbF" secondAttribute="bottom" id="MDe-Jw-qJD"/>
+                            <constraint firstItem="f2g-WA-6gK" firstAttribute="leading" secondItem="Fz9-mY-pN7" secondAttribute="leading" id="RaO-0n-izE"/>
                             <constraint firstAttribute="trailing" secondItem="i2Y-pL-A94" secondAttribute="trailing" id="c4I-qe-1ae"/>
+                            <constraint firstItem="6NI-je-e91" firstAttribute="top" secondItem="f2g-WA-6gK" secondAttribute="bottom" constant="60" id="fpx-O2-k7b"/>
+                            <constraint firstAttribute="trailing" secondItem="f2g-WA-6gK" secondAttribute="trailing" id="zMG-SC-3Zu"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attributeLabel" destination="Wof-SV-Y7D" id="8C4-6D-2ap"/>
+                        <outlet property="barChart" destination="f2g-WA-6gK" id="P9V-Dc-7L7"/>
                         <outlet property="rangeLabel" destination="Xbj-Ua-N2A" id="AhD-dJ-ySB"/>
                     </connections>
                 </viewController>

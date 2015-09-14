@@ -1,72 +1,123 @@
 //
-//  PageContentViewController.swift
+//  ContentViewController.swift
 //  iWalk
 //
-//  Created by Giada Tacconelli on 11/09/15.
+//  Created by Andrea Piscitello on 13/09/15.
 //  Copyright © 2015 Giadrea. All rights reserved.
 //
 
 import UIKit
 
 class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBarChartViewDataSource {
-
-    @IBOutlet weak var heading: UILabel!
-    @IBOutlet weak var periodLabel: NSLayoutConstraint!
-    @IBOutlet weak var barChart: JBBarChartView!
-    @IBOutlet weak var label: UILabel!
     
-    var pageIndex: Int?
-    var titleText : String!
+    // MARK: Static Attributes
+    struct Constants {
+        static let Steps = 0
+        static let Calories = 1
+        static let Distance = 2
+        
+        static let AttributeStrings = ["Steps", "Calories", "Distance"]
+        
+        static let Week = 0
+        static let Month = 1
+        static let Year = 2
+        
+        static let RangeStrings = ["Week", "Month", "Year"]
+    }
+    
+    
+    // MARK: Properties
+    @IBOutlet weak var attributeLabel: UILabel!
+    @IBOutlet weak var rangeLabel: UILabel!
+    @IBOutlet weak var barChart: JBBarChartView!
+    
+    var attribute : Int? {
+        didSet {
+            attributeString = Constants.AttributeStrings[attribute!]
+        }
+
+    }
+    var attributeString : String?
+    
+    var range : Int? {
+        didSet {
+            rangeString = Constants.RangeStrings[range!]
+        }
+        
+    }
+    var rangeString : String?
+
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        range = Constants.Month
+        rangeString = Constants.RangeStrings[range!]
+    }
+    
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        attributeLabel.text = attributeString
+        rangeLabel.text = rangeString
+        
+        showBarChart()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadBarChart()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
+    
+    
     
     var chartLegend = ["11-14", "11-15", "11-16", "11-17", "11-18", "11-19", "11-20"]
     var chartData = [70, 80, 76, 88, 90, 69, 74]
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        heading.text = titleText
-        
-//        view.backgroundColor = UIColor.darkGrayColor()
-        
-        // bar chart setup
-        barChart.backgroundColor = UIColor.darkGrayColor()
+    func loadBarChart() {
+//        barChart.backgroundColor = UIColor.whiteColor()
         barChart.delegate = self
         barChart.dataSource = self
         barChart.minimumValue = 0
         barChart.maximumValue = 100
         
-        barChart.reloadData()
+//        barChart.reloadData()
         
         barChart.setState(.Collapsed, animated: false)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    func showBarChart() {
+
         
-        var footerView = UIView(frame: CGRectMake(0, 0, barChart.frame.width, 16))
-        
-        print("viewDidLoad: \(barChart.frame.width)")
-        
-        var footer1 = UILabel(frame: CGRectMake(0, 0, barChart.frame.width/2 - 8, 16))
-        footer1.textColor = UIColor.whiteColor()
-        footer1.text = "\(chartLegend[0])"
-        
-        var footer2 = UILabel(frame: CGRectMake(barChart.frame.width/2 - 8, 0, barChart.frame.width/2 - 8, 16))
-        footer2.textColor = UIColor.whiteColor()
-        footer2.text = "\(chartLegend[chartLegend.count - 1])"
-        footer2.textAlignment = NSTextAlignment.Right
-        
-        footerView.addSubview(footer1)
-        footerView.addSubview(footer2)
-        
-        var header = UILabel(frame: CGRectMake(0, 0, barChart.frame.width, 50))
-        header.textColor = UIColor.whiteColor()
-        header.font = UIFont.systemFontOfSize(24)
-        header.text = "Weather: San Jose, CA"
-        header.textAlignment = NSTextAlignment.Center
-        
-        barChart.footerView = footerView
-        barChart.headerView = header
+//        var footerView = UIView(frame: CGRectMake(0, 0, barChart.frame.width, 16))
+//        
+//        print("viewDidLoad: \(barChart.frame.width)")
+//        
+//        var footer1 = UILabel(frame: CGRectMake(0, 0, barChart.frame.width/2 - 8, 16))
+//        footer1.textColor = UIColor.whiteColor()
+//        footer1.text = "\(chartLegend[0])"
+//        
+//        var footer2 = UILabel(frame: CGRectMake(barChart.frame.width/2 - 8, 0, barChart.frame.width/2 - 8, 16))
+//        footer2.textColor = UIColor.whiteColor()
+//        footer2.text = "\(chartLegend[chartLegend.count - 1])"
+//        footer2.textAlignment = NSTextAlignment.Right
+//        
+//        footerView.addSubview(footer1)
+//        footerView.addSubview(footer2)
+//        
+//        var header = UILabel(frame: CGRectMake(0, 0, barChart.frame.width, 50))
+//        header.textColor = UIColor.whiteColor()
+//        header.font = UIFont.systemFontOfSize(24)
+//        header.text = "Weather: San Jose, CA"
+//        header.textAlignment = NSTextAlignment.Center
+//        
+//        barChart.footerView = footerView
+//        barChart.headerView = header
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -74,8 +125,7 @@ class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBar
         
         // our code
         barChart.reloadData()
-        
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("showChart"), userInfo: nil, repeats: false)
+        showChart()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -84,11 +134,11 @@ class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBar
     }
     
     func hideChart() {
-        barChart.setState(.Collapsed, animated: true)
+        barChart.setState(.Collapsed, animated: false)
     }
     
     func showChart() {
-        barChart.setState(.Expanded, animated: true)
+        barChart.setState(.Expanded, animated: false)
     }
     
     // MARK: JBBarChartView
@@ -102,28 +152,18 @@ class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBar
     }
     
     func barChartView(barChartView: JBBarChartView!, colorForBarViewAtIndex index: UInt) -> UIColor! {
-        return (index % 2 == 0) ? UIColor.lightGrayColor() : UIColor.whiteColor()
+        return UIColor(hex: Colors.BlueColor)
     }
     
     func barChartView(barChartView: JBBarChartView!, didSelectBarAtIndex index: UInt) {
         let data = chartData[Int(index)]
         let key = chartLegend[Int(index)]
         
-//        informationLabel.text = "Weather on \(key): \(data)"
+        //        informationLabel.text = "Weather on \(key): \(data)"
     }
     
     func didDeselectBarChartView(barChartView: JBBarChartView!) {
-//        informationLabel.text = ""
+        //        informationLabel.text = ""
     }//
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

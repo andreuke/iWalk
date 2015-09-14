@@ -26,7 +26,7 @@ class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPag
         pageController?.delegate = self
         pageController?.dataSource = self
         
-        let startingViewController: ContentViewController =
+        let startingViewController: PageContentViewController =
         viewControllerAtIndex(0)!
         
         let viewControllers: [UIViewController] = [startingViewController]
@@ -50,8 +50,8 @@ class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPag
     
     
     // MARK: PageViewController Delegate Methods
-    func viewControllerAtIndex(index: Int) -> ContentViewController? {
-        let count = ContentViewController.Constants.AttributeStrings.count
+    func viewControllerAtIndex(index: Int) -> PageContentViewController? {
+        let count = PageContentViewController.Constants.AttributeStrings.count
         
         if (count == 0) ||
             (index >= count) {
@@ -60,13 +60,13 @@ class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPag
         
         let storyBoard = UIStoryboard(name: "Main",
             bundle: NSBundle.mainBundle())
-        let contentViewController = storyBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! ContentViewController
+        let contentViewController = storyBoard.instantiateViewControllerWithIdentifier("PageContentViewController") as! PageContentViewController
         
         contentViewController.attribute = index
         return contentViewController
     }
     
-    func indexOfViewController(viewController: ContentViewController) -> Int {
+    func indexOfViewController(viewController: PageContentViewController) -> Int {
    
         if let attribute: Int = viewController.attribute {
             return attribute
@@ -79,7 +79,7 @@ class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPag
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
         var index = indexOfViewController(viewController
-            as! ContentViewController)
+            as! PageContentViewController)
         
         if (index == 0) || (index == NSNotFound) {
             return nil
@@ -92,7 +92,7 @@ class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPag
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
         var index = indexOfViewController(viewController
-            as! ContentViewController)
+            as! PageContentViewController)
         
         if index == NSNotFound {
             return nil
