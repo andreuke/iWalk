@@ -501,7 +501,7 @@
                                     <constraint firstAttribute="height" constant="44" id="x8e-K4-YvT"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2g-WA-6gK" customClass="JBBarChartView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2g-WA-6gK" customClass="BarChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="108" width="600" height="383"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -521,7 +521,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attributeLabel" destination="Wof-SV-Y7D" id="8C4-6D-2ap"/>
-                        <outlet property="barChart" destination="f2g-WA-6gK" id="P9V-Dc-7L7"/>
+                        <outlet property="barChartView" destination="f2g-WA-6gK" id="k6U-3T-zL8"/>
                         <outlet property="rangeLabel" destination="Xbj-Ua-N2A" id="AhD-dJ-ySB"/>
                     </connections>
                 </viewController>

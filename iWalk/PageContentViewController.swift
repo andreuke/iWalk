@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Charts
 
-class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBarChartViewDataSource {
+class PageContentViewController: UIViewController {
     
     // MARK: Static Attributes
     struct Constants {
@@ -29,7 +30,8 @@ class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBar
     // MARK: Properties
     @IBOutlet weak var attributeLabel: UILabel!
     @IBOutlet weak var rangeLabel: UILabel!
-    @IBOutlet weak var barChart: JBBarChartView!
+    @IBOutlet weak var barChartView: BarChartView!
+
     
     var attribute : Int? {
         didSet {
@@ -59,111 +61,56 @@ class PageContentViewController: UIViewController, JBBarChartViewDelegate, JBBar
         super.viewWillAppear(animated)
         attributeLabel.text = attributeString
         rangeLabel.text = rangeString
-        
-        showBarChart()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadBarChart()
+        
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        let unitsSold = [20, 4.2, 6.2, 3.9, 12, 16, 4.7, 4.1, 3.9, 4, 5, 4]
+        
+        setChart(months, values: unitsSold)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    
-    
-    
-    
-    var chartLegend = ["11-14", "11-15", "11-16", "11-17", "11-18", "11-19", "11-20"]
-    var chartData = [70, 80, 76, 88, 90, 69, 74]
-    
-    func loadBarChart() {
-//        barChart.backgroundColor = UIColor.whiteColor()
-        barChart.delegate = self
-        barChart.dataSource = self
-        barChart.minimumValue = 0
-        barChart.maximumValue = 100
+    // MARK: BarChart
+    func setChart(dataPoints: [String], values: [Double]) {
+        var dataEntries: [BarChartDataEntry] = []
         
-//        barChart.reloadData()
+        for i in 0..<dataPoints.count {
+            let dataEntry = BarChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
+        }
         
-        barChart.setState(.Collapsed, animated: false)
-    }
-    
-    func showBarChart() {
+        let chartDataSet = BarChartDataSet(yVals: dataEntries, label: "Units Sold")
+        let chartData = BarChartData(xVals: dataPoints, dataSet: chartDataSet)
+        barChartView.data = chartData
+        
+        // Configuration
+        chartDataSet.colors = [UIColor(hex:Colors.BlueColor)]
+        chartDataSet.valueTextColor = UIColor.whiteColor()
+        chartDataSet.drawValuesEnabled = true
+        chartDataSet.highlightEnabled = false
+        
+        // Set rounding for values on bars
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.generatesDecimalNumbers = false
+        chartDataSet.valueFormatter = numberFormatter
 
         
-//        var footerView = UIView(frame: CGRectMake(0, 0, barChart.frame.width, 16))
-//        
-//        print("viewDidLoad: \(barChart.frame.width)")
-//        
-//        var footer1 = UILabel(frame: CGRectMake(0, 0, barChart.frame.width/2 - 8, 16))
-//        footer1.textColor = UIColor.whiteColor()
-//        footer1.text = "\(chartLegend[0])"
-//        
-//        var footer2 = UILabel(frame: CGRectMake(barChart.frame.width/2 - 8, 0, barChart.frame.width/2 - 8, 16))
-//        footer2.textColor = UIColor.whiteColor()
-//        footer2.text = "\(chartLegend[chartLegend.count - 1])"
-//        footer2.textAlignment = NSTextAlignment.Right
-//        
-//        footerView.addSubview(footer1)
-//        footerView.addSubview(footer2)
-//        
-//        var header = UILabel(frame: CGRectMake(0, 0, barChart.frame.width, 50))
-//        header.textColor = UIColor.whiteColor()
-//        header.font = UIFont.systemFontOfSize(24)
-//        header.text = "Weather: San Jose, CA"
-//        header.textAlignment = NSTextAlignment.Center
-//        
-//        barChart.footerView = footerView
-//        barChart.headerView = header
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        barChartView.descriptionText = ""
+        barChartView.xAxis.labelPosition = .Bottom
+        barChartView.legend.enabled = false
+        barChartView.drawValueAboveBarEnabled = false
+        barChartView.gridBackgroundColor = UIColor.whiteColor()
+        barChartView.drawGridBackgroundEnabled = false
+        barChartView.setScaleEnabled(false)
         
-        // our code
-        barChart.reloadData()
-        showChart()
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        hideChart()
-    }
-    
-    func hideChart() {
-        barChart.setState(.Collapsed, animated: false)
-    }
-    
-    func showChart() {
-        barChart.setState(.Expanded, animated: false)
-    }
-    
-    // MARK: JBBarChartView
-    
-    func numberOfBarsInBarChartView(barChartView: JBBarChartView!) -> UInt {
-        return UInt(chartData.count)
-    }
-    
-    func barChartView(barChartView: JBBarChartView!, heightForBarViewAtIndex index: UInt) -> CGFloat {
-        return CGFloat(chartData[Int(index)])
-    }
-    
-    func barChartView(barChartView: JBBarChartView!, colorForBarViewAtIndex index: UInt) -> UIColor! {
-        return UIColor(hex: Colors.BlueColor)
-    }
-    
-    func barChartView(barChartView: JBBarChartView!, didSelectBarAtIndex index: UInt) {
-        let data = chartData[Int(index)]
-        let key = chartLegend[Int(index)]
         
-        //        informationLabel.text = "Weather on \(key): \(data)"
+
     }
-    
-    func didDeselectBarChartView(barChartView: JBBarChartView!) {
-        //        informationLabel.text = ""
-    }//
     
 }

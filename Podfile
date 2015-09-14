@@ -14,3 +14,6 @@ target 'iWalkUITests' do
 end
 
 pod 'JBChartView'
+#pod 'Charts', '~> 2.1.3'
+
+use_frameworks!
