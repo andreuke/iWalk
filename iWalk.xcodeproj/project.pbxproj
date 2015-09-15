@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39E6F46584F5E408A394DA85 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37E6DAF664F711583782324 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E10566121B9B066E00CC8EE1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10566111B9B066E00CC8EE1 /* HealthKit.framework */; };
 		EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF033CDE1BA1D528003198CD /* InfoTextField.swift */; };
 		EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */; };
 		EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */; };
 		EF34C26E1BA63B0600561955 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34C26D1BA63B0600561955 /* Colors.swift */; };
 		EF8630EA1BA71159008B5D3B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630E91BA71118008B5D3B /* Charts.framework */; };
 		EF8630EB1BA71159008B5D3B /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630E91BA71118008B5D3B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630EF1BA743AF008B5D3B /* HealthKit.framework */; };
+		EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
 		EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */; };
 		EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6411BA051030067384C /* MeTableViewCell.swift */; };
@@ -75,15 +75,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A66C69472F21994E39E751D6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B576AC54223030DBCD8AE2E1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C37E6DAF664F711583782324 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E10566111B9B066E00CC8EE1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EF033CDE1BA1D528003198CD /* InfoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTextField.swift; sourceTree = "<group>"; };
 		EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		EF34C26D1BA63B0600561955 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EF8630E41BA71118008B5D3B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		EF8630EE1BA73EA2008B5D3B /* iWalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iWalk.entitlements; sourceTree = "<group>"; };
+		EF8630EF1BA743AF008B5D3B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBodyViewController.swift; sourceTree = "<group>"; };
 		EFB8F6411BA051030067384C /* MeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeTableViewCell.swift; path = ../MeTableViewCell.swift; sourceTree = "<group>"; };
@@ -109,9 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */,
 				EF8630EA1BA71159008B5D3B /* Charts.framework in Frameworks */,
-				E10566121B9B066E00CC8EE1 /* HealthKit.framework in Frameworks */,
-				39E6F46584F5E408A394DA85 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,18 +131,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08EDDA153ED62E9BF7B7666A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B576AC54223030DBCD8AE2E1 /* Pods.debug.xcconfig */,
-				A66C69472F21994E39E751D6 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		5676153E9ADC215F1A5E7A7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EF8630EF1BA743AF008B5D3B /* HealthKit.framework */,
 				EF8630E41BA71118008B5D3B /* Charts.xcodeproj */,
 				C37E6DAF664F711583782324 /* Pods.framework */,
 			);
@@ -167,6 +158,7 @@
 			children = (
 				EFB8F6431BA076D70067384C /* UserInfo.swift */,
 				EF34C26D1BA63B0600561955 /* Colors.swift */,
+				EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -192,12 +184,10 @@
 		EFE3F6111B99D9170012E081 = {
 			isa = PBXGroup;
 			children = (
-				E10566111B9B066E00CC8EE1 /* HealthKit.framework */,
 				EFE3F61C1B99D9170012E081 /* iWalk */,
 				EFE3F6331B99D9170012E081 /* iWalkTests */,
 				EFE3F63E1B99D9170012E081 /* iWalkUITests */,
 				EFE3F61B1B99D9170012E081 /* Products */,
-				08EDDA153ED62E9BF7B7666A /* Pods */,
 				5676153E9ADC215F1A5E7A7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -215,6 +205,7 @@
 		EFE3F61C1B99D9170012E081 /* iWalk */ = {
 			isa = PBXGroup;
 			children = (
+				EF8630EE1BA73EA2008B5D3B /* iWalk.entitlements */,
 				EF1045A11BA5C67B001AD1CC /* Views */,
 				EF1045A01BA5C668001AD1CC /* Models */,
 				EF10459F1BA5C655001AD1CC /* ViewControllers */,
@@ -252,12 +243,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFE3F6441B99D9170012E081 /* Build configuration list for PBXNativeTarget "iWalk" */;
 			buildPhases = (
-				C0B5F025D4FBC5D05055B229 /* Check Pods Manifest.lock */,
 				EFE3F6161B99D9170012E081 /* Sources */,
 				EFE3F6171B99D9170012E081 /* Frameworks */,
 				EFE3F6181B99D9170012E081 /* Resources */,
-				70E87FA30267B267767C85A3 /* Copy Pods Resources */,
-				A84BC6FAB6EEFFC7D9CA34A3 /* Embed Pods Frameworks */,
 				EF8630DD1BA70F4D008B5D3B /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -317,9 +305,13 @@
 				TargetAttributes = {
 					EFE3F6191B99D9170012E081 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = SSAG8WKRD4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.HealthKit = {
+								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
@@ -399,54 +391,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		70E87FA30267B267767C85A3 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A84BC6FAB6EEFFC7D9CA34A3 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0B5F025D4FBC5D05055B229 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		EFE3F6161B99D9170012E081 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -454,6 +398,7 @@
 			files = (
 				EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */,
 				EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */,
+				EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */,
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
 				EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */,
 				EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */,
@@ -609,33 +554,39 @@
 		};
 		EFE3F6451B99D9170012E081 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B576AC54223030DBCD8AE2E1 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iWalk/iWalk.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iWalk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.giadrea.iWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "iWalk/BChartView-Bridging-Header.h";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
 		EFE3F6461B99D9170012E081 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A66C69472F21994E39E751D6 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iWalk/iWalk.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iWalk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.giadrea.iWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "iWalk/BChartView-Bridging-Header.h";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

@@ -26,9 +26,6 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     // MARK: Inizialization
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Limit number of rows of table view
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        
         // Retrieve data to visualize
         fetchUserInfo()
         
@@ -48,12 +45,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func fetchUserInfo() {
-        let birthday = "14/03/1992"
-        let gender  = "Male"
-        let height = 181
-        let weight = 67
-        
-        let user = UserInfo(birthday:birthday , gender: gender, height: height, weight: weight)
+        let user = UserInfo()
         info = user!.info
         ranges = user!.ranges
     }

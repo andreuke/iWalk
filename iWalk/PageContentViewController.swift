@@ -66,10 +66,11 @@ class PageContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        let unitsSold = [20, 4.2, 6.2, 3.9, 12, 16, 4.7, 4.1, 3.9, 4, 5, 4]
+        let labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+        let values = [20, 4.2, 6.2, 3.9, 12, 16, 4.7, 4.1, 3.9, 4, 5, 4]
         
-        setChart(months, values: unitsSold)
+        setChart(labels, values: values)
     }
 
     override func didReceiveMemoryWarning() {
