@@ -183,7 +183,53 @@ class HealthKitManager {
         })
     }
 
+    func fetchHeight() {
+        
+        // 1. Construct an HKSampleType for Height
+        let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
+        
+        // 2. Call the method to read the most recent Height sample
+        self.readMostRecentSample(sampleType!, completion: { (mostRecentHeight, error) -> Void in
+            
+            if( error != nil )
+            {
+                print("Error reading height from HealthKit Store: \(error.localizedDescription)")
+                return;
+            }
+            
+        
+            let height = mostRecentHeight as? HKQuantitySample;
+            
+            // 3. Format the height to display it on the screen
+            if let meters = height?.quantity.doubleValueForUnit(HKUnit.meterUnit()) {
+                let heightFormatter = NSLengthFormatter()
+                heightFormatter.forPersonHeightUse = true;
+                let heightString = heightFormatter.stringFromMeters(meters);
+                let timestamp = height?.endDate
+                
+                let heightInfo = UpdatableInformation(value: heightString, latestUpdate: timestamp)
+                
+                UserInfo.instance?.updatHeight(heightInfo)
+            }
+            
+    
+        })
+    }
 
+    
+//    func updateBMI() {
+//        if weight != nil && height != nil {
+//            // 1. Get the weight and height values from the samples read from HealthKit
+//            let weightInKilograms = weight!.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+//            let heightInMeters = height!.quantity.doubleValueForUnit(HKUnit.meterUnit())
+//            // 2. Call the method to calculate the BMI
+//            bmi  = calculateBMIWithWeightInKilograms(weightInKilograms, heightInMeters: heightInMeters)
+//        }
+//        // 3. Show the calculated BMI
+//        var bmiString = kUnknownString
+//        if bmi != nil {
+//            bmiLabel.text =  String(format: "%.02f", bmi!)
+//        }
 
 
 //    func getPeriodicData(dataType: Int, period: Int) {
@@ -195,5 +241,5 @@ class HealthKitManager {
 //    }
 
 
-
+    
 }

@@ -34,6 +34,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         
         // Subscribe to Notification Center
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTable", name: Notifications.weightUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTable", name: Notifications.heightUpdated, object: nil)
         
         // Retrieve data to visualize
         fetchUserInfo()
@@ -134,9 +135,6 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     func reloadTable() {
         info = userInfo!.info
         self.tableView.reloadData()
-//        for i in 0 ..< textFields.count {
-//            textFields[i].text = info[i]?.value
-//        }
     }
 
     

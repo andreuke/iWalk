@@ -9,6 +9,7 @@
 import UIKit
 
 class UserInfo {
+    
     static let instance = UserInfo()
     
     enum Attribute:Int {
@@ -65,6 +66,7 @@ class UserInfo {
     func fetchAllInfo() {
         fetchCharachteristics()
         fetchLatestWeight()
+        fetchLatestHeight()
     }
     
     // Birthday and Gender
@@ -77,6 +79,12 @@ class UserInfo {
     // Weight
     func fetchLatestWeight() {
         healthKitManager.fetchWeight()
+        // TODO fetchFromDatabase
+    }
+    
+    // Height
+    func fetchLatestHeight() {
+        healthKitManager.fetchHeight()
         // TODO fetchFromDatabase
     }
     
@@ -95,13 +103,30 @@ class UserInfo {
         else {
             self.info[Attribute.Weight.rawValue] = newWeight
         }
-        sleep(2)
+    
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.weightUpdated, object: nil)
         
     }
     
+    func updatHeight(newHeight: UpdatableInformation) {
+        if(newHeight.latestUpdate == nil) {
+            return
+        }
+        
+        if let currentHeightUpdate = self.info[Attribute.Height.rawValue]?.latestUpdate {
+            if(currentHeightUpdate < newHeight.latestUpdate) {
+                self.info[Attribute.Height.rawValue] = newHeight
+            }
+        }
+            // If current is not available
+        else {
+            self.info[Attribute.Height.rawValue] = newHeight
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.heightUpdated, object: nil)
+        
+    }
     
-    
-    
+
     
 }
