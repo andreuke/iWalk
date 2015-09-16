@@ -16,9 +16,10 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     
     var rightButton : UIBarButtonItem?
     var leftButton : UIBarButtonItem?
-    var info = [String:String]()
-    var ranges = [String:[String]]()
+    var info = [UpdatableInformation?]()
+    var ranges = [[String]]()
     var pickerViewList : [UIPickerView] = []
+    let userInfo = UserInfo.instance
 
 
     var textFields : [UITextField] = []
@@ -26,6 +27,14 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     // MARK: Inizialization
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        
+        // Subscribe to Notification Center
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTable", name: Notifications.weightUpdated, object: nil)
+        
         // Retrieve data to visualize
         fetchUserInfo()
         
@@ -44,10 +53,15 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
 
     }
     
+    // MARK: Deinizialitaion
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     func fetchUserInfo() {
-        let user = UserInfo()
-        info = user!.info
-        ranges = user!.ranges
+        userInfo!.fetchAllInfo()
+        info = userInfo!.info
+        ranges = userInfo!.ranges
     }
     
     
@@ -91,6 +105,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        UserInfo.instance?.tableView = tableView
         return info.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -100,13 +115,13 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         
         let index = indexPath.row
         
-        let currentKey = Array(info.keys)[index]
-        let currentValue = Array(info.values)[index]
+        let currentKey = UserInfo.Attribute(rawValue: index)?.description
+        let currentValue = info[index]?.value
         
         
         // Fill the cell components
         cell.keyLabel.text = currentKey
-        cell.valueLabel.text = currentValue
+        cell.valueLabel.text = currentValue != nil ? currentValue : "Not Set"
         
         // Set correct pickerView as input method for the valueLabel
         cell.valueLabel.inputView = pickerViewList[index]
@@ -114,6 +129,14 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
 
         
         return cell
+    }
+    
+    func reloadTable() {
+        info = userInfo!.info
+        self.tableView.reloadData()
+//        for i in 0 ..< textFields.count {
+//            textFields[i].text = info[i]?.value
+//        }
     }
 
     
@@ -123,17 +146,17 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Array(ranges.values)[pickerView.tag].count
+        return ranges[pickerView.tag].count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Array(ranges.values)[pickerView.tag][row]
+        return ranges[pickerView.tag][row]
 
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let field = textFields[pickerView.tag]
-        field.text = Array(ranges.values)[pickerView.tag][row]
+        field.text = ranges[pickerView.tag][row]
         field.resignFirstResponder()
     }
     

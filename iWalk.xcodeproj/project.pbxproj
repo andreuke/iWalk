@@ -19,6 +19,9 @@
 		EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */; };
 		EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6411BA051030067384C /* MeTableViewCell.swift */; };
 		EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6431BA076D70067384C /* UserInfo.swift */; };
+		EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */; };
+		EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */; };
+		EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */; };
 		EFD04DE21BA62B57005196BA /* iWalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6341B99D9170012E081 /* iWalkTests.swift */; };
 		EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61D1B99D9170012E081 /* AppDelegate.swift */; };
 		EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61F1B99D9170012E081 /* MeViewController.swift */; };
@@ -88,6 +91,9 @@
 		EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBodyViewController.swift; sourceTree = "<group>"; };
 		EFB8F6411BA051030067384C /* MeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeTableViewCell.swift; path = ../MeTableViewCell.swift; sourceTree = "<group>"; };
 		EFB8F6431BA076D70067384C /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = ../UserInfo.swift; sourceTree = "<group>"; };
+		EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatableInformation.swift; sourceTree = "<group>"; };
+		EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		EFE3F61A1B99D9170012E081 /* iWalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE3F61D1B99D9170012E081 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFE3F61F1B99D9170012E081 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 		EF1045A01BA5C668001AD1CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */,
 				EFB8F6431BA076D70067384C /* UserInfo.swift */,
 				EF34C26D1BA63B0600561955 /* Colors.swift */,
 				EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */,
@@ -179,6 +186,15 @@
 				EF8630E91BA71118008B5D3B /* Charts.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EFC17B051BA9BEDF00D5DCA2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */,
+				EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		EFE3F6111B99D9170012E081 = {
@@ -205,6 +221,7 @@
 		EFE3F61C1B99D9170012E081 /* iWalk */ = {
 			isa = PBXGroup;
 			children = (
+				EFC17B051BA9BEDF00D5DCA2 /* Helpers */,
 				EF8630EE1BA73EA2008B5D3B /* iWalk.entitlements */,
 				EF1045A11BA5C67B001AD1CC /* Views */,
 				EF1045A01BA5C668001AD1CC /* Models */,
@@ -396,7 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */,
 				EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */,
+				EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */,
+				EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */,
 				EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */,
 				EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */,
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
