@@ -375,7 +375,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30a-Db-7Rb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="1073"/>
+            <point key="canvasLocation" x="682" y="1073"/>
         </scene>
         <!--Stats-->
         <scene sceneID="7l6-us-3qI">
@@ -394,7 +394,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXn-CI-HUm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="1073"/>
+            <point key="canvasLocation" x="1324" y="1073"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="hgd-EN-a7k">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="MFm-WI-xZm" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZh-uB-we2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1962" y="1073"/>
         </scene>
         <!--Page Content View Controller-->
         <scene sceneID="oCj-35-KQO">
@@ -408,26 +416,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2Y-pL-A94">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2g-WA-6gK" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="193" width="600" height="387"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i2Y-pL-A94">
+                                <rect key="frame" x="0.0" y="70" width="600" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attribute" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wof-SV-Y7D">
-                                        <rect key="frame" x="15" y="11" width="67" height="21"/>
+                                        <rect key="frame" x="15" y="13" width="67" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKd-0X-nZ3">
-                                        <rect key="frame" x="15" y="40" width="585" height="1"/>
+                                        <rect key="frame" x="15" y="41" width="585" height="1"/>
                                         <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="bAq-V8-gni"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbj-Ua-N2A">
-                                        <rect key="frame" x="532" y="11" width="49" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbj-Ua-N2A">
+                                        <rect key="frame" x="537" y="13" width="44" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.40000000000000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -436,32 +448,27 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="QKd-0X-nZ3" secondAttribute="trailing" id="0jd-Ux-kA3"/>
                                     <constraint firstItem="Wof-SV-Y7D" firstAttribute="leading" secondItem="i2Y-pL-A94" secondAttribute="leading" constant="15" id="8aI-jD-HKR"/>
-                                    <constraint firstItem="Wof-SV-Y7D" firstAttribute="centerY" secondItem="i2Y-pL-A94" secondAttribute="centerY" id="9c5-62-zqC"/>
+                                    <constraint firstItem="Wof-SV-Y7D" firstAttribute="centerY" secondItem="i2Y-pL-A94" secondAttribute="centerY" constant="1.5" id="9c5-62-zqC"/>
                                     <constraint firstAttribute="trailing" secondItem="Xbj-Ua-N2A" secondAttribute="trailing" constant="19" id="TTp-Lo-xfg"/>
-                                    <constraint firstItem="Xbj-Ua-N2A" firstAttribute="centerY" secondItem="i2Y-pL-A94" secondAttribute="centerY" id="Z1C-DC-Z3V"/>
+                                    <constraint firstItem="Xbj-Ua-N2A" firstAttribute="centerY" secondItem="i2Y-pL-A94" secondAttribute="centerY" constant="1.5" id="Z1C-DC-Z3V"/>
                                     <constraint firstItem="QKd-0X-nZ3" firstAttribute="leading" secondItem="i2Y-pL-A94" secondAttribute="leading" constant="15" id="fnm-b3-PjC"/>
-                                    <constraint firstItem="QKd-0X-nZ3" firstAttribute="top" secondItem="Wof-SV-Y7D" secondAttribute="bottom" constant="8" id="jvO-9V-TqD"/>
+                                    <constraint firstItem="QKd-0X-nZ3" firstAttribute="top" secondItem="Wof-SV-Y7D" secondAttribute="bottom" constant="7" id="jvO-9V-TqD"/>
                                     <constraint firstAttribute="height" constant="44" id="x8e-K4-YvT"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2g-WA-6gK" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="108" width="600" height="383"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="i2Y-pL-A94" firstAttribute="leading" secondItem="Fz9-mY-pN7" secondAttribute="leading" id="Bhh-lz-Cit"/>
-                            <constraint firstItem="f2g-WA-6gK" firstAttribute="top" secondItem="i2Y-pL-A94" secondAttribute="bottom" id="Dpj-aj-6Lc"/>
-                            <constraint firstItem="i2Y-pL-A94" firstAttribute="top" secondItem="Iwm-Pe-KbF" secondAttribute="bottom" id="MDe-Jw-qJD"/>
-                            <constraint firstItem="f2g-WA-6gK" firstAttribute="leading" secondItem="Fz9-mY-pN7" secondAttribute="leading" id="RaO-0n-izE"/>
-                            <constraint firstAttribute="trailing" secondItem="i2Y-pL-A94" secondAttribute="trailing" id="c4I-qe-1ae"/>
-                            <constraint firstItem="6NI-je-e91" firstAttribute="top" secondItem="f2g-WA-6gK" secondAttribute="bottom" constant="60" id="fpx-O2-k7b"/>
-                            <constraint firstAttribute="trailing" secondItem="f2g-WA-6gK" secondAttribute="trailing" id="zMG-SC-3Zu"/>
+                            <constraint firstItem="f2g-WA-6gK" firstAttribute="top" secondItem="i2Y-pL-A94" secondAttribute="bottom" constant="79" id="7AR-fn-EBN"/>
+                            <constraint firstAttribute="trailing" secondItem="f2g-WA-6gK" secondAttribute="trailing" id="GrP-UD-JQR"/>
+                            <constraint firstItem="f2g-WA-6gK" firstAttribute="leading" secondItem="Fz9-mY-pN7" secondAttribute="leading" id="HyC-MS-fcO"/>
+                            <constraint firstItem="i2Y-pL-A94" firstAttribute="top" secondItem="Fz9-mY-pN7" secondAttribute="top" constant="70" id="Qz7-cT-wtg"/>
+                            <constraint firstItem="i2Y-pL-A94" firstAttribute="leading" secondItem="Fz9-mY-pN7" secondAttribute="leading" id="SeV-Je-elS"/>
+                            <constraint firstAttribute="trailing" secondItem="i2Y-pL-A94" secondAttribute="trailing" id="UQ4-5c-WGP"/>
+                            <constraint firstAttribute="bottom" secondItem="f2g-WA-6gK" secondAttribute="bottom" constant="20" id="ij5-v6-Ovg"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attributeLabel" destination="Wof-SV-Y7D" id="8C4-6D-2ap"/>
                         <outlet property="barChartView" destination="f2g-WA-6gK" id="k6U-3T-zL8"/>
@@ -470,7 +477,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxM-dE-W04" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2121" y="1073"/>
+            <point key="canvasLocation" x="2601" y="1073"/>
         </scene>
     </scenes>
     <resources>

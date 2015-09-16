@@ -49,8 +49,12 @@ class UserInfo {
     // MARK: Inizialization
     private init?() {
         self.info = [UpdatableInformation?](count:ranges.count, repeatedValue: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.heightUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.weightUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.sexUpdated, object: nil)
         
-        fetchAllInfo()
+        
+        //        fetchAllInfo()
         
         //        if !(UserInfo.HEIGHT_MIN...UserInfo.HEIGHT_MAX ~= self.info[HEIGHT]!) {
         //            return nil
@@ -98,12 +102,15 @@ class UserInfo {
             if(currentWeightUpdate < newWeight.latestUpdate) {
                 self.info[Attribute.Weight.rawValue] = newWeight
             }
+            else {
+                return
+            }
         }
             // If current is not available
         else {
             self.info[Attribute.Weight.rawValue] = newWeight
         }
-    
+        
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.weightUpdated, object: nil)
         
     }
@@ -117,6 +124,9 @@ class UserInfo {
             if(currentHeightUpdate < newHeight.latestUpdate) {
                 self.info[Attribute.Height.rawValue] = newHeight
             }
+            else {
+                return
+            }
         }
             // If current is not available
         else {
@@ -127,6 +137,25 @@ class UserInfo {
         
     }
     
-
+    func updateBMI() {
+        // TODO: save directly kilograms
+        
+//        if (info[Attribute.Weight] != nil  && info[Attribute.Height] != nil) {
+//            // 1. Get the weight and height values from the samples read from HealthKit
+//            let weightInKilograms = weight!.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+//            let heightInMeters = height!.quantity.doubleValueForUnit(HKUnit.meterUnit())
+//            // 2. Call the method to calculate the BMI
+//            bmi  = calculateBMIWithWeightInKilograms(weightInKilograms, heightInMeters: heightInMeters)
+//        }
+//        // 3. Show the calculated BMI
+//        var bmiString = kUnknownString
+//        if bmi != nil {
+//            bmiLabel.text =  String(format: "%.02f", bmi!)
+//        }
+    }
+    
+    
+    
+    
     
 }

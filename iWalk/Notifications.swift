@@ -11,4 +11,6 @@ import Foundation
 class Notifications {
     static let weightUpdated = "com.giadrea.notifications.weigthUpdated"
     static let heightUpdated = "com.giadrea.notifications.heigthUpdated"
+    static let sexUpdated = "com.giadrea.notifications.sexUpdated"
+    
 }

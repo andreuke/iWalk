@@ -26,6 +26,8 @@ class HealthKitManager {
             HKObjectType.characteristicTypeForIdentifier(HKCharacteristicTypeIdentifierBiologicalSex)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
             HKObjectType.workoutType()
         )
         
@@ -34,7 +36,9 @@ class HealthKitManager {
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMassIndex)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
-            HKQuantityType.workoutType()
+            HKQuantityType.workoutType(),
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!
         )
         
         // 3. If the store is not available (for instance, iPad) return an error and don't go on.
@@ -215,30 +219,6 @@ class HealthKitManager {
     
         })
     }
-
-    
-//    func updateBMI() {
-//        if weight != nil && height != nil {
-//            // 1. Get the weight and height values from the samples read from HealthKit
-//            let weightInKilograms = weight!.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
-//            let heightInMeters = height!.quantity.doubleValueForUnit(HKUnit.meterUnit())
-//            // 2. Call the method to calculate the BMI
-//            bmi  = calculateBMIWithWeightInKilograms(weightInKilograms, heightInMeters: heightInMeters)
-//        }
-//        // 3. Show the calculated BMI
-//        var bmiString = kUnknownString
-//        if bmi != nil {
-//            bmiLabel.text =  String(format: "%.02f", bmi!)
-//        }
-
-
-//    func getPeriodicData(dataType: Int, period: Int) {
-//        switch dataType {
-//        case 0: {
-//
-//            }
-//        }
-//    }
 
 
     

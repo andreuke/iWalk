@@ -135,6 +135,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     func reloadTable() {
         info = userInfo!.info
         self.tableView.reloadData()
+        print("Reload Table")
     }
 
     
@@ -167,5 +168,12 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
 
     
     
-    
+    //        func getPeriodicData(dataType: Int, period: Int) {
+    //            switch dataType {
+    //            case 0: {
+    //
+    //                }
+    //            }
+    //        }
+
     }

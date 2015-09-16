@@ -10,37 +10,46 @@ import UIKit
 
 class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
-    // MARK: Properties
-    var pageController: UIPageViewController?
-    var pageContent = NSArray()
+    var pageViewController : UIPageViewController!
     
-    // MARK: ViewController Lifecycle
+    @IBAction func swipeLeft(sender: AnyObject) {
+        print("SWipe left")
+    }
+    
+    @IBAction func swiped(sender: AnyObject) {
+        
+        self.pageViewController.view.removeFromSuperview()
+        self.pageViewController.removeFromParentViewController()
+        reset()
+    }
+    
+    func reset() {
+        /* Getting the page View controller */
+        pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
+        self.pageViewController.dataSource = self
+        
+        let pageContentViewController = self.viewControllerAtIndex(0)
+        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height - 60)
+        self.addChildViewController(pageViewController)
+        self.view.addSubview(pageViewController.view)
+        self.pageViewController.didMoveToParentViewController(self)
+    }
+    
+    @IBAction func start(sender: AnyObject) {
+        let pageContentViewController = self.viewControllerAtIndex(0)
+        self.pageViewController.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        reset()
+        var pageControl = UIPageControl.appearance()
+        pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
+        pageControl.currentPageIndicatorTintColor = UIColor.blueColor()
+        pageControl.backgroundColor = UIColor.whiteColor()
         
-        pageController = UIPageViewController(
-            transitionStyle: .Scroll,
-            navigationOrientation: .Horizontal,
-            options: nil)
-        
-        pageController?.delegate = self
-        pageController?.dataSource = self
-        
-        let startingViewController: PageContentViewController =
-        viewControllerAtIndex(0)!
-        
-        let viewControllers: [UIViewController] = [startingViewController]
-        pageController!.setViewControllers(viewControllers,
-            direction: UIPageViewControllerNavigationDirection.Forward,
-            animated: false,
-            completion: nil)
-        
-        self.addChildViewController(pageController!)
-        self.view.addSubview(self.pageController!.view)
-        
-        let pageViewRect = self.view.bounds
-        pageController!.view.frame = pageViewRect
-        pageController!.didMoveToParentViewController(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,63 +57,51 @@ class PagesViewController: UIViewController, UIPageViewControllerDelegate, UIPag
         // Dispose of any resources that can be recreated.
     }
     
-    
-    // MARK: PageViewController Delegate Methods
-    func viewControllerAtIndex(index: Int) -> PageContentViewController? {
-        let count = PageContentViewController.Constants.AttributeStrings.count
-        
-        if (count == 0) ||
-            (index >= count) {
-                return nil
-        }
-        
-        let storyBoard = UIStoryboard(name: "Main",
-            bundle: NSBundle.mainBundle())
-        let contentViewController = storyBoard.instantiateViewControllerWithIdentifier("PageContentViewController") as! PageContentViewController
-        
-        contentViewController.attribute = index
-        return contentViewController
-    }
-    
-    func indexOfViewController(viewController: PageContentViewController) -> Int {
-   
-        if let attribute: Int = viewController.attribute {
-            return attribute
-        } else {
-            return NSNotFound
-        }
-    }
-    
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        
-        var index = indexOfViewController(viewController
-            as! PageContentViewController)
-        
-        if (index == 0) || (index == NSNotFound) {
-            return nil
-        }
-        
-        index--
-        return viewControllerAtIndex(index)
-    }
-    
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = indexOfViewController(viewController
-            as! PageContentViewController)
-        
-        if index == NSNotFound {
-            return nil
-        }
-        
+        var index = (viewController as! PageContentViewController).attribute!
         index++
-        if index == pageContent.count {
+        if(index >= PageContentViewController.Constants.AttributeStrings.count){
+            
             return nil
         }
-        return viewControllerAtIndex(index)
+        
+        return self.viewControllerAtIndex(index)
+        
     }
     
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) ->UIViewController? {
+        
+        var index = (viewController as! PageContentViewController).attribute!
+        
+        if(index <= 0){
+            return nil
+        }
+        index--
+        
+        return self.viewControllerAtIndex(index)
+        
+    }
+    
+    func viewControllerAtIndex(index : Int) -> UIViewController? {
+        
+        if((PageContentViewController.Constants.AttributeStrings.count == 0) || (index >= PageContentViewController.Constants.AttributeStrings.count)) {
+            return nil
+        }
+        
+        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentViewController") as! PageContentViewController
+        pageContentViewController.attribute! = index
+        return pageContentViewController
+    }
+    
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return PageContentViewController.Constants.AttributeStrings.count
+    }
+    
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+        
+        return 0
+    }
     
     
 }
