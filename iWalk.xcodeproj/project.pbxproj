@@ -11,8 +11,8 @@
 		EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */; };
 		EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */; };
 		EF34C26E1BA63B0600561955 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34C26D1BA63B0600561955 /* Colors.swift */; };
-		EF8630EA1BA71159008B5D3B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630E91BA71118008B5D3B /* Charts.framework */; };
-		EF8630EB1BA71159008B5D3B /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630E91BA71118008B5D3B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EF4C931E1BAB6AF8005AB9F3 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4C931D1BAB6AED005AB9F3 /* Charts.framework */; };
+		EF4C931F1BAB6AF8005AB9F3 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF4C931D1BAB6AED005AB9F3 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630EF1BA743AF008B5D3B /* HealthKit.framework */; };
 		EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
@@ -35,16 +35,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EF8630E81BA71118008B5D3B /* PBXContainerItemProxy */ = {
+		EF4C931C1BAB6AED005AB9F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8630E41BA71118008B5D3B /* Charts.xcodeproj */;
+			containerPortal = EF4C93181BAB6AED005AB9F3 /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
 			remoteInfo = Charts;
 		};
-		EF8630EC1BA71159008B5D3B /* PBXContainerItemProxy */ = {
+		EF4C93201BAB6AF8005AB9F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EF8630E41BA71118008B5D3B /* Charts.xcodeproj */;
+			containerPortal = EF4C93181BAB6AED005AB9F3 /* Charts.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
 			remoteInfo = Charts;
@@ -72,7 +72,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EF8630EB1BA71159008B5D3B /* Charts.framework in Embed Frameworks */,
+				EF4C931F1BAB6AF8005AB9F3 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,7 +85,7 @@
 		EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		EF34C26D1BA63B0600561955 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		EF8630E41BA71118008B5D3B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		EF4C93181BAB6AED005AB9F3 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		EF8630EE1BA73EA2008B5D3B /* iWalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iWalk.entitlements; sourceTree = "<group>"; };
 		EF8630EF1BA743AF008B5D3B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */,
-				EF8630EA1BA71159008B5D3B /* Charts.framework in Frameworks */,
+				EF4C931E1BAB6AF8005AB9F3 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				EF8630EF1BA743AF008B5D3B /* HealthKit.framework */,
-				EF8630E41BA71118008B5D3B /* Charts.xcodeproj */,
 				C37E6DAF664F711583782324 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -188,10 +187,10 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		EF8630E51BA71118008B5D3B /* Products */ = {
+		EF4C93191BAB6AED005AB9F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF8630E91BA71118008B5D3B /* Charts.framework */,
+				EF4C931D1BAB6AED005AB9F3 /* Charts.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,6 +218,7 @@
 		EFE3F6111B99D9170012E081 = {
 			isa = PBXGroup;
 			children = (
+				EF4C93181BAB6AED005AB9F3 /* Charts.xcodeproj */,
 				EFE3F61C1B99D9170012E081 /* iWalk */,
 				EFE3F6331B99D9170012E081 /* iWalkTests */,
 				EFE3F63E1B99D9170012E081 /* iWalkUITests */,
@@ -287,7 +287,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF8630ED1BA71159008B5D3B /* PBXTargetDependency */,
+				EF4C93211BAB6AF8005AB9F3 /* PBXTargetDependency */,
 			);
 			name = iWalk;
 			productName = iWalk;
@@ -378,8 +378,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EF8630E51BA71118008B5D3B /* Products */;
-					ProjectRef = EF8630E41BA71118008B5D3B /* Charts.xcodeproj */;
+					ProductGroup = EF4C93191BAB6AED005AB9F3 /* Products */;
+					ProjectRef = EF4C93181BAB6AED005AB9F3 /* Charts.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -392,11 +392,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EF8630E91BA71118008B5D3B /* Charts.framework */ = {
+		EF4C931D1BAB6AED005AB9F3 /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = EF8630E81BA71118008B5D3B /* PBXContainerItemProxy */;
+			remoteRef = EF4C931C1BAB6AED005AB9F3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -472,10 +472,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EF8630ED1BA71159008B5D3B /* PBXTargetDependency */ = {
+		EF4C93211BAB6AF8005AB9F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Charts;
-			targetProxy = EF8630EC1BA71159008B5D3B /* PBXContainerItemProxy */;
+			targetProxy = EF4C93201BAB6AF8005AB9F3 /* PBXContainerItemProxy */;
 		};
 		EFE3F6321B99D9170012E081 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -605,7 +605,7 @@
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iWalk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.giadrea.iWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -626,7 +626,7 @@
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iWalk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.giadrea.iWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";

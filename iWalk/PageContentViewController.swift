@@ -32,6 +32,7 @@ class PageContentViewController: UIViewController {
     @IBOutlet weak var rangeLabel: UILabel!
     @IBOutlet weak var barChartView: BarChartView!
 
+
     
     var attribute : Int? {
         didSet {

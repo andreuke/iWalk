@@ -26,8 +26,6 @@ public class BarChartView: BarLineChartViewBase, BarChartRendererDelegate
     /// if set to true, a grey area is darawn behind each bar that indicates the maximum value
     private var _drawBarShadowEnabled = false
     
-//    private var _valueTextColor = UIColor.blackColor()
-    
     internal override func initialize()
     {
         super.initialize()
@@ -159,15 +157,6 @@ public class BarChartView: BarLineChartViewBase, BarChartRendererDelegate
             setNeedsDisplay()
         }
     }
-    
-//    public var valueTextColor: UIColor {
-//        get {
-//            return _valueTextColor
-//        }
-//        set {
-//            _valueTextColor = newValue
-//        }
-//    }
     
     /// - returns: true if drawing the highlighting arrow is enabled, false if not
     public var isDrawHighlightArrowEnabled: Bool { return drawHighlightArrowEnabled; }

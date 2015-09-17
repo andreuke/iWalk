@@ -62,37 +62,23 @@ class HealthKitManager {
         })
     }
     
-    func getUserInfo() -> (birthday: String?, gender: String?){
+    // MARK: Fetch Data
+    func getUserInfo() -> (birthday: NSDate?, gender: String?){
         
-        let birthday = birthDayAndAge()
+        let birthday = birthDay()
         let gender = biologicalSex()
-        //        info[UserInfo.HEIGHT] = "\(height) cm"
-        //        info[UserInfo.WEIGHT] =  "\(weight) kg"
         
         return (birthday, gender)
     }
     
-    func birthDayAndAge() -> String? {
+    func birthDay() -> NSDate? {
         // TODO: add request to internal database
-        
-        var age:Int?
         
         let birthDay: NSDate?
         
         do {
             try birthDay = healthKitStore.dateOfBirth()
-            
-            let today = NSDate()
-            let calendar = NSCalendar.currentCalendar()
-            let differenceComponents = calendar.components(.Year, fromDate: birthDay!, toDate: today, options: NSCalendarOptions(rawValue: 0) )
-            age = differenceComponents.year
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy"
-            
-            let birthDayString = dateFormatter.stringFromDate(birthDay!)
-            
-            return "\(birthDayString) (\(age!))"
+            return birthDay
             
         } catch {
             print("Error reading Birthday")
@@ -122,14 +108,14 @@ class HealthKitManager {
         }
         return nil
     }
-
+    
     
     
     func readMostRecentSample(sampleType:HKSampleType , completion: ((HKSample!, NSError!) -> Void)!)
     {
         
         // 1. Build the Predicate
-        let past = NSDate.distantPast() 
+        let past = NSDate.distantPast()
         let now   = NSDate()
         let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(past, endDate:now, options: .None)
         
@@ -171,22 +157,19 @@ class HealthKitManager {
                 print("Error reading weight from HealthKit Store: \(error.localizedDescription)")
                 return;
             }
-
+            
             // 3. Format the weight to display it on the screen
             let weight = mostRecentWeight as? HKQuantitySample;
-            if let kilograms = weight?.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo)) {
-                let weightFormatter = NSMassFormatter()
-                weightFormatter.forPersonMassUse = true;
-                let weightString = weightFormatter.stringFromKilograms(kilograms)
-                let timestamp = weight?.endDate
-                
-                let weightInfo = UpdatableInformation(value: weightString, latestUpdate: timestamp)
-                
-                UserInfo.instance?.updateWeight(weightInfo)
-            }
+            
+            let timestamp = weight?.endDate
+            
+            let weightInfo = UpdatableInformation(value: weight, latestUpdate: timestamp)
+            
+            UserInfo.instance?.updateWeight(weightInfo)
+            
         })
     }
-
+    
     func fetchHeight() {
         
         // 1. Construct an HKSampleType for Height
@@ -201,25 +184,93 @@ class HealthKitManager {
                 return;
             }
             
-        
+            
             let height = mostRecentHeight as? HKQuantitySample;
             
             // 3. Format the height to display it on the screen
-            if let meters = height?.quantity.doubleValueForUnit(HKUnit.meterUnit()) {
-                let heightFormatter = NSLengthFormatter()
-                heightFormatter.forPersonHeightUse = true;
-                let heightString = heightFormatter.stringFromMeters(meters);
-                let timestamp = height?.endDate
-                
-                let heightInfo = UpdatableInformation(value: heightString, latestUpdate: timestamp)
-                
-                UserInfo.instance?.updatHeight(heightInfo)
-            }
+            let timestamp = height?.endDate
             
-    
+            let heightInfo = UpdatableInformation(value: height, latestUpdate: timestamp)
+            
+            UserInfo.instance?.updateHeight(heightInfo)
+            
+            
         })
     }
-
+    
+    // MARK: Save Data
+    func saveBMISample(bmi:Double, date:NSDate ) {
+        
+        // 1. Create a BMI Sample
+        let bmiType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMassIndex)
+        let bmiQuantity = HKQuantity(unit: HKUnit.countUnit(), doubleValue: bmi)
+        let bmiSample = HKQuantitySample(type: bmiType!, quantity: bmiQuantity, startDate: date, endDate: date)
+        
+        // 2. Save the sample in the store
+        healthKitStore.saveObject(bmiSample, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print("Error saving BMI sample: \(error!.localizedDescription)")
+            } else {
+                print("BMI sample saved successfully!")
+            }
+        })
+    }
+    
+    
+    func saveHeightSample(height:Double, date:NSDate ) {
+        
+        // 1. Create a BMI Sample
+        let heightSample = heightSampleFromDouble(height, date: date)
+        
+        // 2. Save the sample in the store
+        healthKitStore.saveObject(heightSample, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print("Error saving Height sample: \(error!.localizedDescription)")
+            } else {
+                print("Height sample saved successfully!")
+            }
+        })
+    }
+    
+    func saveWeightSample(weight:Double, date:NSDate ) {
+        
+        // 1. Create a BMI Sample
+        let weightSample = weightSampleFromDouble(weight, date: date)
+        
+        // 2. Save the sample in the store
+        healthKitStore.saveObject(weightSample, withCompletion: { (success, error) -> Void in
+            if( error != nil ) {
+                print("Error saving Weight sample: \(error!.localizedDescription)")
+            } else {
+                print("Weight sample saved successfully!")
+            }
+        })
+    }
+    
+    
+    func heightSampleFromDouble(height: Double, date: NSDate) -> HKQuantitySample {
+        let heightType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)
+        let heightQuantity = HKQuantity(unit: HKUnit(fromString: "cm"), doubleValue: height)
+        let heightSample = HKQuantitySample(type: heightType!, quantity: heightQuantity, startDate: date, endDate: date)
+        return heightSample
+    }
+    
+    func heightDoubleFromSample(height: HKQuantitySample) -> Double {
+        return height.quantity.doubleValueForUnit(HKUnit.meterUnit())
+    }
+    
+    
+    func weightSampleFromDouble(weight: Double, date: NSDate) -> HKQuantitySample {
+        let weightType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+        let weightQuantity = HKQuantity(unit: HKUnit(fromString: "kg"), doubleValue: weight)
+        let weightSample = HKQuantitySample(type: weightType!, quantity: weightQuantity, startDate: date, endDate: date)
+        
+        return weightSample
+    }
+    
+    func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
+        return weight.quantity.doubleValueForUnit(HKUnit.gramUnit())
+    }
 
     
 }

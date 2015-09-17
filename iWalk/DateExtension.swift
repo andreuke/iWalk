@@ -17,3 +17,20 @@ public func <(lhs: NSDate, rhs: NSDate) -> Bool {
 }
 
 extension NSDate: Comparable { }
+
+extension NSDate {
+    func toDateAndAgeString() -> String {
+        let today = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let differenceComponents = calendar.components(.Year, fromDate: self, toDate: today, options: NSCalendarOptions(rawValue: 0) )
+        let age = differenceComponents.year
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        let birthDayString = dateFormatter.stringFromDate(self)
+        return "\(birthDayString) (\(age))"
+
+        
+    }
+}

@@ -15,13 +15,13 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     
     var rightButton : UIBarButtonItem?
     var leftButton : UIBarButtonItem?
-    var info = [UpdatableInformation?]()
-    var ranges = [[String]]()
-    var pickerViewList : [UIPickerView] = []
+    var pickerViewList : [UIPickerView?] = []
+    var datePickerView = UIDatePicker()
     let userInfo = UserInfo.instance
-
+    let healthKitManager = HealthKitManager.instance
+    
     var textFields : [ClickableLabel] = []
-
+    
     // MARK: Inizialization
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +41,22 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         rightButton = navigationBar.rightBarButtonItem
         leftButton = navigationBar.leftBarButtonItem
         
-        // Create pickerViews according to data in UserInfo
-        for i in 0..<info.count {
+        
+        datePickerView.datePickerMode = UIDatePickerMode.Date
+        datePickerView.addTarget(self, action: "datePickerChanged", forControlEvents: UIControlEvents.ValueChanged)
+        
+        // Create pickerViews according to data in UserInfo skipping Birthday
+        pickerViewList = [UIPickerView?](count: UserInfo.Attribute._count.rawValue, repeatedValue: nil)
+        
+        for i in 1..<UserInfo.Attribute._count.rawValue {
             let pickerView = UIPickerView()
+            
             pickerView.delegate = self
             pickerView.tag = i
-            pickerViewList.insert(pickerView, atIndex: pickerView.tag)
+            pickerViewList[i] = pickerView
         }
-
-
+        
+        
     }
     
     // MARK: Deinizialitaion
@@ -59,8 +66,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     
     func fetchUserInfo() {
         userInfo!.fetchAllInfo()
-        info = userInfo!.info
-        ranges = userInfo!.ranges
+        reloadTable()
     }
     
     
@@ -81,12 +87,54 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func saveChanges() {
-        // TODO: save data
+        // Save Birthday
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let birthdayAndAge = textFields[UserInfo.Attribute.Birthday.rawValue].text
+        let birthday = birthdayAndAge!.substringWithRange(Range<String.Index>(start: birthdayAndAge!.startIndex, end: advance((birthdayAndAge?.startIndex)!,10)))
+        
+        let birthdayDate = dateFormatter.dateFromString(birthday)
+        if(!(birthdayDate == userInfo!.birthday)) {
+            userInfo!.birthday = birthdayDate
+            userInfo!.persistBirthday()
+        }
+        
+        // Save Gender
+        let gender = textFields[UserInfo.Attribute.Gender.rawValue].text
+        if((gender != userInfo!.gender)) {
+            userInfo!.gender = gender
+            userInfo!.persistGender()
+        }
+        
+        // Save Height
+        let heightString = textFields[UserInfo.Attribute.Height.rawValue].text
+        let height = heightString!.substringWithRange(Range<String.Index>(start: heightString!.startIndex, end: advance((heightString?.endIndex)!,-3)))
+        let heightDouble = (height as NSString).doubleValue
+        
+        if((heightDouble != healthKitManager.heightDoubleFromSample(userInfo!.height!.value!))) {
+            let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
+            userInfo!.height = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
+            userInfo!.persistHeight()
+        }
+        
+        // Save Weight
+        let weightString = textFields[UserInfo.Attribute.Weight.rawValue].text
+        let weight = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
+        let weightDouble = (weight as NSString).doubleValue
+        
+        if((weightDouble != healthKitManager.weightDoubleFromSample(userInfo!.weight!.value!))) {
+            let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
+            userInfo!.weight = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
+            userInfo!.persistWeight()
+        }
+
+        
+        
         exitEditMode()
     }
     
     func discardChanges() {
-        // TODO: discard changes
+        reloadTable()
         exitEditMode()
     }
     
@@ -106,7 +154,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         UserInfo.instance?.tableView = tableView
-        return info.count
+        return UserInfo.Attribute._count.rawValue
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Table view cells are reused and should be dequeued using a cell identifier.
@@ -116,7 +164,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         let index = indexPath.row
         
         let currentKey = UserInfo.Attribute(rawValue: index)?.description
-        let currentValue = info[index]?.value
+        let currentValue = userInfo?.attributeString(index)
         
         
         // Fill the cell components
@@ -124,19 +172,23 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         cell.valueLabel.text = currentValue != nil ? currentValue : "Not Set"
         
         // Set correct pickerView as input method for the valueLabel
-        cell.valueLabel.inputView = pickerViewList[index]
+        if(index == UserInfo.Attribute.Birthday.rawValue) {
+            cell.valueLabel.inputView = datePickerView
+        }
+        else {
+            cell.valueLabel.inputView = pickerViewList[index]
+        }
         textFields.insert(cell.valueLabel, atIndex:index)
-
+        
         
         return cell
     }
     
     func reloadTable() {
-        info = userInfo!.info
         self.tableView.reloadData()
         print("Reload Table")
     }
-
+    
     
     // MARK: UIPickerView controls
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -144,17 +196,17 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ranges[pickerView.tag].count
+        return userInfo!.ranges[pickerView.tag].count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ranges[pickerView.tag][row]
-
+        return userInfo!.ranges[pickerView.tag][row]
+        
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let field = textFields[pickerView.tag]
-        field.text = ranges[pickerView.tag][row]
+        field.text = userInfo!.ranges[pickerView.tag][row]
     }
     
     func disableTextFields() {
@@ -162,9 +214,13 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             textField.enabled = false
             textField.userInteractionEnabled = false
         }
-
+        
     }
-
+    
+    func datePickerChanged() {
+        textFields[UserInfo.Attribute.Birthday.rawValue].text = datePickerView.date.toDateAndAgeString()
+    }
+    
     
     
     //        func getPeriodicData(dataType: Int, period: Int) {
@@ -174,5 +230,5 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     //                }
     //            }
     //        }
-
-    }
+    
+}

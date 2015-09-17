@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import HealthKit
 
 class UpdatableInformation {
     // MARK: Properties
-    var value: String?
+    var value: HKQuantitySample?
     var latestUpdate: NSDate?
     
-    init(value: String?, latestUpdate: NSDate?) {
+    init(value: HKQuantitySample?, latestUpdate: NSDate?) {
         self.value = value
         self.latestUpdate = latestUpdate
         
     }
+
 }
