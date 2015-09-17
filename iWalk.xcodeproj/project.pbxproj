@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311B1E6AE183852583FCCD39 /* Pods_iWalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD386980CDF59BE2BC1F490 /* Pods_iWalk.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF033CDE1BA1D528003198CD /* InfoTextField.swift */; };
 		EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */; };
 		EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */; };
@@ -80,7 +81,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6FD386980CDF59BE2BC1F490 /* Pods_iWalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94985605ECE766FC921F3DB2 /* Pods-iWalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWalk/Pods-iWalk.release.xcconfig"; sourceTree = "<group>"; };
 		C37E6DAF664F711583782324 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4A4E3D772449511CAC0E2FA /* Pods-iWalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWalk/Pods-iWalk.debug.xcconfig"; sourceTree = "<group>"; };
 		EF033CDE1BA1D528003198CD /* InfoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTextField.swift; sourceTree = "<group>"; };
 		EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			files = (
 				EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */,
 				EF8630EA1BA71159008B5D3B /* Charts.framework in Frameworks */,
+				311B1E6AE183852583FCCD39 /* Pods_iWalk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,8 +154,18 @@
 				EF8630EF1BA743AF008B5D3B /* HealthKit.framework */,
 				EF8630E41BA71118008B5D3B /* Charts.xcodeproj */,
 				C37E6DAF664F711583782324 /* Pods.framework */,
+				6FD386980CDF59BE2BC1F490 /* Pods_iWalk.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8EE6533118A2A52C9E54204 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D4A4E3D772449511CAC0E2FA /* Pods-iWalk.debug.xcconfig */,
+				94985605ECE766FC921F3DB2 /* Pods-iWalk.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		EF10459F1BA5C655001AD1CC /* ViewControllers */ = {
@@ -224,6 +239,7 @@
 				EFE3F63E1B99D9170012E081 /* iWalkUITests */,
 				EFE3F61B1B99D9170012E081 /* Products */,
 				5676153E9ADC215F1A5E7A7B /* Frameworks */,
+				E8EE6533118A2A52C9E54204 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,6 +266,7 @@
 				EFE3F6261B99D9170012E081 /* Assets.xcassets */,
 				EFE3F6281B99D9170012E081 /* LaunchScreen.storyboard */,
 				EFE3F62B1B99D9170012E081 /* Info.plist */,
+				EFC17B0B1BAA43BE00D5DCA2 /* Bridging-Header.h */,
 			);
 			path = iWalk;
 			sourceTree = "<group>";
@@ -279,10 +296,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFE3F6441B99D9170012E081 /* Build configuration list for PBXNativeTarget "iWalk" */;
 			buildPhases = (
+				F6FBBEEF6CE99DACC3666106 /* Check Pods Manifest.lock */,
 				EFE3F6161B99D9170012E081 /* Sources */,
 				EFE3F6171B99D9170012E081 /* Frameworks */,
 				EFE3F6181B99D9170012E081 /* Resources */,
 				EF8630DD1BA70F4D008B5D3B /* Embed Frameworks */,
+				1E94562A331C825E66D68C46 /* Copy Pods Resources */,
+				00A964ED9D00635D18C09802 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,6 +447,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00A964ED9D00635D18C09802 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iWalk/Pods-iWalk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1E94562A331C825E66D68C46 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iWalk/Pods-iWalk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6FBBEEF6CE99DACC3666106 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EFE3F6161B99D9170012E081 /* Sources */ = {
@@ -596,6 +664,7 @@
 		};
 		EFE3F6451B99D9170012E081 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4A4E3D772449511CAC0E2FA /* Pods-iWalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -617,6 +686,7 @@
 		};
 		EFE3F6461B99D9170012E081 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94985605ECE766FC921F3DB2 /* Pods-iWalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

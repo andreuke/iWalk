@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ActionSheetPicker_3_0
 
-class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class MyBodyViewController: UITableViewController {
     
     // MARK: Properties
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -42,13 +43,13 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         rightButton = navigationBar.rightBarButtonItem
         leftButton = navigationBar.leftBarButtonItem
         
-        // Create pickerViews according to data in UserInfo
-        for i in 0..<info.count {
-            let pickerView = UIPickerView()
-            pickerView.delegate = self
-            pickerView.tag = i
-            pickerViewList.insert(pickerView, atIndex: pickerView.tag)
-        }
+//        // Create pickerViews according to data in UserInfo
+//        for i in 0..<info.count {
+//            let pickerView = UIPickerView()
+//            pickerView.delegate = self
+//            pickerView.tag = i
+//            pickerViewList.insert(pickerView, atIndex: pickerView.tag)
+//        }
 
 
     }
@@ -125,13 +126,34 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         cell.valueLabel.text = currentValue != nil ? currentValue : "Not Set"
         
         // Set correct pickerView as input method for the valueLabel
-        cell.valueLabel.inputView = pickerViewList[index]
-        textFields.insert(cell.valueLabel, atIndex:index)
+        
+        let tapRec = UITapGestureRecognizer()
+        tapRec.addTarget(self, action: "onTapValueLabel:")
+        cell.valueLabel.tag = index
+        cell.valueLabel.addGestureRecognizer(tapRec)
+//        cell.valueLabel.inputView = pickerViewList[index]
+        
+        
+        valueLabels.insert(cell.valueLabel, atIndex:index)
 
         
         return cell
     }
     
+    
+    func onTapValueLabel(sender: UITapGestureRecognizer) {
+        let index = sender.view!.tag
+        
+//        switch index {
+        if(index == UserInfo.Attribute.Birthday.rawValue) {
+            let datePicker = ActionSheetDatePicker(title: nil, datePickerMode: UIDatePickerMode.Date, selectedDate: NSDate(), target: self, action: "datePicked:", origin: sender.view!.superview!.superview)
+            
+            datePicker.showActionSheetPicker()
+            }
+//        }
+    }
+    
+    // Redraw table after data change
     func reloadTable() {
         info = userInfo!.info
         self.tableView.reloadData()
