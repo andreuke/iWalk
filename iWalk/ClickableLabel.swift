@@ -26,7 +26,7 @@ class ClickableLabel:PRLabel {
         
         didSet(newValue) {
             //  Working on the other way around ?!
-            if newValue == false {
+            if newValue == true {
                 self.textColor = UIColor.blackColor()
             }
             else {

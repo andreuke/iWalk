@@ -208,7 +208,7 @@ class UserInfo {
     }
     
     func persistHeight() {
-        healthKitManager.saveHeightSample(self.height!.value!.quantity.doubleValueForUnit(HKUnit.meterUnit()), date: NSDate())
+        healthKitManager.saveHeightSample(self.height!.value!.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix((.Centi))), date: NSDate())
     }
     
     func persistWeight() {

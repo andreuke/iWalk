@@ -79,10 +79,8 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         let cancelButton =  UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "discardChanges")
         navigationBar.rightBarButtonItem = doneButton
         navigationBar.leftBarButtonItem = cancelButton
-        for textField in textFields {
-            textField.enabled = true
-            textField.userInteractionEnabled = true
-        }
+        
+        textFieldsEnabled(true)
         
     }
     
@@ -101,7 +99,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         
         // Save Gender
         let gender = textFields[UserInfo.Attribute.Gender.rawValue].text
-        if((gender != userInfo!.gender)) {
+        if(gender != userInfo!.gender) {
             userInfo!.gender = gender
             userInfo!.persistGender()
         }
@@ -110,8 +108,9 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         let heightString = textFields[UserInfo.Attribute.Height.rawValue].text
         let height = heightString!.substringWithRange(Range<String.Index>(start: heightString!.startIndex, end: advance((heightString?.endIndex)!,-3)))
         let heightDouble = (height as NSString).doubleValue
+        let currentHeight = healthKitManager.heightDoubleFromSample(userInfo!.height!.value!)
         
-        if((heightDouble != healthKitManager.heightDoubleFromSample(userInfo!.height!.value!))) {
+        if(heightDouble != currentHeight) {
             let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
             userInfo!.height = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
             userInfo!.persistHeight()
@@ -121,8 +120,9 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         let weightString = textFields[UserInfo.Attribute.Weight.rawValue].text
         let weight = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
         let weightDouble = (weight as NSString).doubleValue
+        let currentWeight = healthKitManager.weightDoubleFromSample(userInfo!.weight!.value!)
         
-        if((weightDouble != healthKitManager.weightDoubleFromSample(userInfo!.weight!.value!))) {
+        if(weightDouble != currentWeight) {
             let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
             userInfo!.weight = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
             userInfo!.persistWeight()
@@ -144,7 +144,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func exitEditMode() {
-        disableTextFields()
+        textFieldsEnabled(false)
         restoreNavigationBar()
     }
     
@@ -209,10 +209,10 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         field.text = userInfo!.ranges[pickerView.tag][row]
     }
     
-    func disableTextFields() {
+    func textFieldsEnabled(enabled: Bool) {
         for textField in textFields {
-            textField.enabled = false
-            textField.userInteractionEnabled = false
+            textField.enabled = enabled
+            textField.userInteractionEnabled = enabled
         }
         
     }

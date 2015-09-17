@@ -256,7 +256,7 @@ class HealthKitManager {
     }
     
     func heightDoubleFromSample(height: HKQuantitySample) -> Double {
-        return height.quantity.doubleValueForUnit(HKUnit.meterUnit())
+        return height.quantity.doubleValueForUnit(HKUnit(fromString: "cm"))
     }
     
     
@@ -269,7 +269,7 @@ class HealthKitManager {
     }
     
     func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
-        return weight.quantity.doubleValueForUnit(HKUnit.gramUnit())
+        return weight.quantity.doubleValueForUnit(HKUnit(fromString: "kg"))
     }
 
     
