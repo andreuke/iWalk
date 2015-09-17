@@ -112,32 +112,21 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         let heightString = textFields[UserInfo.Attribute.Height.rawValue].text
         let height = heightString!.substringWithRange(Range<String.Index>(start: heightString!.startIndex, end: advance((heightString?.endIndex)!,-3)))
         let heightDouble = (height as NSString).doubleValue
-        let currentHeight = userInfo!.height
-        
-        if(currentHeight == nil || heightDouble != healthKitManager.heightDoubleFromSample(currentHeight!.value!)) {
-            
-            let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
-            userInfo!.height = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
-            userInfo!.persistHeight()
-            
+        let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
+        let heightInfo = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
+        if (userInfo?.updateHeight(heightInfo) == true) {
+            userInfo?.persistHeight()
         }
-        
         
         // Save Weight
         let weightString = textFields[UserInfo.Attribute.Weight.rawValue].text
         let weight = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
         let weightDouble = (weight as NSString).doubleValue
-        
-        let currentWeight = userInfo!.weight
-        
-        if(currentWeight == nil || weightDouble != healthKitManager.weightDoubleFromSample(currentWeight!.value!)) {
-            let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
-            userInfo!.weight = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
+        let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
+        let weightInfo = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
+        if(userInfo?.updateWeight(weightInfo) == true) {
             userInfo!.persistWeight()
-        }
-        
-        
-        
+        } 
         
         exitEditMode()
     }

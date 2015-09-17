@@ -131,9 +131,9 @@ class UserInfo {
     }
     
     // MARK: Update information
-    func updateWeight(newWeight: UpdatableInformation) {
+    func updateWeight(newWeight: UpdatableInformation) -> Bool {
         if(newWeight.latestUpdate == nil) {
-            return
+            return false
         }
         
         if let currentWeightUpdate = self.weight?.latestUpdate {
@@ -141,7 +141,7 @@ class UserInfo {
                 self.weight = newWeight
             }
             else {
-                return
+                return false
             }
         }
             // If current is not available
@@ -150,12 +150,12 @@ class UserInfo {
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.weightUpdated, object: nil)
-        
+        return true
     }
     
-    func updateHeight(newHeight: UpdatableInformation) {
+    func updateHeight(newHeight: UpdatableInformation) -> Bool {
         if(newHeight.latestUpdate == nil) {
-            return
+            return false
         }
         
         if let currentHeightUpdate = self.height?.latestUpdate {
@@ -163,15 +163,16 @@ class UserInfo {
                 self.height = newHeight
             }
             else {
-                return
+                return false
             }
         }
-            // If current is not available
+        // If current is not available
         else {
             self.height = newHeight
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.heightUpdated, object: nil)
+        return true
         
     }
     
