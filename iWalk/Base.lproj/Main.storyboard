@@ -306,28 +306,29 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8X-4d-lqT">
-                                            <rect key="frame" x="15" y="11" width="29" height="21"/>
+                                            <rect key="frame" x="15" y="12" width="29" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Value" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbD-3L-4Gt" customClass="InfoTextField" customModule="iWalk" customModuleProvider="target">
-                                            <rect key="frame" x="534" y="12" width="46" height="21"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbG-xU-4dz">
+                                            <rect key="frame" x="548" y="12" width="42" height="21"/>
+                                            <gestureRecognizers/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="NbG-xU-4dz" secondAttribute="trailing" constant="10" id="3Pu-49-fMg"/>
                                         <constraint firstItem="q8X-4d-lqT" firstAttribute="leading" secondItem="hNk-Fw-9Qa" secondAttribute="leading" constant="15" id="7Uw-zU-D0l"/>
-                                        <constraint firstAttribute="trailing" secondItem="rbD-3L-4Gt" secondAttribute="trailing" constant="20" id="E2a-GR-NoH"/>
                                         <constraint firstItem="q8X-4d-lqT" firstAttribute="centerY" secondItem="hNk-Fw-9Qa" secondAttribute="centerY" id="RbM-rv-ZgZ"/>
-                                        <constraint firstItem="rbD-3L-4Gt" firstAttribute="centerY" secondItem="hNk-Fw-9Qa" secondAttribute="centerY" id="fHI-D6-QVt"/>
+                                        <constraint firstItem="NbG-xU-4dz" firstAttribute="centerY" secondItem="hNk-Fw-9Qa" secondAttribute="centerY" id="Yu2-iH-ASC"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="keyLabel" destination="q8X-4d-lqT" id="gQ0-V0-LbN"/>
-                                    <outlet property="valueLabel" destination="rbD-3L-4Gt" id="o7k-og-Iga"/>
+                                    <outlet property="valueLabel" destination="NbG-xU-4dz" id="L8f-cD-158"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
