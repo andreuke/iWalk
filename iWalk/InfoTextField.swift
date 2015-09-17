@@ -14,18 +14,22 @@ class InfoTextField: UITextField {
         super.init(coder: aDecoder)
         self.addTarget(self, action: "onEditingBegin:", forControlEvents: UIControlEvents.EditingDidBegin)
         self.addTarget(self, action: "onEditingEnd:", forControlEvents: UIControlEvents.EditingDidEnd)
+        
+//        let cursor = self.valueForKey("textInputTraits")
+//            cursor!.setValue(UIColor.clearColor(), forKey:"insertionPointColor")
+       
+//        self.setValue(UIColor.clearColor(), forKey:"insertionPointColor")
 
     }
 
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
 //        switch action {
-//            case "paste:","cut:","share:","select:":
+//            case "paste:","cut:","share:","select:","selectAll":
 //                return false
 //            default:
-//                return false
+//                return super.canPerformAction(action, withSender: sender)
 //        }
-//
-//        return super.canPerformAction(action, withSender: sender)
+
         return false
 
     }
@@ -54,6 +58,19 @@ class InfoTextField: UITextField {
     func onEditingEnd(sender: InfoTextField) {
         self.textColor = UIColor.blackColor()
     }
+    
+    // Hide cursor
+//    override func caretRectForPosition(position: UITextPosition) -> CGRect {
+//        return CGRectZero
+//    }
+    
+    override func addGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+        super.addGestureRecognizer(gestureRecognizer)
+        if(gestureRecognizer.isKindOfClass(UILongPressGestureRecognizer)) {
+            gestureRecognizer.enabled = false
+        }
+    }
+
 
 
     

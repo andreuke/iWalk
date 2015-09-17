@@ -12,7 +12,7 @@ class MeTableViewCell: UITableViewCell {
 
     // MARK: Properties
     @IBOutlet weak var keyLabel: UILabel!
-    @IBOutlet weak var valueLabel: UITextField!
+    @IBOutlet weak var valueLabel: ClickableLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

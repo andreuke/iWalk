@@ -21,8 +21,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     var pickerViewList : [UIPickerView] = []
     let userInfo = UserInfo.instance
 
-
-    var textFields : [UITextField] = []
+    var textFields : [ClickableLabel] = []
 
     // MARK: Inizialization
     override func viewDidLoad() {
@@ -77,6 +76,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         navigationBar.leftBarButtonItem = cancelButton
         for textField in textFields {
             textField.enabled = true
+            textField.userInteractionEnabled = true
         }
         
     }
@@ -156,12 +156,12 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let field = textFields[pickerView.tag]
         field.text = ranges[pickerView.tag][row]
-        field.resignFirstResponder()
     }
     
     func disableTextFields() {
         for textField in textFields {
             textField.enabled = false
+            textField.userInteractionEnabled = false
         }
 
     }

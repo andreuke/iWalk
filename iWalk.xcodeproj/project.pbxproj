@@ -23,6 +23,8 @@
 		EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */; };
 		EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */; };
 		EFD04DE21BA62B57005196BA /* iWalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6341B99D9170012E081 /* iWalkTests.swift */; };
+		EFDFB40A1BAADCE9007F4778 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */; };
+		EFDFB40E1BAAE04D007F4778 /* PRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDFB40D1BAAE04D007F4778 /* PRLabel.m */; };
 		EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61D1B99D9170012E081 /* AppDelegate.swift */; };
 		EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61F1B99D9170012E081 /* MeViewController.swift */; };
 		EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6211B99D9170012E081 /* TodayViewController.swift */; };
@@ -94,6 +96,10 @@
 		EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatableInformation.swift; sourceTree = "<group>"; };
 		EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
+		EFDFB40B1BAAE04C007F4778 /* iWalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iWalk-Bridging-Header.h"; sourceTree = "<group>"; };
+		EFDFB40C1BAAE04D007F4778 /* PRLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PRLabel.h; path = iWalk/PRLabel.h; sourceTree = "<group>"; };
+		EFDFB40D1BAAE04D007F4778 /* PRLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PRLabel.m; path = iWalk/PRLabel.m; sourceTree = "<group>"; };
 		EFE3F61A1B99D9170012E081 /* iWalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE3F61D1B99D9170012E081 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFE3F61F1B99D9170012E081 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -173,9 +179,11 @@
 		EF1045A11BA5C67B001AD1CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EFDFB40F1BAAE7BB007F4778 /* PRLabel */,
 				EFB8F6411BA051030067384C /* MeTableViewCell.swift */,
 				EF033CDE1BA1D528003198CD /* InfoTextField.swift */,
 				EF9ED6BA1B9F355D0081035F /* HeaderView.swift */,
+				EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -193,8 +201,19 @@
 			children = (
 				EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */,
 				EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */,
+				EFDFB40B1BAAE04C007F4778 /* iWalk-Bridging-Header.h */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		EFDFB40F1BAAE7BB007F4778 /* PRLabel */ = {
+			isa = PBXGroup;
+			children = (
+				EFDFB40C1BAAE04D007F4778 /* PRLabel.h */,
+				EFDFB40D1BAAE04D007F4778 /* PRLabel.m */,
+			);
+			name = PRLabel;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		EFE3F6111B99D9170012E081 = {
@@ -317,6 +336,7 @@
 		EFE3F6121B99D9170012E081 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Giadrea;
 				TargetAttributes = {
@@ -422,9 +442,11 @@
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
 				EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */,
 				EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */,
+				EFDFB40A1BAADCE9007F4778 /* ClickableLabel.swift in Sources */,
 				EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */,
 				EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */,
 				EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */,
+				EFDFB40E1BAAE04D007F4778 /* PRLabel.m in Sources */,
 				EF34C26E1BA63B0600561955 /* Colors.swift in Sources */,
 				EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */,
 				EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */,
@@ -576,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iWalk/iWalk.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -587,7 +610,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.giadrea.iWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iWalk/iWalk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -595,6 +619,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iWalk/iWalk.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -606,7 +631,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.giadrea.iWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iWalk/iWalk-Bridging-Header.h";
 			};
 			name = Release;
 		};

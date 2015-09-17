@@ -49,9 +49,9 @@ class UserInfo {
     // MARK: Inizialization
     private init?() {
         self.info = [UpdatableInformation?](count:ranges.count, repeatedValue: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.heightUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.weightUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.sexUpdated, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.heightUpdated, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.weightUpdated, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.sexUpdated, object: nil)
         
         
         //        fetchAllInfo()
