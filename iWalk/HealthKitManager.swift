@@ -14,7 +14,6 @@ class HealthKitManager {
     let healthKitStore:HKHealthStore = HKHealthStore()
     
     private init() {
-        // TODO
     }
     
     // MARK: HealthKit Configuration
@@ -71,9 +70,7 @@ class HealthKitManager {
         return (birthday, gender)
     }
     
-    func birthDay() -> NSDate? {
-        // TODO: add request to internal database
-        
+    func birthDay() -> NSDate? {   
         let birthDay: NSDate?
         
         do {

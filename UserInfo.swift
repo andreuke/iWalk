@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import CoreData
 
 class UserInfo : NSObject{
     
@@ -45,6 +46,7 @@ class UserInfo : NSObject{
         static let WEIGHT_MAX = 135
     
     let healthKitManager = HealthKitManager.instance
+    let coreDataManager = CoreDataManager.instance
     
         var ranges : [[String]] = [
             ["Today","Yesterday"],
@@ -114,19 +116,32 @@ class UserInfo : NSObject{
         let infoTuple = healthKitManager.getUserInfo()
         self.birthday = infoTuple.birthday
         self.gender = infoTuple.gender
+        if let bDay = coreDataManager.fetchBirthday(){
+            self.birthday = bDay
+        }
+        if let sex = coreDataManager.fetchGender(){
+            self.gender = sex
+        }
         // TODO: updateGender
     }
+    
     
     // Weight
     func fetchLatestWeight() {
         healthKitManager.fetchWeight()
-        // TODO: fetchFromDatabase
-    }
+        if let weightValues = coreDataManager.fetchWeight() {
+            let weightSample = healthKitManager.weightSampleFromDouble(weightValues.weightDouble, date: weightValues.latestUpdate)
+            self.updateWeight(UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate))
+        }    }
     
     // Height
     func fetchLatestHeight() {
         healthKitManager.fetchHeight()
-        // TODO: fetchFromDatabase
+        if let heightValues = coreDataManager.fetchHeight() {
+            let heightSample = healthKitManager.heightSampleFromDouble(heightValues.heightDouble, date: heightValues.latestUpdate)
+            self.updateHeight(UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate))
+        }
+        
     }
     
     // MARK: Update information
@@ -220,22 +235,31 @@ class UserInfo : NSObject{
     }
     
     func persistBirthday() {
-        
+        if let bDay = self.birthday {
+            coreDataManager.persistBirthday(bDay)
+        }
     }
     
+    
     func persistGender() {
-        
+        if let sex = self.gender {
+            coreDataManager.persistGender(sex)
+        }
     }
     
     func persistHeight() {
-        healthKitManager.saveHeightSample(self.height!.value!.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix((.Centi))), date: NSDate())
+        let heightDouble = self.height!.value!.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix((.Centi)))
+        
+        healthKitManager.saveHeightSample(heightDouble, date: NSDate())
+        coreDataManager.persistHeight(heightDouble)
     }
     
     func persistWeight() {
-        healthKitManager.saveWeightSample(self.weight!.value!.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo)), date: NSDate())
+        let weightDouble = self.weight!.value!.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+        
+        healthKitManager.saveWeightSample(weightDouble, date: NSDate())
+        coreDataManager.persistWeight(weightDouble)
     }
-    
-    
     
     
     
