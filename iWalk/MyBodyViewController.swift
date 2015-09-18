@@ -86,47 +86,56 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     
     func saveChanges() {
         // Save Birthday
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
         let birthdayAndAge = textFields[UserInfo.Attribute.Birthday.rawValue].text
-        let birthday = birthdayAndAge!.substringWithRange(Range<String.Index>(start: birthdayAndAge!.startIndex, end: advance((birthdayAndAge?.startIndex)!,10)))
-        
-        let birthdayDate = dateFormatter.dateFromString(birthday)
-        
-        let currentBirthday = userInfo?.birthday
-        if(currentBirthday == nil || !(birthdayDate == currentBirthday)) {
-            userInfo!.birthday = birthdayDate
-            userInfo!.persistBirthday()
+        if birthdayAndAge != "Not Set" {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            let birthday = birthdayAndAge!.substringWithRange(Range<String.Index>(start: birthdayAndAge!.startIndex, end: advance((birthdayAndAge?.startIndex)!,10)))
+            
+            let birthdayDate = dateFormatter.dateFromString(birthday)
+            
+            let currentBirthday = userInfo?.birthday
+            if(currentBirthday == nil || !(birthdayDate == currentBirthday)) {
+                userInfo!.birthday = birthdayDate
+                userInfo!.persistBirthday()
+            }
         }
         
         
         // Save Gender
         let gender = textFields[UserInfo.Attribute.Gender.rawValue].text
-        let currentGender = userInfo?.gender
-        if(currentGender == nil || gender != currentGender) {
-            userInfo!.gender = gender
-            userInfo!.persistGender()
+        if gender != "Not Set" {
+            let currentGender = userInfo?.gender
+            if(currentGender == nil || gender != currentGender) {
+                userInfo!.gender = gender
+                userInfo!.persistGender()
+            }
         }
         
         // Save Height
         let heightString = textFields[UserInfo.Attribute.Height.rawValue].text
-        let height = heightString!.substringWithRange(Range<String.Index>(start: heightString!.startIndex, end: advance((heightString?.endIndex)!,-3)))
-        let heightDouble = (height as NSString).doubleValue
-        let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
-        let heightInfo = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
-        if (userInfo?.updateHeight(heightInfo) == true) {
-            userInfo?.persistHeight()
+        if(heightString != "Not Set"){
+            let height = heightString!.substringWithRange(Range<String.Index>(start: heightString!.startIndex, end: advance((heightString?.endIndex)!,-3)))
+            let heightDouble = (height as NSString).doubleValue
+            let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
+            let heightInfo = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
+            if (userInfo?.updateHeight(heightInfo) == true) {
+                userInfo?.persistHeight()
+            }
         }
         
         // Save Weight
         let weightString = textFields[UserInfo.Attribute.Weight.rawValue].text
-        let weight = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
-        let weightDouble = (weight as NSString).doubleValue
-        let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
-        let weightInfo = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
-        if(userInfo?.updateWeight(weightInfo) == true) {
-            userInfo!.persistWeight()
-        } 
+        if(weightString != "Not Set") {
+            let weight = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
+            let weightDouble = (weight as NSString).doubleValue
+            let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
+            let weightInfo = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
+            if(userInfo?.updateWeight(weightInfo) == true) {
+                userInfo!.persistWeight()
+            }
+        }
         
         exitEditMode()
     }
