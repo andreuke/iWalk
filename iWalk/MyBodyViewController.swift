@@ -65,7 +65,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func fetchUserInfo() {
-        userInfo!.fetchAllInfo()
+        userInfo.fetchAllInfo()
         reloadTable()
     }
     
@@ -95,10 +95,10 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             
             let birthdayDate = dateFormatter.dateFromString(birthday)
             
-            let currentBirthday = userInfo?.birthday
+            let currentBirthday = userInfo.birthday
             if(currentBirthday == nil || !(birthdayDate == currentBirthday)) {
-                userInfo!.birthday = birthdayDate
-                userInfo!.persistBirthday()
+                userInfo.birthday = birthdayDate
+                userInfo.persistBirthday()
             }
         }
         
@@ -106,10 +106,10 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         // Save Gender
         let gender = textFields[UserInfo.Attribute.Gender.rawValue].text
         if gender != "Not Set" {
-            let currentGender = userInfo?.gender
+            let currentGender = userInfo.gender
             if(currentGender == nil || gender != currentGender) {
-                userInfo!.gender = gender
-                userInfo!.persistGender()
+                userInfo.gender = gender
+                userInfo.persistGender()
             }
         }
         
@@ -120,8 +120,8 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             let heightDouble = (height as NSString).doubleValue
             let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
             let heightInfo = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
-            if (userInfo?.updateHeight(heightInfo) == true) {
-                userInfo?.persistHeight()
+            if (userInfo.updateHeight(heightInfo) == true) {
+                userInfo.persistHeight()
             }
         }
         
@@ -132,11 +132,12 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             let weightDouble = (weight as NSString).doubleValue
             let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
             let weightInfo = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
-            if(userInfo?.updateWeight(weightInfo) == true) {
-                userInfo!.persistWeight()
+            if(userInfo.updateWeight(weightInfo) == true) {
+                userInfo.persistWeight()
             }
         }
         
+        userInfo.updateBmi()
         exitEditMode()
     }
     
@@ -160,7 +161,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        UserInfo.instance?.tableView = tableView
+        UserInfo.instance.tableView = tableView
         return UserInfo.Attribute._count.rawValue
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -171,7 +172,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         let index = indexPath.row
         
         let currentKey = UserInfo.Attribute(rawValue: index)?.description
-        let currentValue = userInfo?.attributeString(index)
+        let currentValue = userInfo.attributeString(index)
         
         
         // Fill the cell components
@@ -203,17 +204,17 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return userInfo!.ranges[pickerView.tag].count
+        return userInfo.ranges[pickerView.tag].count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return userInfo!.ranges[pickerView.tag][row]
+        return userInfo.ranges[pickerView.tag][row]
         
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let field = textFields[pickerView.tag]
-        field.text = userInfo!.ranges[pickerView.tag][row]
+        field.text = userInfo.ranges[pickerView.tag][row]
     }
     
     func textFieldsEnabled(enabled: Bool) {

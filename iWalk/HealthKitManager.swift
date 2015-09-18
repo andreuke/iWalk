@@ -165,7 +165,7 @@ class HealthKitManager {
             
             let weightInfo = UpdatableInformation(value: weight, latestUpdate: timestamp)
             
-            UserInfo.instance?.updateWeight(weightInfo)
+            UserInfo.instance.updateWeight(weightInfo)
             
         })
     }
@@ -192,7 +192,7 @@ class HealthKitManager {
             
             let heightInfo = UpdatableInformation(value: height, latestUpdate: timestamp)
             
-            UserInfo.instance?.updateHeight(heightInfo)
+            UserInfo.instance.updateHeight(heightInfo)
             
             
         })
@@ -202,10 +202,8 @@ class HealthKitManager {
     func saveBMISample(bmi:Double, date:NSDate ) {
         
         // 1. Create a BMI Sample
-        let bmiType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMassIndex)
-        let bmiQuantity = HKQuantity(unit: HKUnit.countUnit(), doubleValue: bmi)
-        let bmiSample = HKQuantitySample(type: bmiType!, quantity: bmiQuantity, startDate: date, endDate: date)
         
+        let bmiSample = bmiSampleFromDouble(bmi, date: date)
         // 2. Save the sample in the store
         healthKitStore.saveObject(bmiSample, withCompletion: { (success, error) -> Void in
             if( error != nil ) {
@@ -255,9 +253,9 @@ class HealthKitManager {
         return heightSample
     }
     
-    func heightDoubleFromSample(height: HKQuantitySample) -> Double {
-        return height.quantity.doubleValueForUnit(HKUnit(fromString: "cm"))
-    }
+//    func heightDoubleFromSample(height: HKQuantitySample) -> Double {
+//        return height.quantity.doubleValueForUnit(HKUnit(fromString: "cm"))
+//    }
     
     
     func weightSampleFromDouble(weight: Double, date: NSDate) -> HKQuantitySample {
@@ -268,9 +266,15 @@ class HealthKitManager {
         return weightSample
     }
     
-    func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
-        return weight.quantity.doubleValueForUnit(HKUnit(fromString: "kg"))
+    func bmiSampleFromDouble(bmi: Double, date: NSDate) -> HKQuantitySample {
+        let bmiType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMassIndex)
+        let bmiQuantity = HKQuantity(unit: HKUnit.countUnit(), doubleValue: bmi)
+        return HKQuantitySample(type: bmiType!, quantity: bmiQuantity, startDate: date, endDate: date)
     }
+    
+//    func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
+//        return weight.quantity.doubleValueForUnit(HKUnit(fromString: "kg"))
+//    }
 
     
 }

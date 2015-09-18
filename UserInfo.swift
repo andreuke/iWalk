@@ -9,7 +9,7 @@
 import UIKit
 import HealthKit
 
-class UserInfo {
+class UserInfo : NSObject{
     
     static let instance = UserInfo()
     
@@ -35,8 +35,8 @@ class UserInfo {
     var gender : String?
     var weight : UpdatableInformation?
     var height : UpdatableInformation?
-    var BMI : UpdatableInformation?
-    
+    var bmi : UpdatableInformation?
+    var bmiHasToBeChanged : Bool = false
     
         static let HEIGHT_MIN = 130
         static let HEIGHT_MAX = 230
@@ -52,17 +52,15 @@ class UserInfo {
             (UserInfo.HEIGHT_MIN...UserInfo.HEIGHT_MAX).map{String($0)+" cm"},
             (UserInfo.WEIGHT_MIN...UserInfo.WEIGHT_MAX).map{String($0)+" kg"}
         ]
-    //
-    //
-    //    var info : [UpdatableInformation?]
+
     var tableView = UITableView()
     
     // MARK: Inizialization
-    private init?() {
+    private override init() {
+        super.init()
         //        self.info = [UpdatableInformation?](count:ranges.count, repeatedValue: nil)
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.heightUpdated, object: nil)
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.weightUpdated, object: nil)
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBMI" , name: Notifications.sexUpdated, object: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "willUpdateBmi" , name: Notifications.heightUpdated, object: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "willUpdateBmi" , name: Notifications.weightUpdated, object: nil)
         
         
         //        fetchAllInfo()
@@ -116,21 +114,29 @@ class UserInfo {
         let infoTuple = healthKitManager.getUserInfo()
         self.birthday = infoTuple.birthday
         self.gender = infoTuple.gender
+        // TODO: updateGender
     }
     
     // Weight
     func fetchLatestWeight() {
         healthKitManager.fetchWeight()
-        // TODO fetchFromDatabase
+        // TODO: fetchFromDatabase
     }
     
     // Height
     func fetchLatestHeight() {
         healthKitManager.fetchHeight()
-        // TODO fetchFromDatabase
+        // TODO: fetchFromDatabase
     }
     
     // MARK: Update information
+    func updateGender() -> Bool {
+        // TODO: implementation
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.sexUpdated, object: nil)
+        return true
+    }
+    
+    
     func updateWeight(newWeight: UpdatableInformation) -> Bool {
         if(newWeight.latestUpdate == nil) {
             return false
@@ -176,23 +182,36 @@ class UserInfo {
         
     }
     
-    func updateBMI() {
-        // TODO: save directly kilograms
-        
-        //        if (info[Attribute.Weight] != nil  && info[Attribute.Height] != nil) {
-        //            // 1. Get the weight and height values from the samples read from HealthKit
-        //            let weightInKilograms = weight!.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
-        //            let heightInMeters = height!.quantity.doubleValueForUnit(HKUnit.meterUnit())
-        //            // 2. Call the method to calculate the BMI
-        //            bmi  = calculateBMIWithWeightInKilograms(weightInKilograms, heightInMeters: heightInMeters)
-        //        }
-        //        // 3. Show the calculated BMI
-        //        var bmiString = kUnknownString
-        //        if bmi != nil {
-        //            bmiLabel.text =  String(format: "%.02f", bmi!)
-        //        }
+    func willUpdateBmi() {
+        self.bmiHasToBeChanged = true
     }
     
+    func updateBmi() {
+        if self.bmiHasToBeChanged == false {
+            return
+        }
+        
+        guard let weightValue = weight?.value?.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo)) else {
+            return
+        }
+        guard let heightValue = height?.value?.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Centi)) else {
+            return
+        }
+
+        
+        let bmiValue = weightValue / (heightValue * heightValue)
+        let bmiSample = healthKitManager.bmiSampleFromDouble(bmiValue, date: NSDate())
+        self.bmi = UpdatableInformation(value: bmiSample, latestUpdate: bmiSample.endDate)
+        
+        healthKitManager.saveBMISample(bmiValue, date: bmiSample.endDate)
+        
+        
+        self.bmiHasToBeChanged = false
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.bmiUpdated, object: nil)
+    }
+    
+    
+    // MARK: Persist Data
     func persistAllData() {
         persistBirthday()
         persistGender()
