@@ -214,6 +214,15 @@ class UserInfo : NSObject{
             return
         }
         
+        guard let _ = weight?.value?.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo)) else {
+            return
+        }
+        guard let _ = height?.value?.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Centi)) else {
+            return
+        }
+
+        
+        calculateBmi()
         if let bmiSample = self.bmi?.value {
             
             let bmiValue = bmiSample.quantity.doubleValueForUnit(HKUnit.countUnit())
