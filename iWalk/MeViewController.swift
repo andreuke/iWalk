@@ -75,6 +75,7 @@ class MeViewController: UIViewController {
     }
     
     func updateBmi() {
+        userInfo.calculateBmi()
         if let bmiString = userInfo.bmiString() {
             self.bmiLabel.text = bmiString
         }

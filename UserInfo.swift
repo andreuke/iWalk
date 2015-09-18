@@ -39,30 +39,30 @@ class UserInfo : NSObject{
     var bmi : UpdatableInformation?
     var bmiHasToBeChanged : Bool = false
     
-        static let HEIGHT_MIN = 130
-        static let HEIGHT_MAX = 230
+    static let HEIGHT_MIN = 130
+    static let HEIGHT_MAX = 230
     
-        static let WEIGHT_MIN = 35
-        static let WEIGHT_MAX = 135
+    static let WEIGHT_MIN = 35
+    static let WEIGHT_MAX = 135
     
     let healthKitManager = HealthKitManager.instance
     let coreDataManager = CoreDataManager.instance
     
-        var ranges : [[String]] = [
-            ["Today","Yesterday"],
-            ["Male","Female"],
-            (UserInfo.HEIGHT_MIN...UserInfo.HEIGHT_MAX).map{String($0)+" cm"},
-            (UserInfo.WEIGHT_MIN...UserInfo.WEIGHT_MAX).map{String($0)+" kg"}
-        ]
-
+    var ranges : [[String]] = [
+        ["Today","Yesterday"],
+        ["Male","Female"],
+        (UserInfo.HEIGHT_MIN...UserInfo.HEIGHT_MAX).map{String($0)+" cm"},
+        (UserInfo.WEIGHT_MIN...UserInfo.WEIGHT_MAX).map{String($0)+" kg"}
+    ]
+    
     var tableView = UITableView()
     
     // MARK: Inizialization
     private override init() {
         super.init()
         //        self.info = [UpdatableInformation?](count:ranges.count, repeatedValue: nil)
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "willUpdateBmi" , name: Notifications.heightUpdated, object: nil)
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "willUpdateBmi" , name: Notifications.weightUpdated, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "willUpdateBmi" , name: Notifications.heightUpdated, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "willUpdateBmi" , name: Notifications.weightUpdated, object: nil)
         
         
         //        fetchAllInfo()
@@ -166,6 +166,7 @@ class UserInfo : NSObject{
         if let currentWeightUpdate = self.weight?.latestUpdate {
             if(currentWeightUpdate < newWeight.latestUpdate) {
                 self.weight = newWeight
+                
             }
             else {
                 return false
@@ -177,6 +178,7 @@ class UserInfo : NSObject{
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.weightUpdated, object: nil)
+        
         return true
     }
     
@@ -193,7 +195,7 @@ class UserInfo : NSObject{
                 return false
             }
         }
-        // If current is not available
+            // If current is not available
         else {
             self.height = newHeight
         }
@@ -212,23 +214,31 @@ class UserInfo : NSObject{
             return
         }
         
+        if let bmiSample = self.bmi?.value {
+            
+            let bmiValue = bmiSample.quantity.doubleValueForUnit(HKUnit.countUnit())
+            healthKitManager.saveBMISample(bmiValue, date: bmiSample.endDate)
+            
+            
+            self.bmiHasToBeChanged = false
+            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.bmiUpdated, object: nil)
+        }
+    }
+    
+    func calculateBmi() {
         guard let weightValue = weight?.value?.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo)) else {
             return
         }
         guard let heightValue = height?.value?.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Centi)) else {
             return
         }
-
         
         let bmiValue = weightValue / (heightValue/100 * heightValue/100)
+        
         let bmiSample = healthKitManager.bmiSampleFromDouble(bmiValue, date: NSDate())
         self.bmi = UpdatableInformation(value: bmiSample, latestUpdate: bmiSample.endDate)
         
-        healthKitManager.saveBMISample(bmiValue, date: bmiSample.endDate)
         
-        
-        self.bmiHasToBeChanged = false
-        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.bmiUpdated, object: nil)
     }
     
     

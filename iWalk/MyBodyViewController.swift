@@ -121,6 +121,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             
             if((heightDouble != healthKitManager.heightDoubleFromSample(userInfo.height!.value!))) {
                 let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
+                userInfo.willUpdateBmi()
                 userInfo.height = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
                 userInfo.persistHeight()
             }
@@ -136,13 +137,11 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             
             if((weightDouble != healthKitManager.weightDoubleFromSample(userInfo.weight!.value!))) {
                 let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
+                userInfo.willUpdateBmi()
                 userInfo.weight = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
                 userInfo.persistWeight()
             }
         }
-        
-        
-        
         userInfo.updateBmi()
         exitEditMode()
     }
