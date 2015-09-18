@@ -250,9 +250,9 @@ class HealthKitManager {
         return heightSample
     }
     
-//    func heightDoubleFromSample(height: HKQuantitySample) -> Double {
-//        return height.quantity.doubleValueForUnit(HKUnit(fromString: "cm"))
-//    }
+    func heightDoubleFromSample(height: HKQuantitySample) -> Double {
+        return height.quantity.doubleValueForUnit(HKUnit(fromString: "cm"))
+    }
     
     
     func weightSampleFromDouble(weight: Double, date: NSDate) -> HKQuantitySample {
@@ -269,9 +269,9 @@ class HealthKitManager {
         return HKQuantitySample(type: bmiType!, quantity: bmiQuantity, startDate: date, endDate: date)
     }
     
-//    func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
-//        return weight.quantity.doubleValueForUnit(HKUnit(fromString: "kg"))
-//    }
+    func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
+        return weight.quantity.doubleValueForUnit(HKUnit(fromString: "kg"))
+    }
 
     
 }

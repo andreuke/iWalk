@@ -103,6 +103,12 @@ class UserInfo : NSObject{
         }
     }
     
+    func bmiString() -> String? {
+        if let bmi = self.bmi?.value?.quantity.doubleValueForUnit(HKUnit.countUnit()) {
+            return String(format:"%.2f", bmi)
+        }
+        return nil
+    }
     
     // MARK: Fetch Information
     func fetchAllInfo() {
@@ -214,7 +220,7 @@ class UserInfo : NSObject{
         }
 
         
-        let bmiValue = weightValue / (heightValue * heightValue)
+        let bmiValue = weightValue / (heightValue/100 * heightValue/100)
         let bmiSample = healthKitManager.bmiSampleFromDouble(bmiValue, date: NSDate())
         self.bmi = UpdatableInformation(value: bmiSample, latestUpdate: bmiSample.endDate)
         

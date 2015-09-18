@@ -34,7 +34,18 @@ class MeViewController: UIViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateWeight", name: Notifications.weightUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeight", name: Notifications.heightUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBmi", name: Notifications.bmiUpdated, object: nil)
         
+        userInfo.fetchAllInfo()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.updateHeight()
+        self.updateWeight()
+        self.updateBmi()
     }
     // MARK: Deinizialitaion
     deinit {
@@ -49,9 +60,24 @@ class MeViewController: UIViewController {
     }
     
     func updateWeight() {
-        let weightString = userInfo.attributeString(UserInfo.Attribute.Weight.rawValue)
-        let weightStringNoKilo = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
+        if let weightString = userInfo.attributeString(UserInfo.Attribute.Weight.rawValue) {
+        let weightStringNoKilo = weightString.substringWithRange(Range<String.Index>(start: weightString.startIndex, end: advance((weightString.endIndex),-3)))
         self.weightLabel.text = weightStringNoKilo
+        }
+    }
+    
+    func updateHeight() {
+        if let heightString = userInfo.attributeString(UserInfo.Attribute.Height.rawValue) {
+        let heightStringNoCm = heightString.substringWithRange(Range<String.Index>(start: heightString.startIndex, end: advance((heightString.endIndex),-3)))
+        self.heightLabel.text = heightStringNoCm
+        }
+
+    }
+    
+    func updateBmi() {
+        if let bmiString = userInfo.bmiString() {
+            self.bmiLabel.text = bmiString
+        }
     }
     
     
