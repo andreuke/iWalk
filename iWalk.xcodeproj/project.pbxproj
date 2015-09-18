@@ -14,10 +14,14 @@
 		EF4C931E1BAB6AF8005AB9F3 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4C931D1BAB6AED005AB9F3 /* Charts.framework */; };
 		EF4C931F1BAB6AF8005AB9F3 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF4C931D1BAB6AED005AB9F3 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EF5765C41BAC2DAE0091F21F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */; };
+		EF5765C61BAC89710091F21F /* RecordsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5765C51BAC89710091F21F /* RecordsContentViewController.swift */; };
+		EF5765C81BAC898F0091F21F /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5765C71BAC898F0091F21F /* RecordsViewController.swift */; };
 		EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630EF1BA743AF008B5D3B /* HealthKit.framework */; };
 		EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */; };
 		EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF8D30FF1BABA80C0082C38B /* CoreDataModel.xcdatamodeld */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
+		EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */; };
+		EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */; };
 		EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */; };
 		EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6411BA051030067384C /* MeTableViewCell.swift */; };
 		EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6431BA076D70067384C /* UserInfo.swift */; };
@@ -89,11 +93,15 @@
 		EF34C26D1BA63B0600561955 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EF4C93181BAB6AED005AB9F3 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		EF5765C51BAC89710091F21F /* RecordsContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewController.swift; sourceTree = "<group>"; };
+		EF5765C71BAC898F0091F21F /* RecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		EF8630EE1BA73EA2008B5D3B /* iWalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iWalk.entitlements; sourceTree = "<group>"; };
 		EF8630EF1BA743AF008B5D3B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		EF8D31001BABA80C0082C38B /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerSecondType.swift; sourceTree = "<group>"; };
+		EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerFirstType.swift; sourceTree = "<group>"; };
 		EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBodyViewController.swift; sourceTree = "<group>"; };
 		EFB8F6411BA051030067384C /* MeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeTableViewCell.swift; path = ../MeTableViewCell.swift; sourceTree = "<group>"; };
 		EFB8F6431BA076D70067384C /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = ../UserInfo.swift; sourceTree = "<group>"; };
@@ -164,6 +172,10 @@
 				EFE3F61F1B99D9170012E081 /* MeViewController.swift */,
 				EFE3F6211B99D9170012E081 /* TodayViewController.swift */,
 				EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */,
+				EF5765C51BAC89710091F21F /* RecordsContentViewController.swift */,
+				EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */,
+				EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */,
+				EF5765C71BAC898F0091F21F /* RecordsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -446,16 +458,20 @@
 				EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */,
 				EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */,
 				EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */,
+				EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */,
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
+				EF5765C81BAC898F0091F21F /* RecordsViewController.swift in Sources */,
 				EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */,
 				EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */,
 				EFDFB40A1BAADCE9007F4778 /* ClickableLabel.swift in Sources */,
 				EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */,
 				EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */,
 				EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */,
+				EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */,
 				EFDFB40E1BAAE04D007F4778 /* PRLabel.m in Sources */,
 				EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */,
 				EF34C26E1BA63B0600561955 /* Colors.swift in Sources */,
+				EF5765C61BAC89710091F21F /* RecordsContentViewController.swift in Sources */,
 				EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */,
 				EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */,
 			);
