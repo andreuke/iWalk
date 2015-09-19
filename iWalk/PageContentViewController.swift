@@ -103,13 +103,25 @@ class PageContentViewController: UIViewController {
         chartDataSet.valueFormatter = numberFormatter
 
         
+
         barChartView.descriptionText = ""
         barChartView.xAxis.labelPosition = .Bottom
+        barChartView.xAxis.setLabelsToSkip(10)
+        barChartView.xAxis.drawGridLinesEnabled = false
+        barChartView.xAxis.avoidFirstLastClippingEnabled = true
+        
+        barChartView.leftAxis.enabled = true
+        barChartView.leftAxis.drawAxisLineEnabled = false
+        barChartView.leftAxis.valueFormatter = numberFormatter
+        barChartView.rightAxis.enabled = false
+        barChartView.leftAxis.labelCount = 5
+        
         barChartView.legend.enabled = false
         barChartView.drawValueAboveBarEnabled = false
         barChartView.gridBackgroundColor = UIColor.whiteColor()
         barChartView.drawGridBackgroundEnabled = false
         barChartView.setScaleEnabled(false)
+
         
         
 

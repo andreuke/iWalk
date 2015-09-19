@@ -96,7 +96,7 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
         // Configuration
         chartDataSet.colors = [UIColor(hex:Colors.BlueColor)]
         chartDataSet.valueTextColor = UIColor.whiteColor()
-        chartDataSet.drawValuesEnabled = true
+        chartDataSet.drawValuesEnabled = false
         chartDataSet.highlightEnabled = false
         
         // Set rounding for values on bars
@@ -107,6 +107,15 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
         
         barChartView.descriptionText = ""
         barChartView.xAxis.labelPosition = .Bottom
+        barChartView.xAxis.setLabelsToSkip(10)
+        barChartView.xAxis.drawGridLinesEnabled = false
+        barChartView.xAxis.avoidFirstLastClippingEnabled = true
+        
+        
+        barChartView.leftAxis.enabled = false
+        barChartView.rightAxis.enabled = false
+        barChartView.leftAxis.labelCount = 3
+        
 
         barChartView.legend.enabled = false
         barChartView.drawValueAboveBarEnabled = false
