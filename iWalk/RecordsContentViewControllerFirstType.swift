@@ -10,10 +10,26 @@ import UIKit
 
 class RecordsContentViewControllerFirstType: RecordsContentViewController {
 
+    struct Constants {
+        static let Most = 0
+        static let Average = 1
+    
+        static let titleStrings = ["Most steps in a day", "Average daily steps"]
+    }
+    
+    @IBOutlet weak var title_text: UILabel!
+    @IBOutlet weak var value: UILabel!
+    @IBOutlet weak var description_text: UILabel!
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title_text.text = Constants.titleStrings[self.index]
     }
 
     override func didReceiveMemoryWarning() {
