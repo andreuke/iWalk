@@ -38,8 +38,7 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
         
         titleLabel.text = Constants.titleStrings[self.index]
         renderData()
-        
-        
+    
         
     }
     
@@ -69,6 +68,9 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
             }
         case Constants.Average:
             self.descriptionLabel.text = ""
+            if let value = self.recordsModel.averageDailySteps.value {
+                self.valueLabel.text = String(value)
+            }
         default:
             return
         }

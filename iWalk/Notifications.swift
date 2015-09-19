@@ -24,12 +24,12 @@ class Notifications {
     }
     
     struct averageDailySteps {
-        static let valueUpdated = "com.giadrea.notifications.mostStepsInADayUpdatedDay"
+        static let valueUpdated = "com.giadrea.notifications.averageDailyStepsUpdatedDay"
         static let hoursUpdated = "com.giadrea.notifications.mostStepsInADayUpdatedSteps"
     }
     
     struct totalRecords {
-        
+        static let valueUpdated = "com.giadrea.notifications.totalLifetimeUpdatedSteps"
     }
     
     
