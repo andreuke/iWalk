@@ -622,13 +622,78 @@
                     <view key="view" contentMode="scaleToFill" id="aLg-AL-Rg9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="186"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuV-XP-OPm">
+                                <rect key="frame" x="20" y="70" width="46" height="42"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="steps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daU-TO-9Pv">
+                                <rect key="frame" x="76" y="83" width="50" height="27"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.40000000000000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMY-xh-Bmj">
+                                <rect key="frame" x="20" y="132" width="40" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jx-RF-mD1">
+                                <rect key="frame" x="564" y="150" width="16" height="14"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="11"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EtX-Ub-m9h">
+                                <rect key="frame" x="519" y="132" width="40" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Total Values" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bau-Rn-fMB">
+                                <rect key="frame" x="20" y="28" width="112" height="28"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="23"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqf-GW-iNG">
+                                <rect key="frame" x="65" y="150" width="23" height="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Bau-Rn-fMB" firstAttribute="leading" secondItem="aLg-AL-Rg9" secondAttribute="leading" constant="20" id="12Y-KS-HQG"/>
+                            <constraint firstItem="6jx-RF-mD1" firstAttribute="baseline" secondItem="EtX-Ub-m9h" secondAttribute="baseline" id="2et-f2-7qA"/>
+                            <constraint firstItem="tuV-XP-OPm" firstAttribute="leading" secondItem="aLg-AL-Rg9" secondAttribute="leading" constant="20" id="4S4-JF-W7E"/>
+                            <constraint firstItem="tuV-XP-OPm" firstAttribute="top" secondItem="Bau-Rn-fMB" secondAttribute="bottom" constant="15" id="5gp-SA-Xdi"/>
+                            <constraint firstItem="6jx-RF-mD1" firstAttribute="leading" secondItem="EtX-Ub-m9h" secondAttribute="trailing" constant="5" id="CK6-js-BHP"/>
+                            <constraint firstItem="jqf-GW-iNG" firstAttribute="baseline" secondItem="gMY-xh-Bmj" secondAttribute="baseline" id="Emv-M1-zGC"/>
+                            <constraint firstItem="daU-TO-9Pv" firstAttribute="baseline" secondItem="tuV-XP-OPm" secondAttribute="baseline" id="F9U-gE-i6G"/>
+                            <constraint firstItem="EtX-Ub-m9h" firstAttribute="centerY" secondItem="gMY-xh-Bmj" secondAttribute="centerY" id="Jc4-Tj-cTQ"/>
+                            <constraint firstItem="gMY-xh-Bmj" firstAttribute="leading" secondItem="aLg-AL-Rg9" secondAttribute="leading" constant="20" id="Rgj-M9-BNW"/>
+                            <constraint firstItem="Bau-Rn-fMB" firstAttribute="top" secondItem="hwc-dF-aYN" secondAttribute="bottom" constant="8" id="Smn-Jh-hg1"/>
+                            <constraint firstItem="daU-TO-9Pv" firstAttribute="leading" secondItem="tuV-XP-OPm" secondAttribute="trailing" constant="10" id="TF2-Pe-BzL"/>
+                            <constraint firstItem="jqf-GW-iNG" firstAttribute="leading" secondItem="gMY-xh-Bmj" secondAttribute="trailing" constant="5" id="Zyf-7w-TYn"/>
+                            <constraint firstAttribute="trailing" secondItem="6jx-RF-mD1" secondAttribute="trailing" constant="20" id="jV9-HF-14T"/>
+                            <constraint firstItem="gMY-xh-Bmj" firstAttribute="top" secondItem="tuV-XP-OPm" secondAttribute="bottom" constant="20" id="mvW-yL-GfU"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="186"/>
+                    <connections>
+                        <outlet property="caloriesLabel" destination="gMY-xh-Bmj" id="APX-qK-xMm"/>
+                        <outlet property="distanceLabel" destination="EtX-Ub-m9h" id="6yu-CF-j5S"/>
+                        <outlet property="stepsLabel" destination="tuV-XP-OPm" id="pWb-EO-eIK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWR-Q0-gzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2697" y="461"/>
+            <point key="canvasLocation" x="2697" y="470"/>
         </scene>
     </scenes>
     <resources>

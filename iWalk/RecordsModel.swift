@@ -28,13 +28,23 @@ class RecordsModel {
         var steps : [Int]?
     }
     
-    struct totalRecordsStruct {
-        var value : Int?
+    enum TotalRecordsAttributes: Int {
+        case Steps = 0
+        case Calories
+        case Distance
     }
+    
+    struct totalRecordsStruct {
+        var steps : Int?
+        var calories : Int?
+        var distance : Int?
+    }
+    
+
     
     var mostStepsInADay = mostStepsInADayStruct()
     var averageDailySteps = averageDailyStepsStruct()
-    var totalLifetimeSteps = totalRecordsStruct()
+    var totalLifetimeRecords = totalRecordsStruct()
     
     
     private init() {
@@ -53,12 +63,14 @@ class RecordsModel {
     
     func fetchAverageDailySteps() {
         healthKitManager.averageDailySteps()
+        healthKitManager.averageStepsByHour()
         
     }
     
     func fetchLifeTimeTotal() {
-        healthKitManager.totalLifetime()
-        
+        healthKitManager.totalLifetime(TotalRecordsAttributes.Steps.rawValue)
+        healthKitManager.totalLifetime(TotalRecordsAttributes.Calories.rawValue)
+        healthKitManager.totalLifetime(TotalRecordsAttributes.Distance.rawValue)
     }
     
 }

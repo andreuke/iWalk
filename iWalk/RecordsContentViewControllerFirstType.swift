@@ -34,6 +34,8 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.mostStepsInADay.dayAndValueUpdated, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.mostStepsInADay.hoursUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.averageDailySteps.valueUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.averageDailySteps.hoursUpdated, object: nil)
         
         
         titleLabel.text = Constants.titleStrings[self.index]
@@ -70,6 +72,10 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
             self.descriptionLabel.text = ""
             if let value = self.recordsModel.averageDailySteps.value {
                 self.valueLabel.text = String(value)
+            }
+            if let steps = self.recordsModel.averageDailySteps.steps {
+                let labels = self.recordsModel.averageDailySteps.hours
+                setChart(labels, values: steps)
             }
         default:
             return

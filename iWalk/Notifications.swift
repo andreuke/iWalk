@@ -19,17 +19,19 @@ class Notifications {
     // MARK: Records
     
     struct mostStepsInADay {
-        static let dayAndValueUpdated = "com.giadrea.notifications.mostStepsInADayUpdatedDay"
-        static let hoursUpdated = "com.giadrea.notifications.mostStepsInADayUpdatedSteps"
+        static let dayAndValueUpdated = "com.giadrea.notifications.mostStepsInADay.dayAndValueUpdated"
+        static let hoursUpdated = "com.giadrea.notifications.mostStepsInADay.hoursUpdated"
     }
     
     struct averageDailySteps {
-        static let valueUpdated = "com.giadrea.notifications.averageDailyStepsUpdatedDay"
-        static let hoursUpdated = "com.giadrea.notifications.mostStepsInADayUpdatedSteps"
+        static let valueUpdated = "com.giadrea.notifications.averageDailySteps.valueUpdated"
+        static let hoursUpdated = "com.giadrea.notifications.averageDailySteps.hoursUpdated"
     }
     
     struct totalRecords {
-        static let valueUpdated = "com.giadrea.notifications.totalLifetimeUpdatedSteps"
+        static let stepsUpdated = "com.giadrea.notifications.totalRecords.stepsUpdated"
+        static let caloriesUpdated = "com.giadrea.notifications.totalRecords.caloriesUpdated"
+        static let distanceUpdated = "com.giadrea.notifications.totalRecords.distanceUpdated"
     }
     
     

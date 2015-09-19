@@ -27,7 +27,9 @@ class HealthKitManager {
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!,
-            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
+
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
+HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
             HKObjectType.workoutType()
         )
         
@@ -282,7 +284,6 @@ class HealthKitManager {
         let interval = NSDateComponents()
         interval.day = 1
         
-        // Set the anchor date to Monday at 3:00 a.m.
         let anchorComponents = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
         anchorComponents.hour = 0
         
@@ -325,7 +326,7 @@ class HealthKitManager {
             }
             
             if maxValue > 0.0 {
-                print("value: \(maxValue), date: \(maxDate)")
+                //                print("value: \(maxValue), date: \(maxDate)")
                 
                 // Save data into the model
                 RecordsModel.instance.mostStepsInADay.value = Int(maxValue)
@@ -346,7 +347,6 @@ class HealthKitManager {
         let interval = NSDateComponents()
         interval.hour = 1
         
-        // Set the anchor date to Monday at 3:00 a.m.
         let anchorComponents = calendar.components([.Hour, .Day, .Month, .Year], fromDate: NSDate())
         anchorComponents.minute = 0
         
@@ -387,7 +387,7 @@ class HealthKitManager {
                     let date = hourFormatter.stringFromDate(statistics.startDate)
                     let value = Int(round(quantity.doubleValueForUnit(HKUnit.countUnit())))
                     
-                    print("\(date)  \(value)")
+                    //                    print("\(date)  \(value)")
                     
                     let index = Int(date)
                     
@@ -409,7 +409,6 @@ class HealthKitManager {
         let interval = NSDateComponents()
         interval.day = 1
         
-        // Set the anchor date to Monday at 3:00 a.m.
         let anchorComponents = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
         anchorComponents.hour = 0
         
@@ -435,11 +434,17 @@ class HealthKitManager {
             }
             
             let statistics = results?.statistics()
-            var totalDay = Double((statistics?.count)!)
+            let totalDay = Double((statistics?.count)!)
             var totalSteps = 0.0
             
-            for s in statistics! {
-                if let quantity = s.sumQuantity() {
+            
+            let endDate = NSDate()
+            let date = endDate.dateByAddingTimeInterval(-365*60*60*24)
+            
+            
+            results!.enumerateStatisticsFromDate(date, toDate: endDate) {
+                statistics, stop in
+                if let quantity = statistics.sumQuantity() {
                     let value = quantity.doubleValueForUnit(HKUnit.countUnit())
                     totalSteps = totalSteps + value
                 }
@@ -448,13 +453,13 @@ class HealthKitManager {
             let averageSteps = totalSteps/totalDay
             
             if averageSteps > 0{
-                print("value: \(averageSteps)")
+                //                print("value: \(averageSteps)")
                 
                 // Save data into the model
                 RecordsModel.instance.averageDailySteps.value = Int(round(averageSteps))
                 
                 NSNotificationCenter.defaultCenter().postNotificationName(Notifications.averageDailySteps.valueUpdated, object: nil)
-
+                
             }
         }
         
@@ -463,77 +468,77 @@ class HealthKitManager {
     }
     
     
-//    func averageStepsByHour(date: NSDate) {
-//        let calendar = NSCalendar.currentCalendar()
-//        
-//        let interval = NSDateComponents()
-//        interval.hour = 1
-//        
-//        // Set the anchor date to Monday at 3:00 a.m.
-//        let anchorComponents = calendar.components([.Hour, .Day, .Month, .Year], fromDate: NSDate())
-//        anchorComponents.minute = 0
-//        
-//        let anchorDate = calendar.dateFromComponents(anchorComponents)
-//        
-//        let quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
-//        
-//        // Create the query
-//        let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
-//            quantitySamplePredicate: nil,
-//            options: .CumulativeSum,
-//            anchorDate: anchorDate!,
-//            intervalComponents: interval)
-//        
-//        // Set the results handler
-//        query.initialResultsHandler = {
-//            query, results, error in
-//            
-//            if error != nil {
-//                // Perform proper error handling here
-//                print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-//                abort()
-//            }
-//            
-//            //let endDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: date, options: nil)
-//            //let endDate = date.dateByAddingTimeInterval(60*60*24)
-//            
-//            var steps = [Int](count:24, repeatedValue: 0)
-//            let statistics = results?.statistics()
-//            var totalDay = Double((statistics?.count)!)
-//            var totalSteps = 0.0
-//
-//            
-//            let hourFormatter = NSDateFormatter()
-//            hourFormatter.dateFormat = "HH"
-//            
-//            //results!.enumerateStatisticsFromDate(date, toDate: endDate) {
-//              //  statistics, stop in
-//            
-//            for s in statistics! {
-//                if let quantity = s.sumQuantity() {
-//                    let value = Int(round(quantity.doubleValueForUnit(HKUnit.countUnit())))
-//                 
-//                }
-//            }
-//
-//            
-//                    print("\(date)  \(value)")
-//                    
-//                    let index = Int(date)
-//                    
-//                    steps[index!] = value
-//                }
-//            }
-//            
-//            RecordsModel.instance.mostStepsInADay.steps = steps
-//            
-//            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.mostStepsInADay.hoursUpdated, object: nil)
-//        }
-//        
-//        healthKitStore.executeQuery(query)
-//    }
+    func averageStepsByHour() {
+        let calendar = NSCalendar.currentCalendar()
+        
+        let interval = NSDateComponents()
+        interval.hour = 1
+        
+        let anchorComponents = calendar.components([.Hour], fromDate: NSDate())
+        anchorComponents.minute = 0
+        
+        let anchorDate = calendar.dateFromComponents(anchorComponents)
+        
+        let quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+        
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
+            quantitySamplePredicate: nil,
+            options: .CumulativeSum,
+            anchorDate: anchorDate!,
+            intervalComponents: interval)
+        
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
+            
+            if error != nil {
+                // Perform proper error handling here
+                print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
+                abort()
+            }
+            
+            
+            //           let endDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: date, options: nil)
+            let endDate = NSDate()
+            let date = endDate.dateByAddingTimeInterval(-365*60*60*24)
+            
+            var steps = [Int](count:24, repeatedValue: 0)
+            
+            let hourFormatter = NSDateFormatter()
+            hourFormatter.dateFormat = "HH"
+            
+            results!.enumerateStatisticsFromDate(date, toDate: endDate) {
+                statistics, stop in
+                
+                if let quantity = statistics.sumQuantity() {
+                    let date = hourFormatter.stringFromDate(statistics.startDate)
+                    let value = Int(round(quantity.doubleValueForUnit(HKUnit.countUnit())))
+                    
+                    print("\(date)  \(value)")
+                    
+                    let index = Int(date)
+                    
+                    steps[index!] += value
+                }
+            }
+            
+            // Compute the year average
+            for i in 0..<steps.count {
+                steps[i] /= 365
+            }
+            
+            RecordsModel.instance.averageDailySteps.steps = steps
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.averageDailySteps.hoursUpdated, object: nil)
+        }
+        healthKitStore.executeQuery(query)
+        
+    }
     
-    func totalLifetime() {
+    
+    
+    func totalLifetime(attribute : Int) {
         let calendar = NSCalendar.currentCalendar()
         
         let interval = NSDateComponents()
@@ -544,8 +549,18 @@ class HealthKitManager {
         anchorComponents.hour = 0
         
         let anchorDate = calendar.dateFromComponents(anchorComponents)
+        var quantityType : HKQuantityType?
         
-        let quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+        switch attribute {
+        case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
+            quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!
+        case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
+            quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!
+        case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
+            quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!
+        default:
+            quantityType = nil
+        }
         
         // Create the query
         let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
@@ -565,26 +580,54 @@ class HealthKitManager {
             }
             
             let statistics = results?.statistics()
-            var totalLifetimeSteps = 0.0
+            var totalLifetimeValue = 0.0
             
             for s in statistics! {
                 if let quantity = s.sumQuantity() {
-                    let value = quantity.doubleValueForUnit(HKUnit.countUnit())
-                    totalLifetimeSteps = totalLifetimeSteps + value
+                    
+                    var value : Double?
+                    
+                    switch attribute {
+                    case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
+                        value = quantity.doubleValueForUnit(HKUnit.countUnit())
+                        
+                    case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
+                        value = quantity.doubleValueForUnit(HKUnit.calorieUnit())/1000
+                        
+                    case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
+                        value = quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Kilo))
+                    default:
+                        value = nil
+                    }
+                    
+                    totalLifetimeValue += value!
                 }
             }
             
-            if totalLifetimeSteps > 0{
-                print("value: \(totalLifetimeSteps)")
+            if totalLifetimeValue > 0{
+                let total = Int(totalLifetimeValue)
                 
-                // Save data into the model
-                RecordsModel.instance.totalLifetimeSteps.value = Int(totalLifetimeSteps)
+                switch attribute {
+                case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
+                    RecordsModel.instance.totalLifetimeRecords.steps = total
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.totalRecords.stepsUpdated, object: nil)
+                    
+                case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
+                    RecordsModel.instance.totalLifetimeRecords.calories = total
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.totalRecords.caloriesUpdated, object: nil)
+                    
+                case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
+                    RecordsModel.instance.totalLifetimeRecords.distance = total
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.totalRecords.distanceUpdated, object: nil)
+                default:
+                    break;
+                }
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.totalRecords.valueUpdated, object: nil)
+                
                 
             }
         }
-
+        
         healthKitStore.executeQuery(query)
     }
     
