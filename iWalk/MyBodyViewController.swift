@@ -118,12 +118,16 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         if(heightString != "Not Set"){
             let height = heightString!.substringWithRange(Range<String.Index>(start: heightString!.startIndex, end: advance((heightString?.endIndex)!,-3)))
             let heightDouble = (height as NSString).doubleValue
+            let currentHeight = userInfo.height
             
-            if((heightDouble != healthKitManager.heightDoubleFromSample(userInfo.height!.value!))) {
+            if(currentHeight == nil || heightDouble != healthKitManager.heightDoubleFromSample(currentHeight!.value!)) {
+                
                 let heightSample = healthKitManager.heightSampleFromDouble(heightDouble, date: NSDate())
                 userInfo.willUpdateBmi()
                 userInfo.height = UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate)
                 userInfo.persistHeight()
+                
+
             }
         }
         
@@ -135,7 +139,9 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
             let weight = weightString!.substringWithRange(Range<String.Index>(start: weightString!.startIndex, end: advance((weightString?.endIndex)!,-3)))
             let weightDouble = (weight as NSString).doubleValue
             
-            if((weightDouble != healthKitManager.weightDoubleFromSample(userInfo.weight!.value!))) {
+            let currentWeight = userInfo.weight
+            
+            if(currentWeight == nil || weightDouble != healthKitManager.weightDoubleFromSample(currentWeight!.value!)) {
                 let weightSample = healthKitManager.weightSampleFromDouble(weightDouble, date: NSDate())
                 userInfo.willUpdateBmi()
                 userInfo.weight = UpdatableInformation(value: weightSample, latestUpdate: weightSample.endDate)
