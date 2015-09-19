@@ -129,7 +129,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Body" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bm-Ll-v3Z">
-                                                <rect key="frame" x="15" y="12" width="67.5" height="21"/>
+                                                <rect key="frame" x="15" y="12" width="68" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -228,7 +228,7 @@
                                         </constraints>
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="pQS-ma-ttS">
-                                        <rect key="frame" x="30" y="54" width="174" height="104"/>
+                                        <rect key="frame" x="15" y="54" width="174" height="104"/>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -245,7 +245,7 @@
                                     <constraint firstItem="pQS-ma-ttS" firstAttribute="centerY" secondItem="NRy-sT-Hiv" secondAttribute="centerY" id="MNa-iM-ZhC"/>
                                     <constraint firstItem="Ir8-QC-DiQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pQS-ma-ttS" secondAttribute="trailing" constant="15" id="PnR-Z9-iJ9"/>
                                     <constraint firstItem="Nl8-sa-24C" firstAttribute="top" secondItem="NRy-sT-Hiv" secondAttribute="top" id="SpE-W3-plC"/>
-                                    <constraint firstItem="pQS-ma-ttS" firstAttribute="leading" secondItem="NRy-sT-Hiv" secondAttribute="leading" constant="30" id="Xvi-q4-UTc"/>
+                                    <constraint firstItem="pQS-ma-ttS" firstAttribute="leading" secondItem="NRy-sT-Hiv" secondAttribute="leading" constant="15" id="Xvi-q4-UTc"/>
                                     <constraint firstItem="Ir8-QC-DiQ" firstAttribute="top" secondItem="pQS-ma-ttS" secondAttribute="top" id="ZAS-rL-ol7"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pQS-ma-ttS" secondAttribute="bottom" constant="15" id="ZXy-GU-DYQ"/>
                                     <constraint firstItem="pQS-ma-ttS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Nl8-sa-24C" secondAttribute="bottom" constant="10" id="hz1-QT-Tz7"/>
