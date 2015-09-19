@@ -12,6 +12,8 @@ class RecordsViewController: UIViewController, UIPageViewControllerDelegate, UIP
     
     var pageViewController : UIPageViewController!
     
+    let recordsModel = RecordsModel.instance
+    
     @IBAction func swipeLeft(sender: AnyObject) {
         print("SWipe left")
     }
@@ -49,6 +51,9 @@ class RecordsViewController: UIViewController, UIPageViewControllerDelegate, UIP
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.blueColor()
         pageControl.backgroundColor = UIColor.whiteColor()
+        
+        // RetrieveRecords
+        recordsModel.fetchAllRecords()
         
     }
     

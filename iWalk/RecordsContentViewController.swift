@@ -12,6 +12,7 @@ class RecordsContentViewController: UIViewController {
     
     static let numberOfDots = 3
     
+    let recordsModel = RecordsModel.instance
     var index = 0
 
     override func viewDidLoad() {

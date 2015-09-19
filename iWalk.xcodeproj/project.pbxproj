@@ -16,7 +16,7 @@
 		EF5765C41BAC2DAE0091F21F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */; };
 		EF5765C61BAC89710091F21F /* RecordsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5765C51BAC89710091F21F /* RecordsContentViewController.swift */; };
 		EF5765C81BAC898F0091F21F /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5765C71BAC898F0091F21F /* RecordsViewController.swift */; };
-		EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8630EF1BA743AF008B5D3B /* HealthKit.framework */; };
+		EF62E36A1BAD7D2600B4C4DD /* RecordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF62E3691BAD7D2600B4C4DD /* RecordsModel.swift */; };
 		EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */; };
 		EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF8D30FF1BABA80C0082C38B /* CoreDataModel.xcdatamodeld */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
@@ -38,6 +38,7 @@
 		EFE3F6271B99D9170012E081 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFE3F6261B99D9170012E081 /* Assets.xcassets */; };
 		EFE3F62A1B99D9170012E081 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFE3F6281B99D9170012E081 /* LaunchScreen.storyboard */; };
 		EFE3F6401B99D9170012E081 /* iWalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F63F1B99D9170012E081 /* iWalkUITests.swift */; };
+		EFE64B0F1BAD945B0018BEC6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE64B0E1BAD945B0018BEC6 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +96,8 @@
 		EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		EF5765C51BAC89710091F21F /* RecordsContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewController.swift; sourceTree = "<group>"; };
 		EF5765C71BAC898F0091F21F /* RecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		EF62E3691BAD7D2600B4C4DD /* RecordsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsModel.swift; sourceTree = "<group>"; };
 		EF8630EE1BA73EA2008B5D3B /* iWalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iWalk.entitlements; sourceTree = "<group>"; };
-		EF8630EF1BA743AF008B5D3B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		EF8D31001BABA80C0082C38B /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		EFE3F63B1B99D9170012E081 /* iWalkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWalkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE3F63F1B99D9170012E081 /* iWalkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWalkUITests.swift; sourceTree = "<group>"; };
 		EFE3F6411B99D9170012E081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFE64B0E1BAD945B0018BEC6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +135,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF8630F01BA743AF008B5D3B /* HealthKit.framework in Frameworks */,
 				EF4C931E1BAB6AF8005AB9F3 /* Charts.framework in Frameworks */,
+				EFE64B0F1BAD945B0018BEC6 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +160,7 @@
 		5676153E9ADC215F1A5E7A7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EF8630EF1BA743AF008B5D3B /* HealthKit.framework */,
+				EFE64B0E1BAD945B0018BEC6 /* HealthKit.framework */,
 				C37E6DAF664F711583782324 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -188,6 +190,7 @@
 				EF34C26D1BA63B0600561955 /* Colors.swift */,
 				EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */,
 				EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */,
+				EF62E3691BAD7D2600B4C4DD /* RecordsModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */,
 				EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */,
 				EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */,
+				EF62E36A1BAD7D2600B4C4DD /* RecordsModel.swift in Sources */,
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
 				EF5765C81BAC898F0091F21F /* RecordsViewController.swift in Sources */,
 				EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */,

@@ -12,6 +12,7 @@ import HealthKit
 class HealthKitManager {
     static let instance = HealthKitManager()
     let healthKitStore:HKHealthStore = HKHealthStore()
+
     
     private init() {
     }
@@ -70,7 +71,7 @@ class HealthKitManager {
         return (birthday, gender)
     }
     
-    func birthDay() -> NSDate? {   
+    func birthDay() -> NSDate? {
         let birthDay: NSDate?
         
         do {
@@ -272,6 +273,134 @@ class HealthKitManager {
     func weightDoubleFromSample(weight: HKQuantitySample) -> Double {
         return weight.quantity.doubleValueForUnit(HKUnit(fromString: "kg"))
     }
+    
+    
+    // MARK: Statistic Queries
+    func mostStepsInADay() {
+        let calendar = NSCalendar.currentCalendar()
+        
+        let interval = NSDateComponents()
+        interval.day = 1
+        
+        // Set the anchor date to Monday at 3:00 a.m.
+        let anchorComponents = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
+        anchorComponents.hour = 0
+        
+        let anchorDate = calendar.dateFromComponents(anchorComponents)
+        
+        let quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+        
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
+            quantitySamplePredicate: nil,
+            options: .CumulativeSum,
+            anchorDate: anchorDate!,
+            intervalComponents: interval)
+        
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
+            
+            if error != nil {
+                // Perform proper error handling here
+                print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
+                abort()
+            }
+            
+            let statistics = results?.statistics()
+            var maxValue = 0.0
+            var maxDate : NSDate?
 
+            for s in statistics! {
+                if let quantity = s.sumQuantity() {
+                    let date = s.startDate
+                    let value = quantity.doubleValueForUnit(HKUnit.countUnit())
+                    
+                    if(value >= maxValue) {
+                        maxValue = value
+                        maxDate = date
+                    }
+
+                }
+            }
+            
+            if maxValue > 0.0 {
+                print("value: \(maxValue), date: \(maxDate)")
+                
+                // Save data into the model
+                RecordsModel.instance.mostStepsInADay.value = Int(maxValue)
+                RecordsModel.instance.mostStepsInADay.day = maxDate
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.mostStepsInADay.dayAndValueUpdated, object: nil)
+                self.stepsByHour(maxDate!)
+            }
+            
+        }
+        
+        healthKitStore.executeQuery(query)
+    }
+    
+    func stepsByHour(date: NSDate) {
+        let calendar = NSCalendar.currentCalendar()
+        
+        let interval = NSDateComponents()
+        interval.hour = 1
+        
+        // Set the anchor date to Monday at 3:00 a.m.
+        let anchorComponents = calendar.components([.Hour, .Day, .Month, .Year], fromDate: NSDate())
+        anchorComponents.minute = 0
+        
+        let anchorDate = calendar.dateFromComponents(anchorComponents)
+        
+        let quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
+        
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
+            quantitySamplePredicate: nil,
+            options: .CumulativeSum,
+            anchorDate: anchorDate!,
+            intervalComponents: interval)
+        
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
+            
+            if error != nil {
+                // Perform proper error handling here
+                print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
+                abort()
+            }
+            
+
+//            let endDate = calendar.dateByAddingUnit(NSCalendarUnit.Day, value: 1, toDate: date, options: nil)
+            let endDate = date.dateByAddingTimeInterval(60*60*24)
+            
+            var steps = [Int](count:24, repeatedValue: 0)
+            
+            let hourFormatter = NSDateFormatter()
+            hourFormatter.dateFormat = "HH"
+            
+            results!.enumerateStatisticsFromDate(date, toDate: endDate) {
+                statistics, stop in
+                
+                if let quantity = statistics.sumQuantity() {
+                    let date = hourFormatter.stringFromDate(statistics.startDate)
+                    let value = Int(round(quantity.doubleValueForUnit(HKUnit.countUnit())))
+                    
+                    print("\(date)  \(value)")
+                    
+                    let index = Int(date)
+                    
+                    steps[index!] = value
+                }
+            }
+
+            RecordsModel.instance.mostStepsInADay.steps = steps
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.mostStepsInADay.hoursUpdated, object: nil)
+        }
+        healthKitStore.executeQuery(query)
+
+    }
     
 }
