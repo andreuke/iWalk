@@ -23,6 +23,7 @@
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
 		EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */; };
 		EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */; };
+		EFAB07BE1BAF03D6000CC1AE /* ClickableRangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */; };
 		EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */; };
 		EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6411BA051030067384C /* MeTableViewCell.swift */; };
 		EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8F6431BA076D70067384C /* UserInfo.swift */; };
@@ -105,6 +106,7 @@
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerSecondType.swift; sourceTree = "<group>"; };
 		EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerFirstType.swift; sourceTree = "<group>"; };
+		EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableRangeLabel.swift; sourceTree = "<group>"; };
 		EFB8F63F1B9FB0180067384C /* MyBodyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBodyViewController.swift; sourceTree = "<group>"; };
 		EFB8F6411BA051030067384C /* MeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeTableViewCell.swift; path = ../MeTableViewCell.swift; sourceTree = "<group>"; };
 		EFB8F6431BA076D70067384C /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfo.swift; path = ../UserInfo.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				EF033CDE1BA1D528003198CD /* InfoTextField.swift */,
 				EF9ED6BA1B9F355D0081035F /* HeaderView.swift */,
 				EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */,
+				EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */,
 				EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */,
 				EFDFB40E1BAAE04D007F4778 /* PRLabel.m in Sources */,
+				EFAB07BE1BAF03D6000CC1AE /* ClickableRangeLabel.swift in Sources */,
 				EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */,
 				EF34C26E1BA63B0600561955 /* Colors.swift in Sources */,
 				EF5765C61BAC89710091F21F /* RecordsContentViewController.swift in Sources */,

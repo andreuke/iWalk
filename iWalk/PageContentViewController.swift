@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class PageContentViewController: UIViewController {
+class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     let statsModel = StatsModel.instance
     
@@ -31,11 +31,12 @@ class PageContentViewController: UIViewController {
     
     // MARK: Properties
     @IBOutlet weak var attributeLabel: UILabel!
-    @IBOutlet weak var rangeLabel: UILabel!
+    @IBOutlet weak var rangeLabel: ClickableRangeLabel!
     @IBOutlet weak var barChartView: BarChartView!
     @IBOutlet weak var averageLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
+    var pickerView = UIPickerView()
     
     
     var attribute : Int? {
@@ -59,7 +60,7 @@ class PageContentViewController: UIViewController {
         super.init(coder: aDecoder)
         attribute = Constants.Steps
         attributeString = Constants.AttributeStrings[attribute!]
-        range = Constants.Year
+        range = Constants.Week
         rangeString = Constants.RangeStrings[range!]
     }
     
@@ -73,11 +74,18 @@ class PageContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statsModel.fetchAllData(range!)
+        statsModel.fetchAllData(Constants.Week)
+        statsModel.fetchAllData(Constants.Month)
+        statsModel.fetchAllData(Constants.Year)
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.stats.stepsUpdated, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.stats.caloriesUpdated, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.stats.distanceUpdated, object: nil)
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        rangeLabel.inputView = pickerView
 
         renderData()
     }
@@ -89,6 +97,7 @@ class PageContentViewController: UIViewController {
     func renderData() {
         attributeLabel.text = attributeString
         rangeLabel.text = rangeString
+
         
         
         guard let period = range else {
@@ -176,7 +185,7 @@ class PageContentViewController: UIViewController {
         // Configuration
         chartDataSet.colors = [UIColor(hex:Colors.BlueColor)]
         chartDataSet.valueTextColor = UIColor.whiteColor()
-        chartDataSet.drawValuesEnabled = true
+        chartDataSet.drawValuesEnabled = false
         chartDataSet.highlightEnabled = false
         
         // Set rounding for values on bars
@@ -188,9 +197,9 @@ class PageContentViewController: UIViewController {
         
         barChartView.descriptionText = ""
         barChartView.xAxis.labelPosition = .Bottom
-        barChartView.xAxis.setLabelsToSkip(10)
+//        barChartView.xAxis.setLabelsToSkip(10)
         barChartView.xAxis.drawGridLinesEnabled = false
-        barChartView.xAxis.avoidFirstLastClippingEnabled = true
+        barChartView.xAxis.avoidFirstLastClippingEnabled = false
         
         barChartView.leftAxis.enabled = true
         barChartView.leftAxis.drawAxisLineEnabled = false
@@ -204,9 +213,26 @@ class PageContentViewController: UIViewController {
         barChartView.drawGridBackgroundEnabled = false
         barChartView.setScaleEnabled(false)
         
+    }
+    
+    // MARK: PickerView
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 3
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Constants.RangeStrings[row]
         
-        
-        
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        range = row
+        renderData()
+        rangeLabel.resignFirstResponder()
     }
     
 }
