@@ -27,9 +27,9 @@ class HealthKitManager {
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!,
-
+            
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
-HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
             HKObjectType.workoutType()
         )
         
@@ -691,7 +691,7 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
             var offset = 0.0
             let hourFormatter = NSDateFormatter()
             var length = 0
-
+            
             
             
             switch period {
@@ -699,17 +699,17 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
                 offset = 6
                 hourFormatter.dateFormat = "EEE"
                 length = 7
-
+                
             case StatsModel.Period.Month.rawValue:
                 offset = 30
                 hourFormatter.dateFormat = "dd MMM"
                 length = 31
-
+                
             case StatsModel.Period.Year.rawValue:
                 offset = 360
                 hourFormatter.dateFormat = "MMM"
                 length = 13
-
+                
             default:
                 break
             }
@@ -720,7 +720,7 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
             var values = [Double](count: length, repeatedValue : 0)
             var labels = [String](count: length, repeatedValue : "")
             
-
+            
             var index = 0
             
             results!.enumerateStatisticsFromDate(startDate, toDate: endDate) {
@@ -744,14 +744,14 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
                     default:
                         break
                     }
-
+                    
                     values[index] = value
                     labels[index] = date
                     
                     index++
                 }
             }
-
+            
             
             if values.count > 0{
                 
@@ -771,7 +771,7 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
                 case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
                     StatsModel.instance.distanceData.distance[period] = values
                     StatsModel.instance.distanceData.labels[period] = labels
-
+                    
                     NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.distanceUpdated, object: nil)
                 default:
                     break;
@@ -785,4 +785,65 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
         healthKitStore.executeQuery(query)
     }
     
+    
+    func plotWeight() {
+        self.fetchWeightHistory({ (samples, error) -> Void in
+            
+            if( error != nil )
+            {
+                print("Error reading weight from HealthKit Store: \(error.localizedDescription)")
+                return;
+            }
+            
+            var results = [Double]()
+            var labels = [NSDate]()
+            
+            if let weightSamples = samples {
+                
+                for weight in weightSamples {
+                    let value = weight.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+                    let date = weight.startDate
+                    results.append(value)
+                    labels.append(date)
+                }
+                UserInfo.instance.weightHistoryDates = labels
+                UserInfo.instance.weightHistoryValues = results
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.weightHistoryUpdated, object: nil)            
+            }
+        })
+
+    }
+
+    func fetchWeightHistory(completion: (([HKQuantitySample!]?, NSError!) -> Void)!) {
+        
+        let past = NSDate.distantPast() as! NSDate
+        let now   = NSDate()
+        
+        let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(past, endDate:now, options: .None)
+        
+        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: true)
+        let limit = 10
+        let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)
+        
+        let sampleQuery = HKSampleQuery(sampleType: sampleType!, predicate: mostRecentPredicate, limit: limit, sortDescriptors: [sortDescriptor])
+            { (sampleQuery, results, error ) -> Void in
+                
+                if let queryError = error {
+                    completion(nil, queryError)
+                    return;
+                }
+                
+                // Get the first sample
+                let mostRecentSamples = results as! [HKQuantitySample]?
+                print("risultati: \(results)")
+                
+                // Execute the completion closure
+                if completion != nil {
+                    completion(mostRecentSamples,nil)
+                }
+        }
+        // 5. Execute the Query
+        self.healthKitStore.executeQuery(sampleQuery)
+    }
 }

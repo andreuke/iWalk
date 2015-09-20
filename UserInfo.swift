@@ -56,6 +56,8 @@ class UserInfo : NSObject{
     ]
     
     var tableView = UITableView()
+    var weightHistoryValues : [Double]?
+    var weightHistoryDates : [NSDate]?
     
     // MARK: Inizialization
     private override init() {
@@ -115,6 +117,7 @@ class UserInfo : NSObject{
         fetchCharachteristics()
         fetchLatestWeight()
         fetchLatestHeight()
+        fetchWeightHistory()
     }
     
     // Birthday and Gender
@@ -148,6 +151,10 @@ class UserInfo : NSObject{
             self.updateHeight(UpdatableInformation(value: heightSample, latestUpdate: heightSample.endDate))
         }
         
+    }
+    
+    func fetchWeightHistory(){
+        healthKitManager.plotWeight()
     }
     
     // MARK: Update information

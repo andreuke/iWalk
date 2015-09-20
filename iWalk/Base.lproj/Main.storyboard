@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -169,8 +168,8 @@
                                             <outletCollection property="gestureRecognizers" destination="Nbv-De-qpA" appends="YES" id="la5-bu-2c8"/>
                                         </connections>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ir8-QC-DiQ">
-                                        <rect key="frame" x="485" y="54" width="100" height="90"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ir8-QC-DiQ">
+                                        <rect key="frame" x="485" y="63" width="100" height="90"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hrh-kZ-wKT">
                                                 <rect key="frame" x="17.5" y="0.0" width="65.5" height="42"/>
@@ -227,29 +226,26 @@
                                             <constraint firstAttribute="height" constant="90" id="x20-SY-OY1"/>
                                         </constraints>
                                     </stackView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="pQS-ma-ttS">
-                                        <rect key="frame" x="15" y="54" width="174" height="104"/>
-                                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <gestureRecognizers/>
+                                    <view contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="161" placeholderIntrinsicHeight="109" translatesAutoresizingMaskIntoConstraints="NO" id="Oqr-ei-1XR" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="15" y="64" width="450" height="109"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="pQS-ma-ttS" secondAttribute="height" multiplier="5:3" id="cyZ-ob-gdq"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="kR1-B1-yXw"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="YzV-rh-2O5"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Oqr-ei-1XR" secondAttribute="bottom" constant="60" id="751-rN-tXT"/>
                                     <constraint firstItem="Nl8-sa-24C" firstAttribute="leading" secondItem="NRy-sT-Hiv" secondAttribute="leading" id="Hk5-bk-xeP"/>
+                                    <constraint firstItem="Oqr-ei-1XR" firstAttribute="centerY" secondItem="NRy-sT-Hiv" secondAttribute="centerY" id="IUK-RF-qQV"/>
                                     <constraint firstAttribute="trailing" secondItem="Ir8-QC-DiQ" secondAttribute="trailing" constant="15" id="J4r-bq-nxG"/>
-                                    <constraint firstItem="pQS-ma-ttS" firstAttribute="centerY" secondItem="NRy-sT-Hiv" secondAttribute="centerY" id="MNa-iM-ZhC"/>
-                                    <constraint firstItem="Ir8-QC-DiQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pQS-ma-ttS" secondAttribute="trailing" constant="15" id="PnR-Z9-iJ9"/>
                                     <constraint firstItem="Nl8-sa-24C" firstAttribute="top" secondItem="NRy-sT-Hiv" secondAttribute="top" id="SpE-W3-plC"/>
-                                    <constraint firstItem="pQS-ma-ttS" firstAttribute="leading" secondItem="NRy-sT-Hiv" secondAttribute="leading" constant="15" id="Xvi-q4-UTc"/>
-                                    <constraint firstItem="Ir8-QC-DiQ" firstAttribute="top" secondItem="pQS-ma-ttS" secondAttribute="top" id="ZAS-rL-ol7"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pQS-ma-ttS" secondAttribute="bottom" constant="15" id="ZXy-GU-DYQ"/>
-                                    <constraint firstItem="pQS-ma-ttS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Nl8-sa-24C" secondAttribute="bottom" constant="10" id="hz1-QT-Tz7"/>
+                                    <constraint firstItem="Ir8-QC-DiQ" firstAttribute="leading" secondItem="Oqr-ei-1XR" secondAttribute="trailing" constant="20" id="XdB-Hu-9cJ"/>
+                                    <constraint firstItem="Ir8-QC-DiQ" firstAttribute="top" secondItem="Oqr-ei-1XR" secondAttribute="top" id="Ydu-0o-Nfy"/>
+                                    <constraint firstItem="Oqr-ei-1XR" firstAttribute="leading" secondItem="NRy-sT-Hiv" secondAttribute="leading" constant="15" id="aaR-rI-Heu"/>
                                     <constraint firstAttribute="trailing" secondItem="Nl8-sa-24C" secondAttribute="trailing" id="ncc-g1-ptn"/>
+                                    <constraint firstItem="Oqr-ei-1XR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Nl8-sa-24C" secondAttribute="bottom" constant="10" id="zaC-oZ-6CS"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wu8-qy-1rE">
@@ -309,6 +305,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Me" id="qF1-gM-za4"/>
                     <connections>
+                        <outlet property="barChartView" destination="Oqr-ei-1XR" id="IVq-Lh-yB5"/>
                         <outlet property="bmiLabel" destination="14e-sb-LbQ" id="ccc-q1-QWT"/>
                         <outlet property="heightLabel" destination="Yy8-aN-8U0" id="AAB-N7-hq1"/>
                         <outlet property="weightLabel" destination="ex9-39-8lZ" id="GrZ-WD-2rs"/>
@@ -734,7 +731,6 @@
         <image name="Arrow" width="25" height="40"/>
         <image name="Charts" width="25" height="25"/>
         <image name="Goals" width="25" height="25"/>
-        <image name="Image" width="225" height="110"/>
         <image name="Me" width="25" height="25"/>
         <image name="Today" width="25" height="25"/>
     </resources>

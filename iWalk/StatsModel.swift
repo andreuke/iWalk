@@ -43,13 +43,13 @@ class StatsModel {
         var steps = [[Double]?](count : 3, repeatedValue : nil)
         var labels = [[String]?](count : 3, repeatedValue : nil)
         
-        var average : [Int]? {
+        var average : [Double]? {
             get {
                 return StatsModel.instance.getAverage(steps)
             }
         }
         
-        var total: [Int]? {
+        var total: [Double]? {
             get {
                 return StatsModel.instance.getTotal(steps)
             }
@@ -63,13 +63,13 @@ class StatsModel {
         var calories = [[Double]?](count : 3, repeatedValue : nil)
         var labels = [[String]?](count : 3, repeatedValue : nil)
         
-        var average : [Int]? {
+        var average : [Double]? {
             get {
                 return StatsModel.instance.getAverage(calories)
             }
         }
         
-        var total: [Int]? {
+        var total: [Double]? {
             get {
                 return StatsModel.instance.getTotal(calories)
             }
@@ -80,22 +80,22 @@ class StatsModel {
         var distance = [[Double]?](count : 3, repeatedValue : nil)
         var labels = [[String]?](count : 3, repeatedValue : nil)
         
-        var average : [Int]? {
+        var average : [Double]? {
             get {
                 return StatsModel.instance.getAverage(distance)
             }
         }
         
-        var total: [Int]? {
+        var total: [Double]? {
             get {
                 return StatsModel.instance.getTotal(distance)
             }
         }
     }
     
-    func getAverage(values: [[Double]?])-> [Int]? {
+    func getAverage(values: [[Double]?])-> [Double]? {
         
-        var returnValues = [Int](count : 3, repeatedValue : 0)
+        var returnValues = [Double](count : 3, repeatedValue : 0)
         
         for i in 0..<values.count  {
             if let vPeriod = values[i] {
@@ -103,7 +103,11 @@ class StatsModel {
                 for v in vPeriod {
                     total += v
                 }
-                returnValues[i] = Int(round(total/Double(vPeriod.count)))
+                var result = total/Double(vPeriod.count)
+                if(i == 0 || i == 1) {
+                    result = round(result)
+                }
+                returnValues[i] = result
             }
             
         }
@@ -113,9 +117,9 @@ class StatsModel {
         
     }
     
-    func getTotal(values: [[Double]?]) -> [Int]? {
+    func getTotal(values: [[Double]?]) -> [Double]? {
         
-        var returnValues = [Int](count : 3, repeatedValue : 0)
+        var returnValues = [Double](count : 3, repeatedValue : 0)
         
         for i in 0..<values.count  {
             if let vPeriod = values[i] {
@@ -123,7 +127,11 @@ class StatsModel {
                 for v in vPeriod {
                     total += v
                 }
-                returnValues[i] = Int(total)
+                var result = total
+                if(i == 0 || i == 1) {
+                    result = round(result)
+                }
+                returnValues[i] = result
             }
 
         }

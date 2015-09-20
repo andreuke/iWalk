@@ -86,7 +86,7 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         pickerView.delegate = self
         pickerView.dataSource = self
         rangeLabel.inputView = pickerView
-
+        
         renderData()
     }
     
@@ -97,7 +97,7 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
     func renderData() {
         attributeLabel.text = attributeString
         rangeLabel.text = rangeString
-
+        
         
         
         guard let period = range else {
@@ -107,9 +107,9 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         var values : [Double]?
         var labels : [String]?
-        var average : Int?
-        var total : Int?
-
+        var average : Double?
+        var total : Double?
+        
         switch attribute! {
         case StatsModel.Attributes.Steps.rawValue:
             if let steps = statsModel.stepsData.steps[period] {
@@ -151,11 +151,21 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         }
         
         if let _ = average {
-            averageLabel.text = String(average!)
+            if(attribute == 0 || attribute == 1) {
+                averageLabel.text = String(Int(average!))
+            }
+            else {
+                averageLabel.text = String(format: "%.1f", average!)
+            }
         }
         
         if let _ = total {
-            totalLabel.text = String(total!)
+            if(attribute == 0 || attribute == 1) {
+                totalLabel.text = String(Int(total!))
+            }
+            else {
+                totalLabel.text = String(format: "%.1f", total!)
+            }
         }
         setChart(labels, values: values)
     }
@@ -197,7 +207,7 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         barChartView.descriptionText = ""
         barChartView.xAxis.labelPosition = .Bottom
-//        barChartView.xAxis.setLabelsToSkip(10)
+        //        barChartView.xAxis.setLabelsToSkip(10)
         barChartView.xAxis.drawGridLinesEnabled = false
         barChartView.xAxis.avoidFirstLastClippingEnabled = false
         

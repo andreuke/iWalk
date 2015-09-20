@@ -14,6 +14,7 @@ class Notifications {
     static let heightUpdated = "com.giadrea.notifications.heigthUpdated"
     static let sexUpdated = "com.giadrea.notifications.sexUpdated"
     static let bmiUpdated = "com.giadrea.notifications.bmiUpdated"
+    static let weightHistoryUpdated = "com.giadrea.notifications.weightHistoryUpdated"
     
     
     // MARK: Records
