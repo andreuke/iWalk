@@ -631,4 +631,158 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
         healthKitStore.executeQuery(query)
     }
     
+    
+    func periodicAttributeQuery(period: Int, attribute: Int) {
+        let calendar = NSCalendar.currentCalendar()
+        
+        let interval = NSDateComponents()
+        var anchorComponents = NSDateComponents()
+        
+        switch period {
+        case StatsModel.Period.Week.rawValue:
+            interval.day = 1
+            anchorComponents = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
+            anchorComponents.hour = 0
+        case StatsModel.Period.Month.rawValue:
+            interval.day = 1
+            anchorComponents = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
+            anchorComponents.hour = 0
+        case StatsModel.Period.Year.rawValue:
+            interval.month = 1
+            anchorComponents = calendar.components([.Month, .Year], fromDate: NSDate())
+            anchorComponents.day = 1
+        default: break
+        }
+        
+        let anchorDate = calendar.dateFromComponents(anchorComponents)
+        var quantityType : HKQuantityType?
+        
+        switch attribute {
+        case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
+            quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!
+        case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
+            quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!
+        case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
+            quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!
+        default:
+            quantityType = nil
+        }
+        
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
+            quantitySamplePredicate: nil,
+            options: .CumulativeSum,
+            anchorDate: anchorDate!,
+            intervalComponents: interval)
+        
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
+            
+            if error != nil {
+                // Perform proper error handling here
+                print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
+                abort()
+            }
+            
+            
+            
+            
+            var offset = 0.0
+            let hourFormatter = NSDateFormatter()
+            var length = 0
+
+            
+            
+            switch period {
+            case StatsModel.Period.Week.rawValue:
+                offset = 6
+                hourFormatter.dateFormat = "EEE"
+                length = 7
+
+            case StatsModel.Period.Month.rawValue:
+                offset = 30
+                hourFormatter.dateFormat = "dd MMM"
+                length = 31
+
+            case StatsModel.Period.Year.rawValue:
+                offset = 360
+                hourFormatter.dateFormat = "MMM"
+                length = 13
+
+            default:
+                break
+            }
+            
+            let endDate = NSDate()
+            let startDate = endDate.dateByAddingTimeInterval(-offset*60*60*24)
+            
+            var values = [Double](count: length, repeatedValue : 0)
+            var labels = [String](count: length, repeatedValue : "")
+            
+
+            var index = 0
+            
+            results!.enumerateStatisticsFromDate(startDate, toDate: endDate) {
+                statistics, stop in
+                
+                if let quantity = statistics.sumQuantity() {
+                    let date = hourFormatter.stringFromDate(statistics.startDate)
+                    
+                    var value  = 0.0
+                    
+                    switch attribute {
+                        
+                    case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
+                        value = quantity.doubleValueForUnit(HKUnit.countUnit())
+                        
+                    case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
+                        value = quantity.doubleValueForUnit(HKUnit.calorieUnit())/1000
+                        
+                    case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
+                        value = quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Kilo))
+                    default:
+                        break
+                    }
+
+                    values[index] = value
+                    labels[index] = date
+                    
+                    index++
+                }
+            }
+
+            
+            if values.count > 0{
+                
+                switch attribute {
+                case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
+                    StatsModel.instance.stepsData.steps = values
+                    StatsModel.instance.stepsData.labels = labels
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.stepsUpdated, object: nil)
+                    
+                case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
+                    StatsModel.instance.caloriesData.calories = values
+                    StatsModel.instance.caloriesData.labels = labels
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.caloriesUpdated, object: nil)
+                    
+                case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
+                    StatsModel.instance.distanceData.distance = values
+                    StatsModel.instance.distanceData.labels = labels
+
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.distanceUpdated, object: nil)
+                default:
+                    break;
+                }
+                
+                
+                
+            }
+        }
+        
+        healthKitStore.executeQuery(query)
+    }
+    
 }

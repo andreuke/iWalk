@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF033CDE1BA1D528003198CD /* InfoTextField.swift */; };
+		EF068F701BAE2A8F0078CDE3 /* StatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF068F6F1BAE2A8F0078CDE3 /* StatsModel.swift */; };
 		EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */; };
 		EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */; };
 		EF34C26E1BA63B0600561955 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF34C26D1BA63B0600561955 /* Colors.swift */; };
@@ -89,6 +90,7 @@
 /* Begin PBXFileReference section */
 		C37E6DAF664F711583782324 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF033CDE1BA1D528003198CD /* InfoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTextField.swift; sourceTree = "<group>"; };
+		EF068F6F1BAE2A8F0078CDE3 /* StatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsModel.swift; sourceTree = "<group>"; };
 		EF1045AB1BA5F333001AD1CC /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		EF1045AD1BA5F3FB001AD1CC /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		EF34C26D1BA63B0600561955 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */,
 				EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */,
 				EF62E3691BAD7D2600B4C4DD /* RecordsModel.swift */,
+				EF068F6F1BAE2A8F0078CDE3 /* StatsModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				EF5765C61BAC89710091F21F /* RecordsContentViewController.swift in Sources */,
 				EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */,
 				EFB8F6441BA076D70067384C /* UserInfo.swift in Sources */,
+				EF068F701BAE2A8F0078CDE3 /* StatsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

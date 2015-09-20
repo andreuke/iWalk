@@ -34,7 +34,12 @@ class Notifications {
         static let distanceUpdated = "com.giadrea.notifications.totalRecords.distanceUpdated"
     }
     
-    
+    // MARK: Stats
+    struct stats {
+        static let stepsUpdated = "com.giadrea.notifications.stats.stepsUpdated"
+        static let caloriesUpdated = "com.giadrea.notifications.stats.caloriesUpdated"
+        static let distanceUpdated = "com.giadrea.notifications.stats.distanceUpdated"
+    }
     
     
 }
