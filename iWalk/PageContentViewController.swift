@@ -90,34 +90,52 @@ class PageContentViewController: UIViewController {
         attributeLabel.text = attributeString
         rangeLabel.text = rangeString
         
+        
+        guard let period = range else {
+            return
+        }
+        
+        
         var values : [Double]?
         var labels : [String]?
         var average : Int?
         var total : Int?
-        
+
         switch attribute! {
         case StatsModel.Attributes.Steps.rawValue:
-            if let steps = statsModel.stepsData.steps {
+            if let steps = statsModel.stepsData.steps[period] {
                 values = steps
-                labels = statsModel.stepsData.labels
-                average = statsModel.stepsData.average
-                total = statsModel.stepsData.total
+                labels = statsModel.stepsData.labels[period]
+                if let avg = statsModel.stepsData.average {
+                    average = avg[period]
+                }
+                if let tot = statsModel.stepsData.total {
+                    total = tot[period]
+                }
             }
             
         case StatsModel.Attributes.Calories.rawValue:
-            if let calories = statsModel.caloriesData.calories {
+            if let calories = statsModel.caloriesData.calories[period] {
                 values = calories
-                labels = statsModel.caloriesData.labels
-                average = statsModel.caloriesData.average
-                total = statsModel.caloriesData.total
+                labels = statsModel.caloriesData.labels[period]
+                if let avg = statsModel.caloriesData.average {
+                    average = avg[period]
+                }
+                if let tot = statsModel.caloriesData.total {
+                    total = tot[period]
+                }
             }
             
         case StatsModel.Attributes.Distance.rawValue:
-            if let distance = statsModel.distanceData.distance {
+            if let distance = statsModel.distanceData.distance[period] {
                 values = distance
-                labels = statsModel.distanceData.labels
-                average = statsModel.distanceData.average
-                total = statsModel.distanceData.total
+                labels = statsModel.distanceData.labels[period]
+                if let avg = statsModel.distanceData.average {
+                    average = avg[period]
+                }
+                if let tot = statsModel.distanceData.total {
+                    total = tot[period]
+                }
             }
         default:
             break

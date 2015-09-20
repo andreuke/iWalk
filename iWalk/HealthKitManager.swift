@@ -757,20 +757,20 @@ HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRu
                 
                 switch attribute {
                 case RecordsModel.TotalRecordsAttributes.Steps.rawValue:
-                    StatsModel.instance.stepsData.steps = values
-                    StatsModel.instance.stepsData.labels = labels
+                    StatsModel.instance.stepsData.steps[period] = values
+                    StatsModel.instance.stepsData.labels[period] = labels
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.stepsUpdated, object: nil)
                     
                 case RecordsModel.TotalRecordsAttributes.Calories.rawValue:
-                    StatsModel.instance.caloriesData.calories = values
-                    StatsModel.instance.caloriesData.labels = labels
+                    StatsModel.instance.caloriesData.calories[period] = values
+                    StatsModel.instance.caloriesData.labels[period] = labels
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.caloriesUpdated, object: nil)
                     
                 case RecordsModel.TotalRecordsAttributes.Distance.rawValue:
-                    StatsModel.instance.distanceData.distance = values
-                    StatsModel.instance.distanceData.labels = labels
+                    StatsModel.instance.distanceData.distance[period] = values
+                    StatsModel.instance.distanceData.labels[period] = labels
 
                     NSNotificationCenter.defaultCenter().postNotificationName(Notifications.stats.distanceUpdated, object: nil)
                 default:

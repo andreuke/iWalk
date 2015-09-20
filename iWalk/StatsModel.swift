@@ -13,13 +13,15 @@ class StatsModel {
     
     let healthKitManager = HealthKitManager.instance
     
+    
     private init() {
+        
     }
     
     var stepsData = stepsStruct()
     var caloriesData = caloriesStruct()
     var distanceData = distanceStruct()
-
+    
     
     enum Attributes: Int {
         case Steps = 0
@@ -33,97 +35,99 @@ class StatsModel {
         case Year
     }
     
+    func getProva() -> Int {
+        return 0
+    }
+    
     struct stepsStruct {
-        var steps: [Double]?
-        var labels: [String]?
+        var steps = [[Double]?](count : 3, repeatedValue : nil)
+        var labels = [[String]?](count : 3, repeatedValue : nil)
         
-        var average : Int? {
+        var average : [Int]? {
             get {
-                if let _ = steps {
-                    var total = 0.0
-                    for s in steps! {
-                        total += s
-                    }
-                    return Int(round(total/Double(steps!.count)))
-                }
-                return nil
+                return StatsModel.instance.getAverage(steps)
             }
         }
         
-        var total: Int? {
+        var total: [Int]? {
             get {
-                if let _ = steps {
-                    var total = 0.0
-                    for s in steps! {
-                        total += s
-                    }
-                    return Int(total)
-                }
-                return nil
+                return StatsModel.instance.getTotal(steps)
+            }
+            
+        }
+    }
+    
+    
+    
+    struct caloriesStruct {
+        var calories = [[Double]?](count : 3, repeatedValue : nil)
+        var labels = [[String]?](count : 3, repeatedValue : nil)
+        
+        var average : [Int]? {
+            get {
+                return StatsModel.instance.getAverage(calories)
+            }
+        }
+        
+        var total: [Int]? {
+            get {
+                return StatsModel.instance.getTotal(calories)
             }
         }
     }
     
-    struct caloriesStruct {
-        var calories: [Double]?
-        var labels: [String]?
+    struct distanceStruct {
+        var distance = [[Double]?](count : 3, repeatedValue : nil)
+        var labels = [[String]?](count : 3, repeatedValue : nil)
         
-        var average : Int? {
+        var average : [Int]? {
             get {
-                if let _ = calories {
-                    var total = 0.0
-                    for s in calories! {
-                        total += s
-                    }
-                    return Int(round(total/Double(calories!.count)))
-                }
-                return nil
+                return StatsModel.instance.getAverage(distance)
             }
         }
         
-        var total: Int? {
+        var total: [Int]? {
             get {
-                if let _ = calories {
-                    var total = 0.0
-                    for s in calories! {
-                        total += s
-                    }
-                    return Int(total)
-                }
-                return nil
+                return StatsModel.instance.getTotal(distance)
             }
         }
     }
+    
+    func getAverage(values: [[Double]?])-> [Int]? {
+        
+        var returnValues = [Int](count : 3, repeatedValue : 0)
+        
+        for i in 0..<values.count  {
+            if let vPeriod = values[i] {
+                var total = 0.0
+                for v in vPeriod {
+                    total += v
+                }
+                returnValues[i] = Int(round(total/Double(vPeriod.count)))
+            }
+            
+        }
+        return returnValues
+        
+        
+        
+    }
+    
+    func getTotal(values: [[Double]?]) -> [Int]? {
+        
+        var returnValues = [Int](count : 3, repeatedValue : 0)
+        
+        for i in 0..<values.count  {
+            if let vPeriod = values[i] {
+                var total = 0.0
+                for v in vPeriod {
+                    total += v
+                }
+                returnValues[i] = Int(total)
+            }
 
-    struct distanceStruct {
-        var distance: [Double]?
-        var labels: [String]?
-        
-        var average : Int? {
-            get {
-                if let _ = distance {
-                    var total = 0.0
-                    for s in distance! {
-                        total += s
-                    }
-                    return Int(round(total/Double(distance!.count)))
-                }
-                return nil
-            }
         }
-        
-        var total: Int? {
-            get {
-                if let _ = distance {
-                    var total = 0.0
-                    for s in distance! {
-                        total += s
-                    }
-                    return Int(total)
-                }
-                return nil
-            }
-        }
+        return returnValues
     }
     
     
@@ -133,5 +137,6 @@ class StatsModel {
         healthKitManager.periodicAttributeQuery(period, attribute: StatsModel.Attributes.Distance.rawValue)
         
     }
-
+    
 }
+
