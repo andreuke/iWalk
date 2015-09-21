@@ -1,10 +1,10 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.0.0)
+  - CVCalendar (1.1.4)
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0 (~> 2.0.0)
+  - CVCalendar (~> 1.1.4)
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: dcd0e3cf07458875e93f5f0c27a7bac0902c26bb
+  CVCalendar: ebeb7b3cb9eaa2c136ed70ce655f07907fc785d7
 
 COCOAPODS: 0.38.2

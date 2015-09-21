@@ -31,6 +31,7 @@
 		EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */; };
 		EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */; };
 		EFD04DE21BA62B57005196BA /* iWalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6341B99D9170012E081 /* iWalkTests.swift */; };
+		EFD1579B1BAF7A9D00D2D860 /* TodayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD1579A1BAF7A9D00D2D860 /* TodayModel.swift */; };
 		EFDFB40A1BAADCE9007F4778 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */; };
 		EFDFB40E1BAAE04D007F4778 /* PRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDFB40D1BAAE04D007F4778 /* PRLabel.m */; };
 		EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61D1B99D9170012E081 /* AppDelegate.swift */; };
@@ -113,6 +114,7 @@
 		EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatableInformation.swift; sourceTree = "<group>"; };
 		EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		EFD1579A1BAF7A9D00D2D860 /* TodayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayModel.swift; sourceTree = "<group>"; };
 		EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
 		EFDFB40B1BAAE04C007F4778 /* iWalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iWalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFDFB40C1BAAE04D007F4778 /* PRLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PRLabel.h; path = iWalk/PRLabel.h; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				EF5765C31BAC2DAE0091F21F /* CoreDataManager.swift */,
 				EF62E3691BAD7D2600B4C4DD /* RecordsModel.swift */,
 				EF068F6F1BAE2A8F0078CDE3 /* StatsModel.swift */,
+				EFD1579A1BAF7A9D00D2D860 /* TodayModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */,
 				EF5765C41BAC2DAE0091F21F /* CoreDataManager.swift in Sources */,
 				EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */,
+				EFD1579B1BAF7A9D00D2D860 /* TodayModel.swift in Sources */,
 				EFB8F6421BA051030067384C /* MeTableViewCell.swift in Sources */,
 				EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */,
 				EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */,

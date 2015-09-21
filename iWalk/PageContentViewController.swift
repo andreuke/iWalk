@@ -97,13 +97,10 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
     func renderData() {
         attributeLabel.text = attributeString
         rangeLabel.text = rangeString
-        
-        
-        
+       
         guard let period = range else {
             return
         }
-        
         
         var values : [Double]?
         var labels : [String]?

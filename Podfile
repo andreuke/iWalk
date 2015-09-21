@@ -4,7 +4,7 @@ use_frameworks!
 
 
 target 'iWalk' do
-pod 'ActionSheetPicker-3.0', '~> 2.0.0'
+pod 'CVCalendar', '~> 1.1.4'
 end
 
 target 'iWalkTests' do
@@ -14,4 +14,3 @@ end
 target 'iWalkUITests' do
 
 end
-
