@@ -42,6 +42,7 @@
 		EFE3F62A1B99D9170012E081 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFE3F6281B99D9170012E081 /* LaunchScreen.storyboard */; };
 		EFE3F6401B99D9170012E081 /* iWalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F63F1B99D9170012E081 /* iWalkUITests.swift */; };
 		EFE64B0F1BAD945B0018BEC6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE64B0E1BAD945B0018BEC6 /* HealthKit.framework */; };
+		EFFC47181BB060FE00A2422E /* Pedometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFC47171BB060FE00A2422E /* Pedometer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		EFE3F63F1B99D9170012E081 /* iWalkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWalkUITests.swift; sourceTree = "<group>"; };
 		EFE3F6411B99D9170012E081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFE64B0E1BAD945B0018BEC6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		EFFC47171BB060FE00A2422E /* Pedometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pedometer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				EF62E3691BAD7D2600B4C4DD /* RecordsModel.swift */,
 				EF068F6F1BAE2A8F0078CDE3 /* StatsModel.swift */,
 				EFD1579A1BAF7A9D00D2D860 /* TodayModel.swift */,
+				EFFC47171BB060FE00A2422E /* Pedometer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */,
 				EF62E36A1BAD7D2600B4C4DD /* RecordsModel.swift in Sources */,
 				EFE3F61E1B99D9170012E081 /* AppDelegate.swift in Sources */,
+				EFFC47181BB060FE00A2422E /* Pedometer.swift in Sources */,
 				EF5765C81BAC898F0091F21F /* RecordsViewController.swift in Sources */,
 				EF1045AE1BA5F3FB001AD1CC /* PagesViewController.swift in Sources */,
 				EF34C26C1BA6358100561955 /* PageContentViewController.swift in Sources */,

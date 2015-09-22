@@ -23,6 +23,7 @@ class TodayModel {
     
     // MARK: Constants
     let healthKitManager = HealthKitManager.instance
+//    let pedometer = Pedometer.instance
     
     // MARK: Properties
     var stepsCount = 0
@@ -52,6 +53,7 @@ class TodayModel {
     }
     
     func fetchSessionValues() {
-        
+        Pedometer.instance.startPedometer()
+        healthKitManager.currentStepsDistribution()
     }
 }

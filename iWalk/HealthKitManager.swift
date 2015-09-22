@@ -912,18 +912,14 @@ class HealthKitManager {
         let anchorDate = calendar.dateFromComponents(anchorComponents)
         
         var quantityType : HKQuantityType?
-        var option : HKStatisticsOptions?
         
         switch attribute {
         case TodayModel.Attribute.Steps:
             quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
-            option = .CumulativeSum
         case TodayModel.Attribute.Calories:
             quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)
-            option = .CumulativeSum
         case TodayModel.Attribute.Distance:
             quantityType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)
-            option = .CumulativeSum
         }
         
         
@@ -943,7 +939,7 @@ class HealthKitManager {
         // Create the query
         let query = HKStatisticsCollectionQuery(quantityType: quantityType!,
             quantitySamplePredicate: onlyTodayPredicate,
-            options: option!,
+            options: .CumulativeSum,
             anchorDate: anchorDate!,
             intervalComponents: interval)
         
@@ -996,7 +992,6 @@ class HealthKitManager {
     }
     
     func currentStepsDistribution() {
-        let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         
         let interval = NSDateComponents()
@@ -1020,50 +1015,63 @@ class HealthKitManager {
         query.initialResultsHandler = {
             query, results, error in
             
-            if error != nil {
-                // Perform proper error handling here
-                print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
-            }
-            
-            let nowComp = calendar.components([.Day, .Month, .Year], fromDate: date)
-            
-            let midnightComp = NSDateComponents()
-            midnightComp.day = nowComp.day
-            midnightComp.month = nowComp.month
-            midnightComp.year = nowComp.year
-            
-            let midnightDay = calendar.dateFromComponents(midnightComp)
-            midnightComp.day += 1
-            let nextMidnight = calendar.dateFromComponents(midnightComp)
-            
-            
-            
-            var steps = [Double](count:24, repeatedValue: 0.0)            
-            
-            let hourFormatter = NSDateFormatter()
-            hourFormatter.dateFormat = "HH"
-            
-            results!.enumerateStatisticsFromDate(midnightDay!, toDate: nextMidnight!) {
-                statistics, stop in
-                
-                if let quantity = statistics.sumQuantity() {
-                    let date = hourFormatter.stringFromDate(statistics.startDate)
-                    let value = round(quantity.doubleValueForUnit(HKUnit.countUnit()))
-                    
-                    let index = Int(date)
-                    
-                    steps[index!] = value
-                    
-                }
-            }
-            
-            TodayModel.instance.values = steps
-            
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.today.stepsDistributionUpdated, object: nil)
+            self.stepsDistributionHandler(results, error: error)
         }
+        
+        query.statisticsUpdateHandler = {
+            query, stats, results, error in
+            
+            self.stepsDistributionHandler(results, error: error)
+        }
+        
         healthKitStore.executeQuery(query)
+    }
+    
+    func stepsDistributionHandler(results: HKStatisticsCollection?, error: NSError?) {
+        
+        if error != nil {
+            // Perform proper error handling here
+            print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
+            abort()
+        }
+        let calendar = NSCalendar.currentCalendar()
+
+        let nowComp = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
+        
+        let midnightComp = NSDateComponents()
+        midnightComp.day = nowComp.day
+        midnightComp.month = nowComp.month
+        midnightComp.year = nowComp.year
+        
+        let midnightDay = calendar.dateFromComponents(midnightComp)
+        midnightComp.day += 1
+        let nextMidnight = calendar.dateFromComponents(midnightComp)
+        
+        
+        
+        var steps = [Double](count:24, repeatedValue: 0.0)
+        
+        let hourFormatter = NSDateFormatter()
+        hourFormatter.dateFormat = "HH"
+        
+        results!.enumerateStatisticsFromDate(midnightDay!, toDate: nextMidnight!) {
+            statistics, stop in
+            
+            if let quantity = statistics.sumQuantity() {
+                let date = hourFormatter.stringFromDate(statistics.startDate)
+                let value = round(quantity.doubleValueForUnit(HKUnit.countUnit()))
+                
+                let index = Int(date)
+                
+                steps[index!] = value
+                
+            }
+        }
+        
+        TodayModel.instance.values = steps
+        
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.today.stepsDistributionUpdated, object: nil)
     }
     
 }

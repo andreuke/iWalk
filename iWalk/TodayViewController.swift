@@ -21,9 +21,10 @@ class TodayViewController: UIViewController {
     // MARK: Constants
     let healthKitManager = HealthKitManager.instance
     let todayModel = TodayModel.instance
+    let pedometer = Pedometer.instance
     
     // MARK: Variables
-    var sessionMode = false
+    var sessionMode = true
     
     
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class TodayViewController: UIViewController {
         
         loadPage()
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,10 +59,7 @@ class TodayViewController: UIViewController {
     func loadSessionMode() {
         // Notifications Subscription
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.session.stepsUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.session.caloriesUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.session.distanceUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.session.timeUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.session.stepsDistributionUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.today.stepsDistributionUpdated, object: nil)
         
 
         // Queries
@@ -95,14 +94,24 @@ class TodayViewController: UIViewController {
     }
     
     func stopQueries() {
-        // TODO:
+        if(sessionMode) {
+            pedometer.stopAccelerometer()
+        }
+        else {
+            // TODO:
+        }
     }
     
     
     // MARK: Rendering
     func renderSessionData() {
-        // TODO:
-    }
+        stepsLabel.text = String(format: "%.0f", pedometer.steps)
+        caloriesLabel.text = String(format: "%.2f", pedometer.calories)
+        distanceLabel.text = String(format: "%.2f", pedometer.distance)
+        timeLabel.text = stringFromTimeInterval(pedometer.timerSec)
+        if let values = todayModel.values {
+            setChart(todayModel.labels, values: values)
+        }    }
     
     func renderTodayData() {
         stepsLabel.text = "\(todayModel.stepsCount)"
@@ -124,6 +133,9 @@ class TodayViewController: UIViewController {
         let seconds = interval % 60
         let minutes = (interval / 60) % 60
         let hours = (interval / 3600)
+        if sessionMode {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
         return String(format: "%02d:%02d", hours, minutes)
     }
     
