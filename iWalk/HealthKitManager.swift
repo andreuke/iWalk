@@ -40,6 +40,7 @@ class HealthKitManager {
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
             HKQuantityType.workoutType(),
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)!,
             HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!
         )
         
@@ -305,7 +306,7 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
+                //abort()
             }
             
             let statistics = results?.statistics()
@@ -368,7 +369,6 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
             }
             
             let nowComp = calendar.components([.Day, .Month, .Year], fromDate: date)
@@ -438,7 +438,7 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
+                //abort()
             }
             
             let statistics = results?.statistics()
@@ -502,7 +502,6 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
             }
             
             
@@ -580,7 +579,7 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
+//                abort()
             }
             
             let statistics = results?.statistics()
@@ -686,7 +685,7 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-                abort()
+//                abort()
             }
    
             var offset = 0.0
@@ -883,7 +882,7 @@ class HealthKitManager {
             { (sampleQuery, results, error ) -> Void in
                 
                 if let _ = error {
-                    abort()
+//                    abort()
                 }
                 
                 var timeCount = 0.0
@@ -964,7 +963,7 @@ class HealthKitManager {
         if error != nil {
             // Perform proper error handling here
             print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-            abort()
+//            abort()
         }
         
         let stats = results?.statistics()
@@ -1032,7 +1031,7 @@ class HealthKitManager {
         if error != nil {
             // Perform proper error handling here
             print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
-            abort()
+//            abort()
         }
         let calendar = NSCalendar.currentCalendar()
 
@@ -1072,6 +1071,55 @@ class HealthKitManager {
         
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.today.stepsDistributionUpdated, object: nil)
+    }
+    
+    // MARK: Workout
+    func saveSession(steps: Double, distance: Double, calories: Double, time: Double, startDate: NSDate) {
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorieUnit(),
+            doubleValue: calories)
+        
+        let distance = HKQuantity(unit: HKUnit.mileUnit(),
+            doubleValue: distance)
+        
+        let endDate = NSDate()
+        
+        // Provide summary information when creating the workout.
+        let walk = HKWorkout(activityType: HKWorkoutActivityType.Walking,
+            startDate: startDate, endDate: endDate, duration: time,
+            totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
+        
+        // Save the workout before adding detailed samples.
+        healthKitStore.saveObject(walk) { (success, error) -> Void in
+            if !success {
+                // Perform proper error handling here...
+                print("*** An error occurred while saving the workout")
+//                abort()
+            }
+            
+            let stepsType =
+            HKObjectType.quantityTypeForIdentifier(
+                HKQuantityTypeIdentifierStepCount)
+            
+            let stepsQuantity = HKQuantity(unit: HKUnit.countUnit(),
+                doubleValue: steps)
+            
+            let stepsSample =
+            HKQuantitySample(type: stepsType!, quantity: stepsQuantity,
+                startDate: startDate, endDate: endDate)
+            
+            
+            // Continue adding detailed samples...
+            
+            // Add all the samples to the workout.
+            self.healthKitStore.addSamples([stepsSample],
+                toWorkout: walk) { (success, error) -> Void in
+                    if !success {
+                        // Perform proper error handling here...
+                        print("*** An error occurred while adding a sample to the workout")
+                        abort()
+                    }
+            }
+        }
     }
     
 }

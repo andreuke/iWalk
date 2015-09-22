@@ -20,11 +20,10 @@ class RecordsContentViewControllerSecondType: RecordsContentViewController {
         
         renderData()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.totalRecords.stepsUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.totalRecords.caloriesUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.totalRecords.distanceUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.totalRecords.stepsUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.totalRecords.caloriesUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.totalRecords.distanceUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
 
-        // Do any additional setup after loading the view.
     }
     
     deinit {
@@ -34,6 +33,10 @@ class RecordsContentViewControllerSecondType: RecordsContentViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func renderData(notification: NSNotification) {
+        renderData()
     }
     
     func renderData() {

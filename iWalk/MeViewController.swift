@@ -35,11 +35,13 @@ class MeViewController: UIViewController {
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateWeight", name: Notifications.weightUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHeight", name: Notifications.heightUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBmi", name: Notifications.bmiUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateChart", name: Notifications.weightHistoryUpdated, object: nil)
+
         
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.weightUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.heightUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.bmiUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.weightHistoryUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
         
         userInfo.fetchAllInfo()
     }
@@ -62,18 +64,18 @@ class MeViewController: UIViewController {
     }
     
     func updateWeight() {
-        if let weightString = userInfo.attributeString(UserInfo.Attribute.Weight.rawValue) {
-        let weightStringNoKilo = weightString.substringWithRange(Range<String.Index>(start: weightString.startIndex, end: advance((weightString.endIndex),-3)))
-        self.weightLabel.text = weightStringNoKilo
+            if let weightString = self.userInfo.attributeString(UserInfo.Attribute.Weight.rawValue) {
+                let weightStringNoKilo = weightString.substringWithRange(Range<String.Index>(start: weightString.startIndex, end: advance((weightString.endIndex),-3)))
+                self.weightLabel.text = weightStringNoKilo
         }
     }
     
     func updateHeight() {
         if let heightString = userInfo.attributeString(UserInfo.Attribute.Height.rawValue) {
-        let heightStringNoCm = heightString.substringWithRange(Range<String.Index>(start: heightString.startIndex, end: advance((heightString.endIndex),-3)))
-        self.heightLabel.text = heightStringNoCm
+            let heightStringNoCm = heightString.substringWithRange(Range<String.Index>(start: heightString.startIndex, end: advance((heightString.endIndex),-3)))
+            self.heightLabel.text = heightStringNoCm
         }
-
+        
     }
     
     func updateBmi() {
@@ -84,11 +86,11 @@ class MeViewController: UIViewController {
     }
     
     func updateChart() {
-        if let values = userInfo.weightHistoryValues {
-            let labels = userInfo.weightHistoryDates
-            
-            setChart(labels!, values: values)
-        }
+            if let values = self.userInfo.weightHistoryValues {
+                let labels = self.userInfo.weightHistoryDates
+                
+                self.setChart(labels!, values: values)
+            }
     }
     
     func setChart(dataPoints: [NSDate], values: [Double]) {
@@ -99,7 +101,7 @@ class MeViewController: UIViewController {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
             dataEntries.append(dataEntry)
         }
-//
+        //
         let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
         let chartData = LineChartData(xVals: dataPoints, dataSet: chartDataSet)
         barChartView.data = chartData
@@ -118,7 +120,7 @@ class MeViewController: UIViewController {
         
         barChartView.descriptionText = ""
         barChartView.xAxis.labelPosition = .Bottom
-//        barChartView.xAxis.setLabelsToSkip(10)
+        //        barChartView.xAxis.setLabelsToSkip(10)
         barChartView.xAxis.drawGridLinesEnabled = false
         barChartView.xAxis.avoidFirstLastClippingEnabled = true
         
@@ -137,13 +139,17 @@ class MeViewController: UIViewController {
         
     }
     
+    func renderData(notification: NSNotification) {
+        renderData()
+    }
+    
     func renderData() {
         self.updateHeight()
         self.updateWeight()
         self.updateBmi()
         self.updateChart()
     }
-
+    
     
     
     

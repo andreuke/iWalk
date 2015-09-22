@@ -31,8 +31,8 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         
         
         // Subscribe to Notification Center
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTable", name: Notifications.weightUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTable", name: Notifications.heightUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.weightUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: reloadTable)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.heightUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: reloadTable)
         
         // Retrieve data to visualize
         fetchUserInfo()
@@ -201,6 +201,10 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         
         
         return cell
+    }
+    
+    func reloadTable(notification: NSNotification) {
+        reloadTable()
     }
     
     func reloadTable() {

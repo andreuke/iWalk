@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -39,11 +40,49 @@
                                         <color key="textColor" red="0.0" green="0.40000000000000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spU-Gh-VDP" customClass="KDCircularProgress" customModule="iWalk" customModuleProvider="target">
+                                        <rect key="frame" x="163" y="0.0" width="236" height="236"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="spU-Gh-VDP" secondAttribute="height" multiplier="1:1" id="9NX-JB-atZ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                                                <integer key="value" value="75"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                                                <integer key="value" value="-90"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="progressThickness">
+                                                <real key="value" value="0.20000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="trackThickness">
+                                                <real key="value" value="0.10000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="glowAmount">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="IBColor1">
+                                                <color key="value" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="trackColor">
+                                                <color key="value" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="IBColor2">
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.88147101751315793" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="spU-Gh-VDP" secondAttribute="bottom" id="AOT-2V-eq1"/>
                                     <constraint firstItem="dsH-Pe-p7k" firstAttribute="centerX" secondItem="ZIe-LC-epX" secondAttribute="centerX" id="Bx5-b6-500"/>
+                                    <constraint firstItem="spU-Gh-VDP" firstAttribute="top" secondItem="ZIe-LC-epX" secondAttribute="top" id="Wtl-sw-6mP"/>
                                     <constraint firstItem="dsH-Pe-p7k" firstAttribute="centerY" secondItem="ZIe-LC-epX" secondAttribute="centerY" id="ak3-5S-5Rh"/>
+                                    <constraint firstItem="spU-Gh-VDP" firstAttribute="centerX" secondItem="ZIe-LC-epX" secondAttribute="centerX" id="rJM-Xa-kvF"/>
+                                    <constraint firstItem="spU-Gh-VDP" firstAttribute="centerY" secondItem="ZIe-LC-epX" secondAttribute="centerY" id="sgU-FA-6er"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJ9-F6-uwl">
@@ -60,7 +99,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FhL-lt-MqA" customClass="BarChartView" customModule="Charts">
                                 <rect key="frame" x="20" y="411" width="560" height="120"/>
-                                <color key="backgroundColor" red="0.86881309747695923" green="0.98945504426956177" blue="0.86560451984405518" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="0.33000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Mgr-Vf-NeL"/>
                                 </constraints>
@@ -107,6 +146,7 @@
                         <outlet property="barChartView" destination="FhL-lt-MqA" id="aZq-cf-sAh"/>
                         <outlet property="caloriesLabel" destination="abi-4V-sdQ" id="Bwq-zi-WGt"/>
                         <outlet property="distanceLabel" destination="DDe-P7-Lsc" id="P9Q-DC-rge"/>
+                        <outlet property="navigationBar" destination="5Xh-kP-Hh4" id="yru-aR-APG"/>
                         <outlet property="stepsLabel" destination="dsH-Pe-p7k" id="o79-kH-V4N"/>
                         <outlet property="timeLabel" destination="iJ9-F6-uwl" id="pug-xU-1d1"/>
                     </connections>

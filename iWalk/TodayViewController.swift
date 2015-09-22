@@ -17,6 +17,8 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var stepsLabel: UILabel!
     @IBOutlet weak var barChartView: BarChartView!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
     
     // MARK: Constants
     let healthKitManager = HealthKitManager.instance
@@ -24,8 +26,9 @@ class TodayViewController: UIViewController {
     let pedometer = Pedometer.instance
     
     // MARK: Variables
-    var sessionMode = true
-    
+    var sessionMode = false
+    var subscriptions = [NSObjectProtocol]()
+    var timer : NSTimer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +60,18 @@ class TodayViewController: UIViewController {
     }
     
     func loadSessionMode() {
-        // Notifications Subscription
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.session.stepsUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderSessionData", name:  Notifications.today.stepsDistributionUpdated, object: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveSession")
+        let cancelButton =  UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "changeMode")
         
+        navigationBar.title = "Live Session"
+        navigationBar.rightBarButtonItem = doneButton
+        navigationBar.leftBarButtonItem = cancelButton
+        
+        // Notifications Subscription
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.session.stepsUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderSessionData))
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.stepsDistributionUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderSessionData))
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "renderSessionData", userInfo: nil, repeats: true)
 
         // Queries
         todayModel.fetchSessionValues()
@@ -70,12 +81,19 @@ class TodayViewController: UIViewController {
     }
     
     func loadTodayMode() {
+        let sessionButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "changeMode")
+
+        navigationBar.title = "Today"
+        navigationBar.rightBarButtonItem = sessionButton
+        navigationBar.leftBarButtonItem = nil
+        
+        
         // Notifications Subscription
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderTodayData", name:  Notifications.today.stepsUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderTodayData", name:  Notifications.today.caloriesUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderTodayData", name:  Notifications.today.distanceUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderTodayData", name: Notifications.today.timeUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderTodayData", name: Notifications.today.stepsDistributionUpdated, object: nil)
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.stepsUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderTodayData))
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.caloriesUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderTodayData))
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.distanceUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderTodayData))
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.timeUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderTodayData))
+        subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.stepsDistributionUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderTodayData))
         
         // Queries
         todayModel.fetchTodayValues()
@@ -86,9 +104,11 @@ class TodayViewController: UIViewController {
     
     // MARK: Change Mode
     func changeMode() {
+        unsubscribe()
         stopQueries()
-        todayModel.resetCounters()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        if let _ = timer {
+            timer?.invalidate()
+        }
         sessionMode = !sessionMode
         loadPage()
     }
@@ -102,8 +122,24 @@ class TodayViewController: UIViewController {
         }
     }
     
+    func unsubscribe() {
+        for s in subscriptions {
+            NSNotificationCenter.defaultCenter().removeObserver(s)
+        }
+        subscriptions.removeAll()
+    }
+    
+    func saveSession() {
+        pedometer.saveSession()
+        changeMode()
+    }
+    
     
     // MARK: Rendering
+    func renderSessionData(notification: NSNotification) {
+        renderSessionData()
+    }
+    
     func renderSessionData() {
         stepsLabel.text = String(format: "%.0f", pedometer.steps)
         caloriesLabel.text = String(format: "%.2f", pedometer.calories)
@@ -112,6 +148,10 @@ class TodayViewController: UIViewController {
         if let values = todayModel.values {
             setChart(todayModel.labels, values: values)
         }    }
+    
+    func renderTodayData(notification: NSNotification) {
+        renderTodayData()
+    }
     
     func renderTodayData() {
         stepsLabel.text = "\(todayModel.stepsCount)"
@@ -136,7 +176,7 @@ class TodayViewController: UIViewController {
         if sessionMode {
             return String(format: "%02d:%02d", minutes, seconds)
         }
-        return String(format: "%02d:%02d", hours, minutes)
+        return String(format: "%dh:%dm", hours, minutes)
     }
     
     

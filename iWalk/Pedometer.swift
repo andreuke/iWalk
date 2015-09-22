@@ -23,7 +23,7 @@ class Pedometer {
         didSet {
             if let heightSample = UserInfo.instance.height?.value {
                 let height = healthKitManager.heightDoubleFromSample(heightSample)
-                distance = 0.414 * height * steps / 1000.0 / 1000.0
+                distance = 0.414 * height * steps / 1000.0 / 100.0
                 
                 if let weightSample = UserInfo.instance.weight?.value {
                     let hours = timerSec/60.0/60.0
@@ -65,8 +65,8 @@ class Pedometer {
     let Z = 2
     
     
-    let MIN_INTERVAL : Int
-    let MAX_INTERVAL : Int
+    var MIN_INTERVAL : Int
+    var MAX_INTERVAL : Int
     
     // MARK: Variables
     var max_candidate = [Int](count: 3, repeatedValue: 0)
@@ -129,16 +129,22 @@ class Pedometer {
 //                print(self.steps)
                 
                 
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    // update UI here
-                }
-                
             }
         }
 
     }
     
     func resetValues() {
+        MIN_INTERVAL = Int(FREQUENCY/Double(MAX_STEPS_PER_SECOND))
+        MAX_INTERVAL = Int(FREQUENCY/MIN_STEPS_PER_SECOND)
+        old = [[Int]](count: FILTER_SIZE - 1, repeatedValue: [Int](count: 3, repeatedValue: 0))
+        
+        steps = 0.0
+        calories = 0.0
+        distance = 0.0
+        timerSec = 0.0
+        
+        
         for i in 0..<3 {
             max_candidate[i] = -1000000
             min_candidate[i] = 1000000
@@ -292,5 +298,10 @@ class Pedometer {
     
     func stopAccelerometer() {
         coreMotionManager.stopAccelerometerUpdates()
+        resetValues()
+    }
+    
+    func saveSession() {
+        healthKitManager.saveSession(steps, distance: distance, calories: calories, time: timerSec, startDate: startTime!)
     }
 }

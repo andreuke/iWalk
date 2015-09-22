@@ -21,6 +21,7 @@
 		EF8630F21BA749BA008B5D3B /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */; };
 		EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF8D30FF1BABA80C0082C38B /* CoreDataModel.xcdatamodeld */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
+		EFA0E3361BB1705D0094345D /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */; };
 		EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */; };
 		EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */; };
 		EFAB07BE1BAF03D6000CC1AE /* ClickableRangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */; };
@@ -106,6 +107,7 @@
 		EF8630F11BA749BA008B5D3B /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		EF8D31001BABA80C0082C38B /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerSecondType.swift; sourceTree = "<group>"; };
 		EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerFirstType.swift; sourceTree = "<group>"; };
 		EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableRangeLabel.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */,
 				EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */,
 				EFDFB40B1BAAE04C007F4778 /* iWalk-Bridging-Header.h */,
+				EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				EFDFB40A1BAADCE9007F4778 /* ClickableLabel.swift in Sources */,
 				EF033CDF1BA1D528003198CD /* InfoTextField.swift in Sources */,
 				EFB8F6401B9FB0180067384C /* MyBodyViewController.swift in Sources */,
+				EFA0E3361BB1705D0094345D /* KDCircularProgress.swift in Sources */,
 				EFE3F6201B99D9170012E081 /* MeViewController.swift in Sources */,
 				EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */,
 				EFDFB40E1BAAE04D007F4778 /* PRLabel.m in Sources */,

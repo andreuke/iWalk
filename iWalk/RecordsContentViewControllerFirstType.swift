@@ -32,15 +32,15 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.mostStepsInADay.dayAndValueUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.mostStepsInADay.hoursUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.averageDailySteps.valueUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.averageDailySteps.hoursUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.mostStepsInADay.dayAndValueUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.mostStepsInADay.hoursUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.averageDailySteps.valueUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.averageDailySteps.hoursUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
         
         
         titleLabel.text = Constants.titleStrings[self.index]
         renderData()
-    
+        
         
     }
     
@@ -55,18 +55,22 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
     }
     
     // MARK: Actions
+    func renderData(notification: NSNotification) {
+        renderData()
+    }
+    
     func renderData() {
-        switch index {
+        switch self.index {
         case Constants.Most:
             if let day = self.recordsModel.mostStepsInADay.day {
-                self.descriptionLabel.text = stringFromDate(day)
+                self.descriptionLabel.text = self.stringFromDate(day)
             }
             if let value = self.recordsModel.mostStepsInADay.value {
                 self.valueLabel.text = String(value)
             }
             if let steps = self.recordsModel.mostStepsInADay.steps {
                 let labels = self.recordsModel.mostStepsInADay.hours
-                setChart(labels, values: steps)
+                self.setChart(labels, values: steps)
             }
         case Constants.Average:
             self.descriptionLabel.text = ""
@@ -75,12 +79,11 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
             }
             if let steps = self.recordsModel.averageDailySteps.steps {
                 let labels = self.recordsModel.averageDailySteps.hours
-                setChart(labels, values: steps)
+                self.setChart(labels, values: steps)
             }
         default:
             return
         }
-
     }
     
     func stringFromDate(date: NSDate) -> String {
@@ -124,7 +127,7 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
         barChartView.rightAxis.enabled = false
         barChartView.leftAxis.labelCount = 3
         
-
+        
         barChartView.legend.enabled = false
         barChartView.drawValueAboveBarEnabled = false
         barChartView.gridBackgroundColor = UIColor.whiteColor()

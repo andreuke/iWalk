@@ -77,11 +77,11 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         statsModel.fetchAllData(Constants.Week)
         statsModel.fetchAllData(Constants.Month)
         statsModel.fetchAllData(Constants.Year)
+       
         
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.stats.stepsUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.stats.caloriesUpdated, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "renderData", name: Notifications.stats.distanceUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.stats.stepsUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.stats.caloriesUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
+        NSNotificationCenter.defaultCenter().addObserverForName(Notifications.stats.distanceUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderData)
         
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -94,6 +94,9 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         super.didReceiveMemoryWarning()
     }
     
+    func renderData(notification: NSNotification) {
+        renderData()
+    }
     func renderData() {
         attributeLabel.text = attributeString
         rangeLabel.text = rangeString
