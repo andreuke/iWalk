@@ -61,3 +61,21 @@ extension Int {
     }
 }
 
+// MARK: Matrix Implementation
+struct Matrix2D<KeyElem:Hashable, Value> {
+    
+    var _storage:[KeyElem:[KeyElem:Value]] = [:]
+    
+    subscript(x:KeyElem, y:KeyElem) -> Value? {
+        get {
+            return _storage[x]?[y]
+        }
+        set(val) {
+            if _storage[x] == nil {
+                _storage[x] = [:]
+            }
+            _storage[x]![y] = val
+        }
+    }
+}
+

@@ -57,6 +57,7 @@ class Pedometer {
         }
     }
     
+  
     // MARK: Constants
     let FILTER_SIZE = 4           // shift-register dimension for digital filter
     let NOISE_QUANTITY = 10
@@ -84,7 +85,7 @@ class Pedometer {
     var result = [Int](count: 3, repeatedValue: 0)       // new values
     
 //    var old : [[Int]]
-    var old = Array<Array<Int>>()
+    var old = Matrix2D<Int, Int>()
     
     var samples = 0                // number of samples acquired
     var interval = 0              // interval between a step and the next one
@@ -99,7 +100,6 @@ class Pedometer {
     private init() {
         MIN_INTERVAL = Int(FREQUENCY/Double(MAX_STEPS_PER_SECOND))
         MAX_INTERVAL = Int(FREQUENCY/MIN_STEPS_PER_SECOND)
-        old = [[Int]](count: FILTER_SIZE - 1, repeatedValue: [Int](count: 3, repeatedValue: 0))
     }
     
    
@@ -144,7 +144,7 @@ class Pedometer {
     func resetValues() {
         MIN_INTERVAL = Int(FREQUENCY/Double(MAX_STEPS_PER_SECOND))
         MAX_INTERVAL = Int(FREQUENCY/MIN_STEPS_PER_SECOND)
-        old = [[Int]](count: FILTER_SIZE - 1, repeatedValue: [Int](count: 3, repeatedValue: 0))
+//        old = [[Int]](count: FILTER_SIZE - 1, repeatedValue: [Int](count: 3, repeatedValue: 0))
         
         steps = 0.0
         calories = 0.0
@@ -161,9 +161,9 @@ class Pedometer {
             active[i] = false
             result[i] = 0
             
-            old[i][X] = 0
-            old[i][Y] = 0
-            old[i][Z] = 0
+            old[i,X] = 0
+            old[i,Y] = 0
+            old[i,Z] = 0
         }
     }
     
@@ -177,7 +177,7 @@ class Pedometer {
         for i in 0..<3 {
             var sum = result[i]
             for j in 0..<buffer_filling-1 {
-                sum += old[j][i]
+                sum += old[j,i]!
             }
             result[i] = Int(Double(sum)/Double(buffer_filling))
         }
@@ -232,9 +232,9 @@ class Pedometer {
     // Updates the shift register used for digital filter
     func shift_register_update() {
         for i in 0..<3 {
-            old[2][i] = old[1][i]
-            old[1][i] = old[0][i]
-            old[0][i] = result[i]
+            old[2,i] = old[1,i]
+            old[1,i] = old[0,i]
+            old[0,i] = result[i]
 
         }
     }
@@ -263,18 +263,18 @@ class Pedometer {
     // Recognize the biggest difference of acceleration among the three axis
     func most_active_axis_detection() {
         if(active[X] &&
-            abs(result[X] - old[0][X]) >= abs(result[Y] - old[0][Y]) &&
-            abs(result[X] - old[0][X]) >= abs(result[Z] - old[0][Z])) {
+            abs(result[X] - old[0,X]!) >= abs(result[Y] - old[0,Y]!) &&
+            abs(result[X] - old[0,X]!) >= abs(result[Z] - old[0,Z]!)) {
                 most_active = X
         }
         else if(active[Y] &&
-            abs(result[Y] - old[0][Y]) >= abs(result[X] - old[0][X]) &&
-            abs(result[Y] - old[0][Y]) >= abs(result[Z] - old[0][Z])) {
+            abs(result[Y] - old[0,Y]!) >= abs(result[X] - old[0,X]!) &&
+            abs(result[Y] - old[0,Y]!) >= abs(result[Z] - old[0,Z]!)) {
                 most_active = Y
         }
         else if(active[Z] &&
-            abs(result[Z] - old[0][Z]) >= abs(result[Y] - old[0][Y]) &&
-            abs(result[Z] - old[0][Z]) >= abs(result[X] - old[0][X])) {
+            abs(result[Z] - old[0,Z]!) >= abs(result[Y] - old[0,Y]!) &&
+            abs(result[Z] - old[0,Z]!) >= abs(result[X] - old[0,X]!)) {
                 most_active = Z
         }
         else {
@@ -290,9 +290,9 @@ class Pedometer {
     // Implements the step recognition logic
     func step_recognition() {
         if(0 <= most_active && most_active <= 2) {
-            if(old[0][most_active] > threshold[most_active] &&
+            if(old[0,most_active]! > threshold[most_active] &&
                 threshold[most_active] > result[most_active]) &&
-                    abs(old[0][most_active] - result[most_active]) > NOISE_QUANTITY {                  // recognize a negative slope threshold cross
+                    abs(old[0,most_active]! - result[most_active]) > NOISE_QUANTITY {                  // recognize a negative slope threshold cross
                     if (interval >= MIN_INTERVAL) {                                 // ignore steps faster than one every 200ms
                         if(interval <= MAX_INTERVAL)  {                                     // ignore steps slower than one every 2s
                             steps++
