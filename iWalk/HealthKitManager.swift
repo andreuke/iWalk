@@ -309,6 +309,7 @@ class HealthKitManager {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
                 //abort()
+                return
             }
             
             let statistics = results?.statistics()
@@ -441,6 +442,7 @@ class HealthKitManager {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
                 //abort()
+                return
             }
             
             let statistics = results?.statistics()
@@ -504,6 +506,7 @@ class HealthKitManager {
             if error != nil {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
+                return
             }
             
             
@@ -582,6 +585,7 @@ class HealthKitManager {
                 // Perform proper error handling here
                 print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
 //                abort()
+                return
             }
             
             let statistics = results?.statistics()

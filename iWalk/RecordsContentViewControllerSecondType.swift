@@ -41,13 +41,13 @@ class RecordsContentViewControllerSecondType: RecordsContentViewController {
     
     func renderData() {
         if let steps = recordsModel.totalLifetimeRecords.steps {
-            stepsLabel.text = String(steps)
+            stepsLabel.text = steps.addSpaceSeparator
         }
         if let calories = recordsModel.totalLifetimeRecords.calories {
-            caloriesLabel.text = String(calories)
+            caloriesLabel.text = calories.addSpaceSeparator
         }
         if let distance = recordsModel.totalLifetimeRecords.distance {
-            distanceLabel.text = String(distance)
+            distanceLabel.text = distance.addSpaceSeparator
         }
     }
 }

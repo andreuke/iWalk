@@ -66,7 +66,7 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
                 self.descriptionLabel.text = self.stringFromDate(day)
             }
             if let value = self.recordsModel.mostStepsInADay.value {
-                self.valueLabel.text = String(value)
+                self.valueLabel.text = value.addSpaceSeparator
             }
             if let steps = self.recordsModel.mostStepsInADay.steps {
                 let labels = self.recordsModel.mostStepsInADay.hours
@@ -75,7 +75,7 @@ class RecordsContentViewControllerFirstType: RecordsContentViewController {
         case Constants.Average:
             self.descriptionLabel.text = ""
             if let value = self.recordsModel.averageDailySteps.value {
-                self.valueLabel.text = String(value)
+                self.valueLabel.text = value.addSpaceSeparator
             }
             if let steps = self.recordsModel.averageDailySteps.steps {
                 let labels = self.recordsModel.averageDailySteps.hours

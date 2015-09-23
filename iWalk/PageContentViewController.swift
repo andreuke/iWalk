@@ -152,7 +152,7 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         if let _ = average {
             if(attribute == 0 || attribute == 1) {
-                averageLabel.text = String(Int(average!))
+                averageLabel.text = Int(average!).addSpaceSeparator
             }
             else {
                 averageLabel.text = String(format: "%.1f", average!)
@@ -161,7 +161,7 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         if let _ = total {
             if(attribute == 0 || attribute == 1) {
-                totalLabel.text = String(Int(total!))
+                totalLabel.text = Int(total!).addSpaceSeparator
             }
             else {
                 totalLabel.text = String(format: "%.1f", total!)

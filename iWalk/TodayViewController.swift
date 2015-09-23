@@ -302,7 +302,7 @@ class TodayViewController: UIViewController {
             goal = todayModel.goal
         }
         goalLabel.text = ""
-        goalLabel.placeholder = "Goal: " + String(format:"%.0f", goal)
+        goalLabel.placeholder = "Goal: " + Int(goal).addSpaceSeparator
     }
     
     
