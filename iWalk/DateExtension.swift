@@ -30,7 +30,21 @@ extension NSDate {
         
         let birthDayString = dateFormatter.stringFromDate(self)
         return "\(birthDayString) (\(age))"
-
         
+        
+    }
+    
+    func isToday() -> Bool{
+        let cal = NSCalendar.currentCalendar()
+        var components = cal.components([.Day, .Month, .Year, .Era], fromDate: NSDate())
+        let today = cal.dateFromComponents(components)!
+        
+        components = cal.components([.Day, .Month, .Year, .Era], fromDate:self);
+        let otherDate = cal.dateFromComponents(components)!
+        
+        if(today.isEqualToDate(otherDate)) {
+            return true
+        }
+        return false
     }
 }

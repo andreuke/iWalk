@@ -14,22 +14,25 @@ class TodayModel {
     case Calories, Distance
     }
     
-    
     static let instance = TodayModel()
     
     private init() {
-        
     }
     
     // MARK: Constants
     let healthKitManager = HealthKitManager.instance
-//    let pedometer = Pedometer.instance
+    let coreDataManager = CoreDataManager.instance
     
     // MARK: Properties
     var stepsCount = 0
     var caloriesCount = 0.0
     var distanceCount = 0.0
     var timeCount : NSTimeInterval?
+    var goal = 10000.0 {
+        didSet {
+            self.saveGoal(goal)
+        }
+    }
     
         // Graph
     var values : [Double]?
@@ -42,10 +45,26 @@ class TodayModel {
         healthKitManager.currentDistance()
         healthKitManager.currentTime()
         healthKitManager.currentStepsDistribution()
+
+        if let g = coreDataManager.fetchTodayGoal() {
+            goal = g
+        }
     }
     
     func fetchSessionValues() {
         Pedometer.instance.startPedometer()
         healthKitManager.currentStepsDistribution()
+        
+        if let g = coreDataManager.fetchSessionGoal() {
+            Pedometer.instance.goal = g
+        }
+    }
+    
+    func stopQueries() {
+        healthKitManager.stopQueries()
+    }
+    
+    func saveGoal(goal: Double) {
+        coreDataManager.persistTodayGoal(goal)
     }
 }

@@ -13,6 +13,8 @@ class HealthKitManager {
     static let instance = HealthKitManager()
     let healthKitStore:HKHealthStore = HKHealthStore()
     
+    var realTimeQueries = [HKQuery]()
+    
     
     private init() {
     }
@@ -883,6 +885,8 @@ class HealthKitManager {
                 
                 if let _ = error {
 //                    abort()
+                    return
+                    
                 }
                 
                 var timeCount = 0.0
@@ -895,6 +899,9 @@ class HealthKitManager {
                 
 
         }
+        
+        realTimeQueries.append(sampleQuery)
+        
         // 5. Execute the Query
         self.healthKitStore.executeQuery(sampleQuery)
     }
@@ -955,9 +962,11 @@ class HealthKitManager {
             
             self.todayHandler(results, error: error, attribute: attribute)
         }
+        
+        realTimeQueries.append(query)
+        
         healthKitStore.executeQuery(query)
     }
-
     
     func todayHandler(results: HKStatisticsCollection?, error: NSError?, attribute: TodayModel.Attribute) {
         if error != nil {
@@ -1023,6 +1032,8 @@ class HealthKitManager {
             self.stepsDistributionHandler(results, error: error)
         }
         
+        realTimeQueries.append(query)
+        
         healthKitStore.executeQuery(query)
     }
     
@@ -1032,6 +1043,7 @@ class HealthKitManager {
             // Perform proper error handling here
             print("*** An error occurred while calculating the statistics: \(error!.localizedDescription) ***")
 //            abort()
+            return
         }
         let calendar = NSCalendar.currentCalendar()
 
@@ -1073,8 +1085,15 @@ class HealthKitManager {
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.today.stepsDistributionUpdated, object: nil)
     }
     
+    func stopQueries() {
+        for q in realTimeQueries {
+            healthKitStore.stopQuery(q)
+        }
+        realTimeQueries.removeAll()
+    }
+    
     // MARK: Workout
-    func saveSession(steps: Double, distance: Double, calories: Double, time: Double, startDate: NSDate) {
+    func saveSession(steps: Double, distance: Double, calories: Double, seconds: Double, startDate: NSDate) {
         let energyBurned = HKQuantity(unit: HKUnit.kilocalorieUnit(),
             doubleValue: calories)
         
@@ -1083,9 +1102,11 @@ class HealthKitManager {
         
         let endDate = NSDate()
         
+        let minutes = seconds/60
+        
         // Provide summary information when creating the workout.
         let walk = HKWorkout(activityType: HKWorkoutActivityType.Walking,
-            startDate: startDate, endDate: endDate, duration: time,
+            startDate: startDate, endDate: endDate, duration: minutes,
             totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
         
         // Save the workout before adding detailed samples.
@@ -1107,17 +1128,21 @@ class HealthKitManager {
             HKQuantitySample(type: stepsType!, quantity: stepsQuantity,
                 startDate: startDate, endDate: endDate)
             
+            var samples = [HKSample]()
+            samples.append(stepsSample)
             
             // Continue adding detailed samples...
             
             // Add all the samples to the workout.
-            self.healthKitStore.addSamples([stepsSample],
+            self.healthKitStore.addSamples(samples,
                 toWorkout: walk) { (success, error) -> Void in
+                    
                     if !success {
                         // Perform proper error handling here...
                         print("*** An error occurred while adding a sample to the workout")
-                        abort()
+                        //abort()
                     }
+                    print("Steps samples added to workout")
             }
         }
     }

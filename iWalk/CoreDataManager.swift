@@ -58,6 +58,34 @@ class CoreDataManager {
         return nil
     }
     
+    func fetchTodayGoal() -> Double?{
+        if let results = fetchData("TodayGoal") {
+            if let goal = results[results.endIndex-1].valueForKey("value") as? Double {
+                let latestUpdate = results[results.endIndex-1].valueForKey("latestUpdate") as! NSDate
+                if(latestUpdate.isToday()) {
+                    return goal
+                }
+                return nil
+            }
+        }
+        
+        return nil
+    }
+    
+    func fetchSessionGoal() -> Double? {
+        if let results = fetchData("SessionGoal") {
+            if let goal = results[results.endIndex-1].valueForKey("value") as? Double {
+                let latestUpdate = results[results.endIndex-1].valueForKey("latestUpdate") as! NSDate
+                if(latestUpdate.isToday()) {
+                    return goal
+                }
+                return nil
+            }
+        }
+        
+        return nil
+    }
+    
     func fetchData(key: String) -> [NSManagedObject]? {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -94,6 +122,14 @@ class CoreDataManager {
     
     func persistWeight(weight: Double) {
         persistData("Weight", value: weight)
+    }
+    
+    func persistTodayGoal(goal: Double) {
+        persistData("TodayGoal", value: goal)
+    }
+    
+    func persistSessionGoal(goal: Double) {
+        persistData("SessionGoal", value: goal)
     }
     
     func persistData(key: String, value: AnyObject) {

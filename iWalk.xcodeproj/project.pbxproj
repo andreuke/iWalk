@@ -22,6 +22,7 @@
 		EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF8D30FF1BABA80C0082C38B /* CoreDataModel.xcdatamodeld */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
 		EFA0E3361BB1705D0094345D /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */; };
+		EFA0E33A1BB202A90094345D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0E3391BB202A90094345D /* TabBarController.swift */; };
 		EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */; };
 		EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */; };
 		EFAB07BE1BAF03D6000CC1AE /* ClickableRangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */; };
@@ -108,6 +109,7 @@
 		EF8D31001BABA80C0082C38B /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
+		EFA0E3391BB202A90094345D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerSecondType.swift; sourceTree = "<group>"; };
 		EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerFirstType.swift; sourceTree = "<group>"; };
 		EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableRangeLabel.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */,
 				EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */,
 				EF5765C71BAC898F0091F21F /* RecordsViewController.swift */,
+				EFA0E3391BB202A90094345D /* TabBarController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */,
 				EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */,
 				EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */,
+				EFA0E33A1BB202A90094345D /* TabBarController.swift in Sources */,
 				EF5765C41BAC2DAE0091F21F /* CoreDataManager.swift in Sources */,
 				EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */,
 				EFD1579B1BAF7A9D00D2D860 /* TodayModel.swift in Sources */,

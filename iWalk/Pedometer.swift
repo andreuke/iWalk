@@ -16,6 +16,7 @@ class Pedometer {
     let todayModel = TodayModel.instance
     let healthKitManager = HealthKitManager.instance
     let coreMotionManager = CMMotionManager()
+    let coreDataManager = CoreDataManager.instance
     
     // MARK: Attributes
     var steps = 0.0
@@ -50,6 +51,11 @@ class Pedometer {
     var distance = 0.0
     var startTime : NSDate?
     var timerSec : NSTimeInterval = 0.0
+    var goal = 1000.0 {
+        didSet {
+            self.saveGoal(goal)
+        }
+    }
     
     // MARK: Constants
     let FILTER_SIZE = 4           // shift-register dimension for digital filter
@@ -302,6 +308,10 @@ class Pedometer {
     }
     
     func saveSession() {
-        healthKitManager.saveSession(steps, distance: distance, calories: calories, time: timerSec, startDate: startTime!)
+        healthKitManager.saveSession(steps, distance: distance, calories: calories, seconds: timerSec, startDate: startTime!)
+    }
+    
+    func saveGoal(goal: Double) {
+        coreDataManager.persistSessionGoal(goal)
     }
 }

@@ -18,6 +18,8 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var stepsLabel: UILabel!
     @IBOutlet weak var barChartView: BarChartView!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var circularProgressView: KDCircularProgress!
+    @IBOutlet weak var goalLabel: UITextField!
     
     
     // MARK: Constants
@@ -36,7 +38,7 @@ class TodayViewController: UIViewController {
         
         loadPage()
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,6 +53,7 @@ class TodayViewController: UIViewController {
     
     // MARK: Inizialization
     func loadPage() {
+        makeNavigationBar()
         if sessionMode {
             loadSessionMode()
         }
@@ -59,20 +62,33 @@ class TodayViewController: UIViewController {
         }
     }
     
+    func makeNavigationBar() {
+        if(sessionMode) {
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveSession")
+            let cancelButton =  UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "changeMode")
+            
+            navigationBar.title = "Live Session"
+            navigationBar.rightBarButtonItem = doneButton
+            navigationBar.leftBarButtonItem = cancelButton
+        }
+        else {
+            let sessionButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "changeMode")
+            
+            navigationBar.title = "Today"
+            navigationBar.rightBarButtonItem = sessionButton
+            navigationBar.leftBarButtonItem = nil
+        }
+    }
+    
     func loadSessionMode() {
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveSession")
-        let cancelButton =  UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "changeMode")
         
-        navigationBar.title = "Live Session"
-        navigationBar.rightBarButtonItem = doneButton
-        navigationBar.leftBarButtonItem = cancelButton
         
         // Notifications Subscription
         subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.session.stepsUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderSessionData))
         subscriptions.append(NSNotificationCenter.defaultCenter().addObserverForName(Notifications.today.stepsDistributionUpdated, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: renderSessionData))
         
         timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "renderSessionData", userInfo: nil, repeats: true)
-
+        
         // Queries
         todayModel.fetchSessionValues()
         
@@ -81,11 +97,6 @@ class TodayViewController: UIViewController {
     }
     
     func loadTodayMode() {
-        let sessionButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "changeMode")
-
-        navigationBar.title = "Today"
-        navigationBar.rightBarButtonItem = sessionButton
-        navigationBar.leftBarButtonItem = nil
         
         
         // Notifications Subscription
@@ -118,7 +129,7 @@ class TodayViewController: UIViewController {
             pedometer.stopAccelerometer()
         }
         else {
-            // TODO:
+            todayModel.stopQueries()
         }
     }
     
@@ -136,6 +147,16 @@ class TodayViewController: UIViewController {
     
     
     // MARK: Rendering
+    func renderData() {
+        if(sessionMode) {
+            renderSessionData()
+        }
+        else {
+            renderTodayData()
+        }
+    }
+    
+    
     func renderSessionData(notification: NSNotification) {
         renderSessionData()
     }
@@ -147,7 +168,11 @@ class TodayViewController: UIViewController {
         timeLabel.text = stringFromTimeInterval(pedometer.timerSec)
         if let values = todayModel.values {
             setChart(todayModel.labels, values: values)
-        }    }
+        }
+        
+        updateGoalText()
+        setProgressBar(pedometer.steps, max: pedometer.goal)
+    }
     
     func renderTodayData(notification: NSNotification) {
         renderTodayData()
@@ -165,6 +190,8 @@ class TodayViewController: UIViewController {
             setChart(todayModel.labels, values: values)
         }
         
+        updateGoalText()
+        setProgressBar(Double(todayModel.stepsCount),max: todayModel.goal)
         
     }
     
@@ -179,8 +206,18 @@ class TodayViewController: UIViewController {
         return String(format: "%dh:%dm", hours, minutes)
     }
     
+    // MARK: Progress Bar
+    func setProgressBar(current: Double, max: Double) {
+        if(circularProgressView.isAnimating()) {
+            return
+        }
+        
+        let percentage = current/max
+        let angle = percentage < 1.0 ? Int(percentage * 360.0) : 360
+        circularProgressView.animateToAngle(angle, duration: 0.5, completion: nil)
+    }
     
-    // Bar Chart
+    // MARK: Bar Chart
     func setChart(dataPoints: [String], values: [Double]) {
         var dataEntries: [BarChartDataEntry] = []
         
@@ -223,6 +260,52 @@ class TodayViewController: UIViewController {
         barChartView.drawGridBackgroundEnabled = false
         barChartView.setScaleEnabled(false)
     }
+    
+    @IBAction func onStartEditingGoal(sender: UITextField) {
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "saveGoal")
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "resetContext")
+        navigationBar.rightBarButtonItem = doneButton
+        navigationBar.leftBarButtonItem = cancelButton
+    }
+    
+    func saveGoal() {
+        if let goal = goalLabel.text {
+            if let goalValue = Double(goal) {
+                if(sessionMode) {
+                    pedometer.goal = goalValue
+                }
+                else {
+                    todayModel.goal = goalValue
+                }
+                resetContext()
+            }
+        }
+    }
+    
+    func resetContext() {
+        goalLabel.resignFirstResponder()
+        updateGoalText()
+        makeNavigationBar()
+        renderData()
+        
+    }
+    
+    func updateGoalText() {
+        if goalLabel.isFirstResponder() {
+            return
+        }
+        var goal : Double
+        if(sessionMode) {
+            goal = pedometer.goal
+        }
+        else {
+            goal = todayModel.goal
+        }
+        goalLabel.text = ""
+        goalLabel.placeholder = "Goal: " + String(format:"%.0f", goal)
+    }
+    
+    
     
     
     

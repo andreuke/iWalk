@@ -64,6 +64,7 @@ class MyBodyViewController: UITableViewController, UIPickerViewDelegate, UIPicke
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+
     func fetchUserInfo() {
         userInfo.fetchAllInfo()
         reloadTable()
