@@ -53,8 +53,8 @@ extension NSDate {
 extension Int {
     var addSpaceSeparator:String {
         let nf = NSNumberFormatter()
-//        nf.groupingSeparator = NSLocale.currentLocale().objectForKey(NSLocaleGroupingSeparator) as! String
-        nf.groupingSeparator = ","
+        nf.groupingSeparator = NSLocale.currentLocale().objectForKey(NSLocaleGroupingSeparator) as! String
+       // nf.groupingSeparator = ","
     
         nf.numberStyle = NSNumberFormatterStyle.DecimalStyle
         return nf.stringFromNumber(self)!

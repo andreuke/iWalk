@@ -49,6 +49,12 @@
                                             <action selector="onStartEditingGoal:" destination="8rJ-Kc-sve" eventType="editingDidBegin" id="RKJ-oa-UDO"/>
                                         </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LV5-Uw-wTG">
+                                        <rect key="frame" x="263" y="66" width="34" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spU-Gh-VDP" customClass="KDCircularProgress" customModule="iWalk" customModuleProvider="target">
                                         <rect key="frame" x="163" y="0.0" width="236" height="236"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -86,8 +92,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="dsH-Pe-p7k" firstAttribute="top" secondItem="LV5-Uw-wTG" secondAttribute="bottom" constant="10" id="33A-f3-Ml9"/>
                                     <constraint firstAttribute="bottom" secondItem="spU-Gh-VDP" secondAttribute="bottom" id="AOT-2V-eq1"/>
                                     <constraint firstItem="dsH-Pe-p7k" firstAttribute="centerX" secondItem="ZIe-LC-epX" secondAttribute="centerX" id="Bx5-b6-500"/>
+                                    <constraint firstItem="LV5-Uw-wTG" firstAttribute="centerX" secondItem="dsH-Pe-p7k" secondAttribute="centerX" id="DOG-3U-KKB"/>
                                     <constraint firstItem="spU-Gh-VDP" firstAttribute="top" secondItem="ZIe-LC-epX" secondAttribute="top" id="Wtl-sw-6mP"/>
                                     <constraint firstItem="dsH-Pe-p7k" firstAttribute="centerY" secondItem="ZIe-LC-epX" secondAttribute="centerY" id="ak3-5S-5Rh"/>
                                     <constraint firstItem="K1d-6b-Twy" firstAttribute="top" secondItem="dsH-Pe-p7k" secondAttribute="bottom" constant="10" id="ppR-61-Pvi"/>
@@ -159,6 +167,7 @@
                         <outlet property="circularProgressView" destination="spU-Gh-VDP" id="RZK-9z-56G"/>
                         <outlet property="distanceLabel" destination="DDe-P7-Lsc" id="P9Q-DC-rge"/>
                         <outlet property="goalLabel" destination="K1d-6b-Twy" id="jFk-JF-SJK"/>
+                        <outlet property="levelLabel" destination="LV5-Uw-wTG" id="4wB-f1-pCN"/>
                         <outlet property="navigationBar" destination="5Xh-kP-Hh4" id="yru-aR-APG"/>
                         <outlet property="stepsLabel" destination="dsH-Pe-p7k" id="o79-kH-V4N"/>
                         <outlet property="timeLabel" destination="iJ9-F6-uwl" id="pug-xU-1d1"/>

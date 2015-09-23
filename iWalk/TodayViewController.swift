@@ -20,6 +20,7 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var circularProgressView: KDCircularProgress!
     @IBOutlet weak var goalLabel: UITextField!
+    @IBOutlet weak var levelLabel: UILabel!
     
     
     // MARK: Constants
@@ -174,6 +175,7 @@ class TodayViewController: UIViewController {
         
         updateGoalText()
         setProgressBar(pedometer.steps, max: pedometer.goal)
+        updateActivityLabel(nil)
     }
     
     func renderTodayData(notification: NSNotification) {
@@ -194,6 +196,7 @@ class TodayViewController: UIViewController {
         
         updateGoalText()
         setProgressBar(Double(todayModel.stepsCount),max: todayModel.goal)
+        updateActivityLabel(todayModel.stepsCount)
         
     }
     
@@ -206,6 +209,30 @@ class TodayViewController: UIViewController {
             return String(format: "%02d:%02d", minutes, seconds)
         }
         return String(format: "%dh:%dm", hours, minutes)
+    }
+    
+    // MARK: ActivityLabel
+    func updateActivityLabel(steps: Int?) {
+        var level = ""
+        if let s = steps {
+            if(s<5000) {
+                level = "sedentary"
+            }
+            else if(s<7500) {
+                level = "low active"
+            }
+            else if(s<10000) {
+                level = "somewhat active"
+            }
+            else if(s<12500) {
+                level = "active"
+            }
+            else {
+                level = "highly active"
+            }
+        }
+        levelLabel.text = level
+        
     }
     
     // MARK: Progress Bar
