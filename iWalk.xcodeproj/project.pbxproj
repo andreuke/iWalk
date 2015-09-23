@@ -22,7 +22,6 @@
 		EF8D31011BABA80C0082C38B /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF8D30FF1BABA80C0082C38B /* CoreDataModel.xcdatamodeld */; };
 		EF9ED6BB1B9F355D0081035F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9ED6BA1B9F355D0081035F /* HeaderView.swift */; };
 		EFA0E3361BB1705D0094345D /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */; };
-		EFA0E33A1BB202A90094345D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0E3391BB202A90094345D /* TabBarController.swift */; };
 		EFA31D431BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */; };
 		EFA31D451BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */; };
 		EFAB07BE1BAF03D6000CC1AE /* ClickableRangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */; };
@@ -32,6 +31,7 @@
 		EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */; };
 		EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */; };
 		EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */; };
+		EFCFC86B1BB2ED7100079862 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCFC86A1BB2ED7100079862 /* TabBarController.swift */; };
 		EFD04DE21BA62B57005196BA /* iWalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F6341B99D9170012E081 /* iWalkTests.swift */; };
 		EFD1579B1BAF7A9D00D2D860 /* TodayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD1579A1BAF7A9D00D2D860 /* TodayModel.swift */; };
 		EFDFB40A1BAADCE9007F4778 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */; };
@@ -109,7 +109,6 @@
 		EF8D31001BABA80C0082C38B /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		EF9ED6BA1B9F355D0081035F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EFA0E3351BB1705D0094345D /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
-		EFA0E3391BB202A90094345D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerSecondType.swift; sourceTree = "<group>"; };
 		EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordsContentViewControllerFirstType.swift; sourceTree = "<group>"; };
 		EFAB07BD1BAF03D6000CC1AE /* ClickableRangeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableRangeLabel.swift; sourceTree = "<group>"; };
@@ -119,6 +118,7 @@
 		EFC17B031BA9B19D00D5DCA2 /* UpdatableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatableInformation.swift; sourceTree = "<group>"; };
 		EFC17B061BA9BF0400D5DCA2 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		EFC17B081BA9D02A00D5DCA2 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		EFCFC86A1BB2ED7100079862 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EFD1579A1BAF7A9D00D2D860 /* TodayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayModel.swift; sourceTree = "<group>"; };
 		EFDFB4091BAADCE9007F4778 /* ClickableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
 		EFDFB40B1BAAE04C007F4778 /* iWalk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iWalk-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 				EFA31D441BACBEBE00546CA1 /* RecordsContentViewControllerFirstType.swift */,
 				EFA31D421BACBC3A00546CA1 /* RecordsContentViewControllerSecondType.swift */,
 				EF5765C71BAC898F0091F21F /* RecordsViewController.swift */,
-				EFA0E3391BB202A90094345D /* TabBarController.swift */,
+				EFCFC86A1BB2ED7100079862 /* TabBarController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -475,7 +475,7 @@
 				EFC17B091BA9D02A00D5DCA2 /* Notifications.swift in Sources */,
 				EFE3F6221B99D9170012E081 /* TodayViewController.swift in Sources */,
 				EFC17B071BA9BF0400D5DCA2 /* DateExtension.swift in Sources */,
-				EFA0E33A1BB202A90094345D /* TabBarController.swift in Sources */,
+				EFCFC86B1BB2ED7100079862 /* TabBarController.swift in Sources */,
 				EF5765C41BAC2DAE0091F21F /* CoreDataManager.swift in Sources */,
 				EFC17B041BA9B19D00D5DCA2 /* UpdatableInformation.swift in Sources */,
 				EFD1579B1BAF7A9D00D2D860 /* TodayModel.swift in Sources */,
@@ -664,6 +664,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iWalk/iWalk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -684,6 +685,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iWalk/iWalk-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

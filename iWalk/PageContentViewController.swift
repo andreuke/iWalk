@@ -35,6 +35,8 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
     @IBOutlet weak var barChartView: BarChartView!
     @IBOutlet weak var averageLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var averageUnityLabel: UILabel!
+    @IBOutlet weak var totalUnityLabel: UILabel!
     
     var pickerView = UIPickerView()
     
@@ -122,6 +124,9 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
                     total = tot[period]
                 }
             }
+            let averageUnity = ""
+            averageUnityLabel.text = averageUnity
+            totalUnityLabel.text = averageUnity
             
         case StatsModel.Attributes.Calories.rawValue:
             if let calories = statsModel.caloriesData.calories[period] {
@@ -134,6 +139,9 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
                     total = tot[period]
                 }
             }
+            let averageUnity = "kcal"
+            averageUnityLabel.text = averageUnity
+            totalUnityLabel.text = averageUnity
             
         case StatsModel.Attributes.Distance.rawValue:
             if let distance = statsModel.distanceData.distance[period] {
@@ -145,13 +153,16 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
                 if let tot = statsModel.distanceData.total {
                     total = tot[period]
                 }
+                let averageUnity = "km"
+                averageUnityLabel.text = averageUnity
+                totalUnityLabel.text = averageUnity
             }
         default:
             break
         }
         
         if let _ = average {
-            if(attribute == 0 || attribute == 1) {
+            if(attribute == Constants.Steps || attribute == Constants.Calories) {
                 averageLabel.text = Int(average!).addSpaceSeparator
             }
             else {
@@ -160,7 +171,7 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         }
         
         if let _ = total {
-            if(attribute == 0 || attribute == 1) {
+            if(attribute == Constants.Steps || attribute == Constants.Calories) {
                 totalLabel.text = Int(total!).addSpaceSeparator
             }
             else {
@@ -207,7 +218,12 @@ class PageContentViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         barChartView.descriptionText = ""
         barChartView.xAxis.labelPosition = .Bottom
-        //        barChartView.xAxis.setLabelsToSkip(10)
+        if range == Constants.Week {
+                barChartView.xAxis.setLabelsToSkip(0)
+        }
+        else {
+            barChartView.xAxis.resetLabelsToSkip()
+        }
         barChartView.xAxis.drawGridLinesEnabled = false
         barChartView.xAxis.avoidFirstLastClippingEnabled = false
         

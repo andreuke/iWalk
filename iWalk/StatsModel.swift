@@ -103,11 +103,7 @@ class StatsModel {
                 for v in vPeriod {
                     total += v
                 }
-                var result = total/Double(vPeriod.count)
-                if(i == 0 || i == 1) {
-                    result = round(result)
-                }
-                returnValues[i] = result
+                returnValues[i] = total/Double(vPeriod.count)
             }
             
         }
@@ -127,11 +123,7 @@ class StatsModel {
                 for v in vPeriod {
                     total += v
                 }
-                var result = total
-                if(i == 0 || i == 1) {
-                    result = round(result)
-                }
-                returnValues[i] = result
+                returnValues[i] = total
             }
 
         }

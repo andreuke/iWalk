@@ -83,7 +83,8 @@ class Pedometer {
     var active = [Bool](count: 3, repeatedValue: false)   // active axis
     var result = [Int](count: 3, repeatedValue: 0)       // new values
     
-    var old : [[Int]]
+//    var old : [[Int]]
+    var old = Array<Array<Int>>()
     
     var samples = 0                // number of samples acquired
     var interval = 0              // interval between a step and the next one

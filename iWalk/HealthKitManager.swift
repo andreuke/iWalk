@@ -67,6 +67,21 @@ class HealthKitManager {
         })
     }
     
+    func authorizeHealthKit() {
+        authorizeHealthKit { (authorized,  error) -> Void in
+            if authorized {
+                print("HealthKit authorization received.")
+            }
+            else
+            {
+                print("HealthKit authorization denied!")
+                if error != nil {
+                    print("\(error)")
+                }
+            }
+        }
+    }
+    
     // MARK: Fetch Data
     func getUserInfo() -> (birthday: NSDate?, gender: String?){
         

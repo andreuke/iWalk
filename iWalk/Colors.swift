@@ -10,6 +10,7 @@ import UIKit
 
 class Colors {
     static let BlueColor = 0x0066FF
+    static let Celestino = 0x80C7EE
 
 }
 
